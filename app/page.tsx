@@ -1,9 +1,10 @@
-import { topicClient } from "@/lib/janus/plato";
+import { topicClient } from "@/lib/janus/client/plato";
 import { Topic } from "@/proto/janus/plato/object_pb";
 import { Card } from "@/components/ui/card";
+import { topicServerClient } from "@/lib/janus/server-client/plato";
 
 export default async function Home() {
-  const res = await topicClient.paginateTopic({}).catch((err) => {
+  const res = await topicServerClient.paginateTopic({}).catch((err) => {
     console.error("Error fetching topics:", err);
   });
 

@@ -22,7 +22,10 @@
     "@radix-ui/react-dialog": "^1.1.14",
     "@radix-ui/react-label": "^2.1.7",
     "@radix-ui/react-progress": "^1.1.7",
+    "@radix-ui/react-select": "^2.2.5",
+    "@radix-ui/react-separator": "^1.1.7",
     "@radix-ui/react-slot": "^1.2.3",
+    "@radix-ui/react-tooltip": "^1.2.7",
     "@tailwindcss/language-server": "^0.14.21",
     "@types/lodash": "^4.17.17",
     "class-variance-authority": "^0.7.1",
@@ -38,6 +41,7 @@
     "next": "15.3.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "sonner": "^2.0.5",
     "tailwind-merge": "^3.3.0",
     "tw-animate-css": "^1.3.4",
     "zod": "^3.25.56"

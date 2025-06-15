@@ -11,8 +11,10 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useState } from "react";
-import { callApi } from "@/lib/api";
+import React, { useState } from "react";
+import { userClient } from "@/lib/janus/client/hermes";
+import { newJanusError } from "@/lib/janus/error";
+import { showSuccessToast } from "@/lib/toast";
 
 export function LoginForm({
   className,
@@ -24,11 +26,11 @@ export function LoginForm({
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await callApi("/api/login", { username, password });
-      window.location.href = "/dashboard";
+      await userClient.validatePassword({ username, password });
+      showSuccessToast("Login successful!");
+      // window.location.href = "/dashboard";
     } catch (err) {
-      alert("Login failed");
-      console.error("Login error: ", err);
+      newJanusError(err).handle();
     }
   };
 

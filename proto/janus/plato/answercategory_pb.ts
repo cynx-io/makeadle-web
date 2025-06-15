@@ -34,7 +34,7 @@ import type { Message } from "@bufbuild/protobuf";
 export const file_plato_answercategory: GenFile =
   /*@__PURE__*/
   fileDesc(
-    "ChpwbGF0by9hbnN3ZXJjYXRlZ29yeS5wcm90bxIFcGxhdG8icgocTGlzdEFuc3dlckNhdGVnb3JpZXNSZXNwb25zZRIhCgRiYXNlGAEgASgLMhMucGxhdG8uQmFzZVJlc3BvbnNlEi8KEGFuc3dlckNhdGVnb3JpZXMYAiADKAsyFS5wbGF0by5BbnN3ZXJDYXRlZ29yeSJqChZBbnN3ZXJDYXRlZ29yeVJlc3BvbnNlEiEKBGJhc2UYASABKAsyEy5wbGF0by5CYXNlUmVzcG9uc2USLQoOYW5zd2VyQ2F0ZWdvcnkYAiABKAsyFS5wbGF0by5BbnN3ZXJDYXRlZ29yeSKFAQobSW5zZXJ0QW5zd2VyQ2F0ZWdvcnlSZXF1ZXN0EigKBGJhc2UYASABKAsyEi5wbGF0by5CYXNlUmVxdWVzdEIGukgDyAEBEgwKBG5hbWUYAiABKAkSDAoEdHlwZRgDIAEoCRINCgV2YWx1ZRgEIAEoCRIRCglhbnN3ZXJfaWQYBiABKAQiuQEKG1VwZGF0ZUFuc3dlckNhdGVnb3J5UmVxdWVzdBIoCgRiYXNlGAEgASgLMhIucGxhdG8uQmFzZVJlcXVlc3RCBrpIA8gBARIRCgRuYW1lGAIgASgJSACIAQESEQoEdHlwZRgDIAEoCUgBiAEBEhIKBXZhbHVlGAQgASgJSAKIAQESGgoSYW5zd2VyX2NhdGVnb3J5X2lkGAUgASgEQgcKBV9uYW1lQgcKBV90eXBlQggKBl92YWx1ZTLlAwocUGxhdG9BbnN3ZXJDYXRlZ29yaWVzU2VydmljZRJYChVHZXRBbnN3ZXJDYXRlZ29yeUJ5SWQSHi5wbGF0by5BbnN3ZXJDYXRlZ29yeUlkUmVxdWVzdBodLnBsYXRvLkFuc3dlckNhdGVnb3J5UmVzcG9uc2UiABJfCh5MaXN0QW5zd2VyQ2F0ZWdvcmllc0J5QW5zd2VySWQSFi5wbGF0by5BbnN3ZXJJZFJlcXVlc3QaIy5wbGF0by5MaXN0QW5zd2VyQ2F0ZWdvcmllc1Jlc3BvbnNlIgASWwoUSW5zZXJ0QW5zd2VyQ2F0ZWdvcnkSIi5wbGF0by5JbnNlcnRBbnN3ZXJDYXRlZ29yeVJlcXVlc3QaHS5wbGF0by5BbnN3ZXJDYXRlZ29yeVJlc3BvbnNlIgASWwoUVXBkYXRlQW5zd2VyQ2F0ZWdvcnkSIi5wbGF0by5VcGRhdGVBbnN3ZXJDYXRlZ29yeVJlcXVlc3QaHS5wbGF0by5BbnN3ZXJDYXRlZ29yeVJlc3BvbnNlIgASUAoURGVsZXRlQW5zd2VyQ2F0ZWdvcnkSHi5wbGF0by5BbnN3ZXJDYXRlZ29yeUlkUmVxdWVzdBoWLnBsYXRvLkdlbmVyaWNSZXNwb25zZSIAQhFaD3BsYXRvL2FwaS9wcm90b2IGcHJvdG8z",
+    "ChpwbGF0by9hbnN3ZXJjYXRlZ29yeS5wcm90bxIFcGxhdG8icgocTGlzdEFuc3dlckNhdGVnb3JpZXNSZXNwb25zZRIhCgRiYXNlGAEgASgLMhMucGxhdG8uQmFzZVJlc3BvbnNlEi8KEGFuc3dlckNhdGVnb3JpZXMYAiADKAsyFS5wbGF0by5BbnN3ZXJDYXRlZ29yeSJqChZBbnN3ZXJDYXRlZ29yeVJlc3BvbnNlEiEKBGJhc2UYASABKAsyEy5wbGF0by5CYXNlUmVzcG9uc2USLQoOYW5zd2VyQ2F0ZWdvcnkYAiABKAsyFS5wbGF0by5BbnN3ZXJDYXRlZ29yeSKFAQobSW5zZXJ0QW5zd2VyQ2F0ZWdvcnlSZXF1ZXN0EigKBGJhc2UYASABKAsyEi5wbGF0by5CYXNlUmVxdWVzdEIGukgDyAEBEgwKBG5hbWUYAiABKAkSDAoEdHlwZRgDIAEoCRINCgV2YWx1ZRgEIAEoCRIRCglhbnN3ZXJfaWQYBiABKAQiuQEKG1VwZGF0ZUFuc3dlckNhdGVnb3J5UmVxdWVzdBIoCgRiYXNlGAEgASgLMhIucGxhdG8uQmFzZVJlcXVlc3RCBrpIA8gBARIRCgRuYW1lGAIgASgJSACIAQESEQoEdHlwZRgDIAEoCUgBiAEBEhIKBXZhbHVlGAQgASgJSAKIAQESGgoSYW5zd2VyX2NhdGVnb3J5X2lkGAUgASgEQgcKBV9uYW1lQgcKBV90eXBlQggKBl92YWx1ZTLjAwoaUGxhdG9BbnN3ZXJDYXRlZ29yeVNlcnZpY2USWAoVR2V0QW5zd2VyQ2F0ZWdvcnlCeUlkEh4ucGxhdG8uQW5zd2VyQ2F0ZWdvcnlJZFJlcXVlc3QaHS5wbGF0by5BbnN3ZXJDYXRlZ29yeVJlc3BvbnNlIgASXwoeTGlzdEFuc3dlckNhdGVnb3JpZXNCeUFuc3dlcklkEhYucGxhdG8uQW5zd2VySWRSZXF1ZXN0GiMucGxhdG8uTGlzdEFuc3dlckNhdGVnb3JpZXNSZXNwb25zZSIAElsKFEluc2VydEFuc3dlckNhdGVnb3J5EiIucGxhdG8uSW5zZXJ0QW5zd2VyQ2F0ZWdvcnlSZXF1ZXN0Gh0ucGxhdG8uQW5zd2VyQ2F0ZWdvcnlSZXNwb25zZSIAElsKFFVwZGF0ZUFuc3dlckNhdGVnb3J5EiIucGxhdG8uVXBkYXRlQW5zd2VyQ2F0ZWdvcnlSZXF1ZXN0Gh0ucGxhdG8uQW5zd2VyQ2F0ZWdvcnlSZXNwb25zZSIAElAKFERlbGV0ZUFuc3dlckNhdGVnb3J5Eh4ucGxhdG8uQW5zd2VyQ2F0ZWdvcnlJZFJlcXVlc3QaFi5wbGF0by5HZW5lcmljUmVzcG9uc2UiAEIRWg9wbGF0by9hcGkvcHJvdG9iBnByb3RvMw",
     [file_core_core, file_plato_generic, file_plato_object],
   );
 
@@ -164,11 +164,11 @@ export const UpdateAnswerCategoryRequestSchema: GenMessage<UpdateAnswerCategoryR
   messageDesc(file_plato_answercategory, 3);
 
 /**
- * @generated from service plato.PlatoAnswerCategoriesService
+ * @generated from service plato.PlatoAnswerCategoryService
  */
-export const PlatoAnswerCategoriesService: GenService<{
+export const PlatoAnswerCategoryService: GenService<{
   /**
-   * @generated from rpc plato.PlatoAnswerCategoriesService.GetAnswerCategoryById
+   * @generated from rpc plato.PlatoAnswerCategoryService.GetAnswerCategoryById
    */
   getAnswerCategoryById: {
     methodKind: "unary";
@@ -176,7 +176,7 @@ export const PlatoAnswerCategoriesService: GenService<{
     output: typeof AnswerCategoryResponseSchema;
   };
   /**
-   * @generated from rpc plato.PlatoAnswerCategoriesService.ListAnswerCategoriesByAnswerId
+   * @generated from rpc plato.PlatoAnswerCategoryService.ListAnswerCategoriesByAnswerId
    */
   listAnswerCategoriesByAnswerId: {
     methodKind: "unary";
@@ -184,7 +184,7 @@ export const PlatoAnswerCategoriesService: GenService<{
     output: typeof ListAnswerCategoriesResponseSchema;
   };
   /**
-   * @generated from rpc plato.PlatoAnswerCategoriesService.InsertAnswerCategory
+   * @generated from rpc plato.PlatoAnswerCategoryService.InsertAnswerCategory
    */
   insertAnswerCategory: {
     methodKind: "unary";
@@ -192,7 +192,7 @@ export const PlatoAnswerCategoriesService: GenService<{
     output: typeof AnswerCategoryResponseSchema;
   };
   /**
-   * @generated from rpc plato.PlatoAnswerCategoriesService.UpdateAnswerCategory
+   * @generated from rpc plato.PlatoAnswerCategoryService.UpdateAnswerCategory
    */
   updateAnswerCategory: {
     methodKind: "unary";
@@ -200,7 +200,7 @@ export const PlatoAnswerCategoriesService: GenService<{
     output: typeof AnswerCategoryResponseSchema;
   };
   /**
-   * @generated from rpc plato.PlatoAnswerCategoriesService.DeleteAnswerCategory
+   * @generated from rpc plato.PlatoAnswerCategoryService.DeleteAnswerCategory
    */
   deleteAnswerCategory: {
     methodKind: "unary";

@@ -21,3 +21,9 @@ export async function getSession() {
   const cookieStore = await cookies();
   return await getIronSession<SessionData>(cookieStore, sessionOptions);
 }
+
+export async function setSession(sessionData: SessionData) {
+  const session = await getSession();
+  session.user = sessionData.user;
+  await session.save();
+}

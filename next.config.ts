@@ -15,6 +15,10 @@ const nextConfig: NextConfig = {
     NEXT_PUBLIC_JANUS_BASE_URL:
       process.env.NEXT_PUBLIC_JANUS_BASE_URL || "notset",
   },
+  experimental: {
+    serverComponentsHmrCache: false,
+  },
+  allowedDevOrigins: ["devspace.local", "*.devspace.local"],
 };
 
 export default nextConfig;
