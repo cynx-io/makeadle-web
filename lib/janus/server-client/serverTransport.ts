@@ -92,7 +92,7 @@ async function fetchJanus(
 
   const response = await fetch(input, {
     ...init,
-    // body: processedBody,
+    body: processedBody,
     headers: {
       ...init?.headers,
       "Content-Type": "application/json",

@@ -5,7 +5,7 @@ import {
   topicServerClient,
 } from "@/lib/janus/server-client/plato";
 import { DashboardAnswerTable } from "@/components/admin/answer/table/DashboardAnswerTable";
-import {cookies} from "next/headers";
+import { cookies } from "next/headers";
 
 type Props = {
   params: Promise<{ slug: string }>;

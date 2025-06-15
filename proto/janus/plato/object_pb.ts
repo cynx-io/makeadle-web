@@ -14,7 +14,7 @@ import type { Message } from "@bufbuild/protobuf";
 export const file_plato_object: GenFile =
   /*@__PURE__*/
   fileDesc(
-    "ChJwbGF0by9vYmplY3QucHJvdG8SBXBsYXRvIpgBCgVUb3BpYxIKCgJpZBgBIAEoBBIPCgd1c2VyX2lkGAIgASgEEg0KBXRpdGxlGAMgASgJEhMKC2Rlc2NyaXB0aW9uGAQgASgJEhAKCGljb25fdXJsGAUgASgJEhIKCmJhbm5lcl91cmwYBiABKAkSEQoEbGluaxgHIAEoCUgAiAEBEgwKBHNsdWcYCCABKAlCBwoFX2xpbmsibAoETW9kZRIKCgJpZBgBIAEoBBINCgV0aXRsZRgCIAEoCRITCgtkZXNjcmlwdGlvbhgDIAEoCRIVCghpY29uX3VybBgEIAEoCUgAiAEBEhAKCHRvcGljX2lkGAYgASgEQgsKCV9pY29uX3VybCJGCgZBbnN3ZXISCgoCaWQYASABKAQSDAoEbmFtZRgCIAEoCRIQCghpY29uX3VybBgDIAEoCRIQCgh0b3BpY19pZBgEIAEoBCJfCgxEZXRhaWxBbnN3ZXISHQoGYW5zd2VyGAEgASgLMg0ucGxhdG8uQW5zd2VyEjAKEWFuc3dlcl9jYXRlZ29yaWVzGAIgAygLMhUucGxhdG8uQW5zd2VyQ2F0ZWdvcnkibQoTQXR0ZW1wdERldGFpbEFuc3dlchIdCgZhbnN3ZXIYASABKAsyDS5wbGF0by5BbnN3ZXISNwoRYW5zd2VyX2NhdGVnb3JpZXMYAiADKAsyHC5wbGF0by5BdHRlbXB0QW5zd2VyQ2F0ZWdvcnkibAoOQW5zd2VyQ2F0ZWdvcnkSCgoCaWQYASABKAQSDAoEbmFtZRgCIAEoCRIMCgR0eXBlGAMgASgJEg0KBXZhbHVlGAQgASgJEhAKCHRvcGljX2lkGAUgASgEEhEKCWFuc3dlcl9pZBgGIAEoBCKIAQoVQXR0ZW1wdEFuc3dlckNhdGVnb3J5EgoKAmlkGAEgASgEEgwKBG5hbWUYAiABKAkSDAoEdHlwZRgDIAEoCRINCgV2YWx1ZRgEIAEoCRITCgtjb3JyZWN0bmVzcxgFIAEoAxIQCgh0b3BpY19pZBgPIAEoBBIRCglhbnN3ZXJfaWQYECABKAQidwoJRGFpbHlHYW1lEgoKAmlkGAEgASgEEigKBGRhdGUYAyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhEKCWFuc3dlcl9pZBgKIAEoBBIPCgdtb2RlX2lkGAsgASgEEhAKCHRvcGljX2lkGAwgASgEIlcKFERhaWx5R2FtZUFuc3dlclN0YXRzEhUKDXRvdGFsX2d1ZXNzZXMYAiABKAQSFQoNZGFpbHlfZ2FtZV9pZBgKIAEoBBIRCglhbnN3ZXJfaWQYCyABKAQivQEKGkRldGFpbERhaWx5R2FtZUFuc3dlclN0YXRzEhUKDXRvdGFsX2d1ZXNzZXMYAiABKAQSFwoPY29ycmVjdF9ndWVzc2VzGAMgASgEEhkKEWluY29ycmVjdF9ndWVzc2VzGAQgASgEEhUKDWRhaWx5X2dhbWVfaWQYCiABKAQSEQoJYW5zd2VyX2lkGAsgASgEEioKDWRldGFpbF9hbnN3ZXIYDCABKAsyEy5wbGF0by5EZXRhaWxBbnN3ZXIidwoTRGFpbHlHYW1lR3Vlc3NTdGF0cxIVCg10b3RhbF9ndWVzc2VzGAIgASgEEhcKD2NvcnJlY3RfZ3Vlc3NlcxgDIAEoBBIZChFpbmNvcnJlY3RfZ3Vlc3NlcxgEIAEoBBIVCg1kYWlseV9nYW1lX2lkGAogASgEIuUBCg9EZXRhaWxEYWlseUdhbWUSJAoKZGFpbHlfZ2FtZRgBIAEoCzIQLnBsYXRvLkRhaWx5R2FtZRIyChVjdXJyZW50X2RldGFpbF9hbnN3ZXIYAiABKAsyEy5wbGF0by5EZXRhaWxBbnN3ZXISPAoXZGFpbHlfZ2FtZV9hbnN3ZXJfc3RhdHMYAyADKAsyGy5wbGF0by5EYWlseUdhbWVBbnN3ZXJTdGF0cxI6ChZkYWlseV9nYW1lX2d1ZXNzX3N0YXRzGAQgASgLMhoucGxhdG8uRGFpbHlHYW1lR3Vlc3NTdGF0cyKIAQoPUHVibGljRGFpbHlHYW1lEhUKDWRhaWx5X2dhbWVfaWQYASABKAQSKAoEZGF0ZRgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASFQoNdG90YWxfZ3Vlc3NlcxgDIAEoBBIdChV0b3RhbF9jb3JyZWN0X2d1ZXNzZXMYBCABKARCEVoPcGxhdG8vYXBpL3Byb3RvYgZwcm90bzM",
+    "ChJwbGF0by9vYmplY3QucHJvdG8SBXBsYXRvIpgBCgVUb3BpYxIKCgJpZBgBIAEoBRIPCgd1c2VyX2lkGAIgASgFEg0KBXRpdGxlGAMgASgJEhMKC2Rlc2NyaXB0aW9uGAQgASgJEhAKCGljb25fdXJsGAUgASgJEhIKCmJhbm5lcl91cmwYBiABKAkSEQoEbGluaxgHIAEoCUgAiAEBEgwKBHNsdWcYCCABKAlCBwoFX2xpbmsibAoETW9kZRIKCgJpZBgBIAEoBRINCgV0aXRsZRgCIAEoCRITCgtkZXNjcmlwdGlvbhgDIAEoCRIVCghpY29uX3VybBgEIAEoCUgAiAEBEhAKCHRvcGljX2lkGAYgASgFQgsKCV9pY29uX3VybCJGCgZBbnN3ZXISCgoCaWQYASABKAUSDAoEbmFtZRgCIAEoCRIQCghpY29uX3VybBgDIAEoCRIQCgh0b3BpY19pZBgEIAEoBSJfCgxEZXRhaWxBbnN3ZXISHQoGYW5zd2VyGAEgASgLMg0ucGxhdG8uQW5zd2VyEjAKEWFuc3dlcl9jYXRlZ29yaWVzGAIgAygLMhUucGxhdG8uQW5zd2VyQ2F0ZWdvcnkibQoTQXR0ZW1wdERldGFpbEFuc3dlchIdCgZhbnN3ZXIYASABKAsyDS5wbGF0by5BbnN3ZXISNwoRYW5zd2VyX2NhdGVnb3JpZXMYAiADKAsyHC5wbGF0by5BdHRlbXB0QW5zd2VyQ2F0ZWdvcnkibAoOQW5zd2VyQ2F0ZWdvcnkSCgoCaWQYASABKAUSDAoEbmFtZRgCIAEoCRIMCgR0eXBlGAMgASgJEg0KBXZhbHVlGAQgASgJEhAKCHRvcGljX2lkGAUgASgFEhEKCWFuc3dlcl9pZBgGIAEoBSKIAQoVQXR0ZW1wdEFuc3dlckNhdGVnb3J5EgoKAmlkGAEgASgFEgwKBG5hbWUYAiABKAkSDAoEdHlwZRgDIAEoCRINCgV2YWx1ZRgEIAEoCRITCgtjb3JyZWN0bmVzcxgFIAEoBRIQCgh0b3BpY19pZBgPIAEoBRIRCglhbnN3ZXJfaWQYECABKAUidwoJRGFpbHlHYW1lEgoKAmlkGAEgASgFEigKBGRhdGUYAyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhEKCWFuc3dlcl9pZBgKIAEoBRIPCgdtb2RlX2lkGAsgASgFEhAKCHRvcGljX2lkGAwgASgFIlcKFERhaWx5R2FtZUFuc3dlclN0YXRzEhUKDXRvdGFsX2d1ZXNzZXMYAiABKAUSFQoNZGFpbHlfZ2FtZV9pZBgKIAEoBRIRCglhbnN3ZXJfaWQYCyABKAUivQEKGkRldGFpbERhaWx5R2FtZUFuc3dlclN0YXRzEhUKDXRvdGFsX2d1ZXNzZXMYAiABKAUSFwoPY29ycmVjdF9ndWVzc2VzGAMgASgFEhkKEWluY29ycmVjdF9ndWVzc2VzGAQgASgFEhUKDWRhaWx5X2dhbWVfaWQYCiABKAUSEQoJYW5zd2VyX2lkGAsgASgFEioKDWRldGFpbF9hbnN3ZXIYDCABKAsyEy5wbGF0by5EZXRhaWxBbnN3ZXIidwoTRGFpbHlHYW1lR3Vlc3NTdGF0cxIVCg10b3RhbF9ndWVzc2VzGAIgASgFEhcKD2NvcnJlY3RfZ3Vlc3NlcxgDIAEoBRIZChFpbmNvcnJlY3RfZ3Vlc3NlcxgEIAEoBRIVCg1kYWlseV9nYW1lX2lkGAogASgFIuUBCg9EZXRhaWxEYWlseUdhbWUSJAoKZGFpbHlfZ2FtZRgBIAEoCzIQLnBsYXRvLkRhaWx5R2FtZRIyChVjdXJyZW50X2RldGFpbF9hbnN3ZXIYAiABKAsyEy5wbGF0by5EZXRhaWxBbnN3ZXISPAoXZGFpbHlfZ2FtZV9hbnN3ZXJfc3RhdHMYAyADKAsyGy5wbGF0by5EYWlseUdhbWVBbnN3ZXJTdGF0cxI6ChZkYWlseV9nYW1lX2d1ZXNzX3N0YXRzGAQgASgLMhoucGxhdG8uRGFpbHlHYW1lR3Vlc3NTdGF0cyKIAQoPUHVibGljRGFpbHlHYW1lEhUKDWRhaWx5X2dhbWVfaWQYASABKAUSKAoEZGF0ZRgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASFQoNdG90YWxfZ3Vlc3NlcxgDIAEoBRIdChV0b3RhbF9jb3JyZWN0X2d1ZXNzZXMYBCABKAVCEVoPcGxhdG8vYXBpL3Byb3RvYgZwcm90bzM",
     [file_google_protobuf_timestamp],
   );
 
@@ -23,14 +23,14 @@ export const file_plato_object: GenFile =
  */
 export type Topic = Message<"plato.Topic"> & {
   /**
-   * @generated from field: uint64 id = 1;
+   * @generated from field: int32 id = 1;
    */
-  id: bigint;
+  id: number;
 
   /**
-   * @generated from field: uint64 user_id = 2;
+   * @generated from field: int32 user_id = 2;
    */
-  userId: bigint;
+  userId: number;
 
   /**
    * @generated from field: string title = 3;
@@ -76,9 +76,9 @@ export const TopicSchema: GenMessage<Topic> =
  */
 export type Mode = Message<"plato.Mode"> & {
   /**
-   * @generated from field: uint64 id = 1;
+   * @generated from field: int32 id = 1;
    */
-  id: bigint;
+  id: number;
 
   /**
    * @generated from field: string title = 2;
@@ -96,9 +96,9 @@ export type Mode = Message<"plato.Mode"> & {
   iconUrl?: string;
 
   /**
-   * @generated from field: uint64 topic_id = 6;
+   * @generated from field: int32 topic_id = 6;
    */
-  topicId: bigint;
+  topicId: number;
 };
 
 /**
@@ -114,9 +114,9 @@ export const ModeSchema: GenMessage<Mode> =
  */
 export type Answer = Message<"plato.Answer"> & {
   /**
-   * @generated from field: uint64 id = 1;
+   * @generated from field: int32 id = 1;
    */
-  id: bigint;
+  id: number;
 
   /**
    * @generated from field: string name = 2;
@@ -129,9 +129,9 @@ export type Answer = Message<"plato.Answer"> & {
   iconUrl: string;
 
   /**
-   * @generated from field: uint64 topic_id = 4;
+   * @generated from field: int32 topic_id = 4;
    */
-  topicId: bigint;
+  topicId: number;
 };
 
 /**
@@ -193,9 +193,9 @@ export const AttemptDetailAnswerSchema: GenMessage<AttemptDetailAnswer> =
  */
 export type AnswerCategory = Message<"plato.AnswerCategory"> & {
   /**
-   * @generated from field: uint64 id = 1;
+   * @generated from field: int32 id = 1;
    */
-  id: bigint;
+  id: number;
 
   /**
    * @generated from field: string name = 2;
@@ -213,14 +213,14 @@ export type AnswerCategory = Message<"plato.AnswerCategory"> & {
   value: string;
 
   /**
-   * @generated from field: uint64 topic_id = 5;
+   * @generated from field: int32 topic_id = 5;
    */
-  topicId: bigint;
+  topicId: number;
 
   /**
-   * @generated from field: uint64 answer_id = 6;
+   * @generated from field: int32 answer_id = 6;
    */
-  answerId: bigint;
+  answerId: number;
 };
 
 /**
@@ -236,9 +236,9 @@ export const AnswerCategorySchema: GenMessage<AnswerCategory> =
  */
 export type AttemptAnswerCategory = Message<"plato.AttemptAnswerCategory"> & {
   /**
-   * @generated from field: uint64 id = 1;
+   * @generated from field: int32 id = 1;
    */
-  id: bigint;
+  id: number;
 
   /**
    * @generated from field: string name = 2;
@@ -262,19 +262,19 @@ export type AttemptAnswerCategory = Message<"plato.AttemptAnswerCategory"> & {
    * Type == "number" : Scale from -5 to 5
    * Type == "string" : 0 false, 1 partial, 2 true
    *
-   * @generated from field: int64 correctness = 5;
+   * @generated from field: int32 correctness = 5;
    */
-  correctness: bigint;
+  correctness: number;
 
   /**
-   * @generated from field: uint64 topic_id = 15;
+   * @generated from field: int32 topic_id = 15;
    */
-  topicId: bigint;
+  topicId: number;
 
   /**
-   * @generated from field: uint64 answer_id = 16;
+   * @generated from field: int32 answer_id = 16;
    */
-  answerId: bigint;
+  answerId: number;
 };
 
 /**
@@ -290,9 +290,9 @@ export const AttemptAnswerCategorySchema: GenMessage<AttemptAnswerCategory> =
  */
 export type DailyGame = Message<"plato.DailyGame"> & {
   /**
-   * @generated from field: uint64 id = 1;
+   * @generated from field: int32 id = 1;
    */
-  id: bigint;
+  id: number;
 
   /**
    * @generated from field: google.protobuf.Timestamp date = 3;
@@ -300,19 +300,19 @@ export type DailyGame = Message<"plato.DailyGame"> & {
   date?: Timestamp;
 
   /**
-   * @generated from field: uint64 answer_id = 10;
+   * @generated from field: int32 answer_id = 10;
    */
-  answerId: bigint;
+  answerId: number;
 
   /**
-   * @generated from field: uint64 mode_id = 11;
+   * @generated from field: int32 mode_id = 11;
    */
-  modeId: bigint;
+  modeId: number;
 
   /**
-   * @generated from field: uint64 topic_id = 12;
+   * @generated from field: int32 topic_id = 12;
    */
-  topicId: bigint;
+  topicId: number;
 };
 
 /**
@@ -328,19 +328,19 @@ export const DailyGameSchema: GenMessage<DailyGame> =
  */
 export type DailyGameAnswerStats = Message<"plato.DailyGameAnswerStats"> & {
   /**
-   * @generated from field: uint64 total_guesses = 2;
+   * @generated from field: int32 total_guesses = 2;
    */
-  totalGuesses: bigint;
+  totalGuesses: number;
 
   /**
-   * @generated from field: uint64 daily_game_id = 10;
+   * @generated from field: int32 daily_game_id = 10;
    */
-  dailyGameId: bigint;
+  dailyGameId: number;
 
   /**
-   * @generated from field: uint64 answer_id = 11;
+   * @generated from field: int32 answer_id = 11;
    */
-  answerId: bigint;
+  answerId: number;
 };
 
 /**
@@ -357,29 +357,29 @@ export const DailyGameAnswerStatsSchema: GenMessage<DailyGameAnswerStats> =
 export type DetailDailyGameAnswerStats =
   Message<"plato.DetailDailyGameAnswerStats"> & {
     /**
-     * @generated from field: uint64 total_guesses = 2;
+     * @generated from field: int32 total_guesses = 2;
      */
-    totalGuesses: bigint;
+    totalGuesses: number;
 
     /**
-     * @generated from field: uint64 correct_guesses = 3;
+     * @generated from field: int32 correct_guesses = 3;
      */
-    correctGuesses: bigint;
+    correctGuesses: number;
 
     /**
-     * @generated from field: uint64 incorrect_guesses = 4;
+     * @generated from field: int32 incorrect_guesses = 4;
      */
-    incorrectGuesses: bigint;
+    incorrectGuesses: number;
 
     /**
-     * @generated from field: uint64 daily_game_id = 10;
+     * @generated from field: int32 daily_game_id = 10;
      */
-    dailyGameId: bigint;
+    dailyGameId: number;
 
     /**
-     * @generated from field: uint64 answer_id = 11;
+     * @generated from field: int32 answer_id = 11;
      */
-    answerId: bigint;
+    answerId: number;
 
     /**
      * @generated from field: plato.DetailAnswer detail_answer = 12;
@@ -400,24 +400,24 @@ export const DetailDailyGameAnswerStatsSchema: GenMessage<DetailDailyGameAnswerS
  */
 export type DailyGameGuessStats = Message<"plato.DailyGameGuessStats"> & {
   /**
-   * @generated from field: uint64 total_guesses = 2;
+   * @generated from field: int32 total_guesses = 2;
    */
-  totalGuesses: bigint;
+  totalGuesses: number;
 
   /**
-   * @generated from field: uint64 correct_guesses = 3;
+   * @generated from field: int32 correct_guesses = 3;
    */
-  correctGuesses: bigint;
+  correctGuesses: number;
 
   /**
-   * @generated from field: uint64 incorrect_guesses = 4;
+   * @generated from field: int32 incorrect_guesses = 4;
    */
-  incorrectGuesses: bigint;
+  incorrectGuesses: number;
 
   /**
-   * @generated from field: uint64 daily_game_id = 10;
+   * @generated from field: int32 daily_game_id = 10;
    */
-  dailyGameId: bigint;
+  dailyGameId: number;
 };
 
 /**
@@ -466,9 +466,9 @@ export const DetailDailyGameSchema: GenMessage<DetailDailyGame> =
  */
 export type PublicDailyGame = Message<"plato.PublicDailyGame"> & {
   /**
-   * @generated from field: uint64 daily_game_id = 1;
+   * @generated from field: int32 daily_game_id = 1;
    */
-  dailyGameId: bigint;
+  dailyGameId: number;
 
   /**
    * @generated from field: google.protobuf.Timestamp date = 2;
@@ -476,14 +476,14 @@ export type PublicDailyGame = Message<"plato.PublicDailyGame"> & {
   date?: Timestamp;
 
   /**
-   * @generated from field: uint64 total_guesses = 3;
+   * @generated from field: int32 total_guesses = 3;
    */
-  totalGuesses: bigint;
+  totalGuesses: number;
 
   /**
-   * @generated from field: uint64 total_correct_guesses = 4;
+   * @generated from field: int32 total_correct_guesses = 4;
    */
-  totalCorrectGuesses: bigint;
+  totalCorrectGuesses: number;
 };
 
 /**

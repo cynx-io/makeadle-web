@@ -15,7 +15,7 @@ import type { Message } from "@bufbuild/protobuf";
 export const file_plato_generic: GenFile =
   /*@__PURE__*/
   fileDesc(
-    "ChNwbGF0by9nZW5lcmljLnByb3RvEgVwbGF0byKbAQoPUGFnaW5hdGVSZXF1ZXN0EigKBGJhc2UYASABKAsyEi5wbGF0by5CYXNlUmVxdWVzdEIGukgDyAEBEhIKBWxpbWl0GAIgASgDSACIAQESEwoGb2Zmc2V0GAMgASgDSAGIAQESFAoHa2V5d29yZBgEIAEoCUgCiAEBQggKBl9saW1pdEIJCgdfb2Zmc2V0QgoKCF9rZXl3b3JkIkUKC1NsdWdSZXF1ZXN0EigKBGJhc2UYASABKAsyEi5wbGF0by5CYXNlUmVxdWVzdEIGukgDyAEBEgwKBHNsdWcYAiABKAkiXwoQVG9waWNNb2RlUmVxdWVzdBIoCgRiYXNlGAEgASgLMhIucGxhdG8uQmFzZVJlcXVlc3RCBrpIA8gBARIQCgh0b3BpY19pZBgCIAEoBBIPCgdtb2RlX2lkGAMgASgEIkoKDU1vZGVJZFJlcXVlc3QSKAoEYmFzZRgBIAEoCzISLnBsYXRvLkJhc2VSZXF1ZXN0Qga6SAPIAQESDwoHbW9kZV9pZBgCIAEoBCJMCg5Ub3BpY0lkUmVxdWVzdBIoCgRiYXNlGAEgASgLMhIucGxhdG8uQmFzZVJlcXVlc3RCBrpIA8gBARIQCgh0b3BpY19pZBgCIAEoBCJVChJEYWlseUdhbWVJZFJlcXVlc3QSKAoEYmFzZRgBIAEoCzISLnBsYXRvLkJhc2VSZXF1ZXN0Qga6SAPIAQESFQoNZGFpbHlfZ2FtZV9pZBgCIAEoBCJOCg9BbnN3ZXJJZFJlcXVlc3QSKAoEYmFzZRgBIAEoCzISLnBsYXRvLkJhc2VSZXF1ZXN0Qga6SAPIAQESEQoJYW5zd2VyX2lkGAIgASgEIl8KF0Fuc3dlckNhdGVnb3J5SWRSZXF1ZXN0EigKBGJhc2UYASABKAsyEi5wbGF0by5CYXNlUmVxdWVzdEIGukgDyAEBEhoKEmFuc3dlcl9jYXRlZ29yeV9pZBgCIAEoBEIRWg9wbGF0by9hcGkvcHJvdG9iBnByb3RvMw",
+    "ChNwbGF0by9nZW5lcmljLnByb3RvEgVwbGF0byKbAQoPUGFnaW5hdGVSZXF1ZXN0EigKBGJhc2UYASABKAsyEi5wbGF0by5CYXNlUmVxdWVzdEIGukgDyAEBEhIKBWxpbWl0GAIgASgFSACIAQESEwoGb2Zmc2V0GAMgASgFSAGIAQESFAoHa2V5d29yZBgEIAEoCUgCiAEBQggKBl9saW1pdEIJCgdfb2Zmc2V0QgoKCF9rZXl3b3JkIkUKC1NsdWdSZXF1ZXN0EigKBGJhc2UYASABKAsyEi5wbGF0by5CYXNlUmVxdWVzdEIGukgDyAEBEgwKBHNsdWcYAiABKAkiXwoQVG9waWNNb2RlUmVxdWVzdBIoCgRiYXNlGAEgASgLMhIucGxhdG8uQmFzZVJlcXVlc3RCBrpIA8gBARIQCgh0b3BpY19pZBgCIAEoBRIPCgdtb2RlX2lkGAMgASgFIkoKDU1vZGVJZFJlcXVlc3QSKAoEYmFzZRgBIAEoCzISLnBsYXRvLkJhc2VSZXF1ZXN0Qga6SAPIAQESDwoHbW9kZV9pZBgCIAEoBSJMCg5Ub3BpY0lkUmVxdWVzdBIoCgRiYXNlGAEgASgLMhIucGxhdG8uQmFzZVJlcXVlc3RCBrpIA8gBARIQCgh0b3BpY19pZBgCIAEoBSJVChJEYWlseUdhbWVJZFJlcXVlc3QSKAoEYmFzZRgBIAEoCzISLnBsYXRvLkJhc2VSZXF1ZXN0Qga6SAPIAQESFQoNZGFpbHlfZ2FtZV9pZBgCIAEoBSJOCg9BbnN3ZXJJZFJlcXVlc3QSKAoEYmFzZRgBIAEoCzISLnBsYXRvLkJhc2VSZXF1ZXN0Qga6SAPIAQESEQoJYW5zd2VyX2lkGAIgASgFIl8KF0Fuc3dlckNhdGVnb3J5SWRSZXF1ZXN0EigKBGJhc2UYASABKAsyEi5wbGF0by5CYXNlUmVxdWVzdEIGukgDyAEBEhoKEmFuc3dlcl9jYXRlZ29yeV9pZBgCIAEoBUIRWg9wbGF0by9hcGkvcHJvdG9iBnByb3RvMw",
     [file_core_core],
   );
 
@@ -29,14 +29,14 @@ export type PaginateRequest = Message<"plato.PaginateRequest"> & {
   base?: BaseRequest;
 
   /**
-   * @generated from field: optional int64 limit = 2;
+   * @generated from field: optional int32 limit = 2;
    */
-  limit?: bigint;
+  limit?: number;
 
   /**
-   * @generated from field: optional int64 offset = 3;
+   * @generated from field: optional int32 offset = 3;
    */
-  offset?: bigint;
+  offset?: number;
 
   /**
    * @generated from field: optional string keyword = 4;
@@ -85,14 +85,14 @@ export type TopicModeRequest = Message<"plato.TopicModeRequest"> & {
   base?: BaseRequest;
 
   /**
-   * @generated from field: uint64 topic_id = 2;
+   * @generated from field: int32 topic_id = 2;
    */
-  topicId: bigint;
+  topicId: number;
 
   /**
-   * @generated from field: uint64 mode_id = 3;
+   * @generated from field: int32 mode_id = 3;
    */
-  modeId: bigint;
+  modeId: number;
 };
 
 /**
@@ -113,9 +113,9 @@ export type ModeIdRequest = Message<"plato.ModeIdRequest"> & {
   base?: BaseRequest;
 
   /**
-   * @generated from field: uint64 mode_id = 2;
+   * @generated from field: int32 mode_id = 2;
    */
-  modeId: bigint;
+  modeId: number;
 };
 
 /**
@@ -136,9 +136,9 @@ export type TopicIdRequest = Message<"plato.TopicIdRequest"> & {
   base?: BaseRequest;
 
   /**
-   * @generated from field: uint64 topic_id = 2;
+   * @generated from field: int32 topic_id = 2;
    */
-  topicId: bigint;
+  topicId: number;
 };
 
 /**
@@ -159,9 +159,9 @@ export type DailyGameIdRequest = Message<"plato.DailyGameIdRequest"> & {
   base?: BaseRequest;
 
   /**
-   * @generated from field: uint64 daily_game_id = 2;
+   * @generated from field: int32 daily_game_id = 2;
    */
-  dailyGameId: bigint;
+  dailyGameId: number;
 };
 
 /**
@@ -182,9 +182,9 @@ export type AnswerIdRequest = Message<"plato.AnswerIdRequest"> & {
   base?: BaseRequest;
 
   /**
-   * @generated from field: uint64 answer_id = 2;
+   * @generated from field: int32 answer_id = 2;
    */
-  answerId: bigint;
+  answerId: number;
 };
 
 /**
@@ -206,9 +206,9 @@ export type AnswerCategoryIdRequest =
     base?: BaseRequest;
 
     /**
-     * @generated from field: uint64 answer_category_id = 2;
+     * @generated from field: int32 answer_category_id = 2;
      */
-    answerCategoryId: bigint;
+    answerCategoryId: number;
   };
 
 /**

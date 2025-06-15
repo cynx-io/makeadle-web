@@ -50,7 +50,7 @@ export function DashboardAnswerTable({ detailAnswers }: Props) {
     try {
       await answerCategoryClient.insertAnswerCategory({
         name: editing.category,
-        value: value,
+        value: value.toString(),
         answerId: editing.id,
         type: "string",
       });

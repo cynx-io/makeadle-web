@@ -15,7 +15,7 @@ import type { Message } from "@bufbuild/protobuf";
 export const file_core_core: GenFile =
   /*@__PURE__*/
   fileDesc(
-    "Cg9jb3JlL2NvcmUucHJvdG8SBXBsYXRvIu8BCgtCYXNlUmVxdWVzdBIdCgpyZXF1ZXN0X2lkGAEgASgJQgm6SAZyBBABGGQSIQoOcmVxdWVzdF9vcmlnaW4YAiABKAlCCbpIBnIEEAEYZBIfCgxyZXF1ZXN0X3BhdGgYAyABKAlCCbpIBnIEEAEYZBI3Cgl0aW1lc3RhbXAYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgi6SAWyAQI4ARIUCgd1c2VyX2lkGAUgASgESACIAQESFQoIdXNlcm5hbWUYBiABKAlIAYgBAUIKCghfdXNlcl9pZEILCglfdXNlcm5hbWUiKgoMQmFzZVJlc3BvbnNlEgwKBGNvZGUYASABKAkSDAoEZGVzYxgCIAEoCSI6Cg5HZW5lcmljUmVxdWVzdBIoCgRiYXNlGAEgASgLMhIucGxhdG8uQmFzZVJlcXVlc3RCBrpIA8gBASI8Cg9HZW5lcmljUmVzcG9uc2USKQoEYmFzZRgBIAEoCzITLnBsYXRvLkJhc2VSZXNwb25zZUIGukgDyAEBQjpaOGdpdGh1Yi5jb20vY3lueGVlcy9qYW51cy1nYXRld2F5L2FwaS9wcm90by9nZW4vY29yZTtjb3JlYgZwcm90bzM",
+    "Cg9jb3JlL2NvcmUucHJvdG8SBXBsYXRvIu8BCgtCYXNlUmVxdWVzdBIdCgpyZXF1ZXN0X2lkGAEgASgJQgm6SAZyBBABGGQSIQoOcmVxdWVzdF9vcmlnaW4YAiABKAlCCbpIBnIEEAEYZBIfCgxyZXF1ZXN0X3BhdGgYAyABKAlCCbpIBnIEEAEYZBI3Cgl0aW1lc3RhbXAYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQgi6SAWyAQI4ARIUCgd1c2VyX2lkGAUgASgFSACIAQESFQoIdXNlcm5hbWUYBiABKAlIAYgBAUIKCghfdXNlcl9pZEILCglfdXNlcm5hbWUiKgoMQmFzZVJlc3BvbnNlEgwKBGNvZGUYASABKAkSDAoEZGVzYxgCIAEoCSI6Cg5HZW5lcmljUmVxdWVzdBIoCgRiYXNlGAEgASgLMhIucGxhdG8uQmFzZVJlcXVlc3RCBrpIA8gBASI8Cg9HZW5lcmljUmVzcG9uc2USKQoEYmFzZRgBIAEoCzITLnBsYXRvLkJhc2VSZXNwb25zZUIGukgDyAEBQjpaOGdpdGh1Yi5jb20vY3lueGVlcy9qYW51cy1nYXRld2F5L2FwaS9wcm90by9nZW4vY29yZTtjb3JlYgZwcm90bzM",
     [file_google_protobuf_timestamp],
   );
 
@@ -48,9 +48,9 @@ export type BaseRequest = Message<"plato.BaseRequest"> & {
   timestamp?: Timestamp;
 
   /**
-   * @generated from field: optional uint64 user_id = 5;
+   * @generated from field: optional int32 user_id = 5;
    */
-  userId?: bigint;
+  userId?: number;
 
   /**
    * @generated from field: optional string username = 6;
