@@ -20,7 +20,7 @@ type Props = {
 
 export function DashboardAnswerTable({ detailAnswers }: Props) {
   const [editing, setEditing] = useState<{
-    id: bigint;
+    id: number;
     category: string;
   } | null>(null);
   const [value, setValue] = useState("");
@@ -37,7 +37,7 @@ export function DashboardAnswerTable({ detailAnswers }: Props) {
   });
 
   // Handle starting edit mode
-  const startEditing = (id: bigint, category: string, initialValue: string) => {
+  const startEditing = (id: number, category: string, initialValue: string) => {
     setEditing({ id, category });
     setValue(initialValue);
   };
@@ -50,7 +50,7 @@ export function DashboardAnswerTable({ detailAnswers }: Props) {
     try {
       await answerCategoryClient.insertAnswerCategory({
         name: editing.category,
-        value: value.toString(),
+        value: value,
         answerId: editing.id,
         type: "string",
       });
