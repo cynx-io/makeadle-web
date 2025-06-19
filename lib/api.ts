@@ -1,6 +1,6 @@
 "use client";
 
-export const callApi = (url: string, body: any): Promise<Response> => {
+export const callApi = (url: string, body: never): Promise<Response> => {
   const jsonBody = JSON.stringify(body);
   return fetch(url, {
     method: "POST",

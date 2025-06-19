@@ -18,18 +18,18 @@ function toSnakeCase(str: string): string {
 }
 
 // FIXED: Only convert keys, preserve values
-export function keysToSnake<T>(obj: T): any {
+export function keysToSnake<T>(obj: T): unknown {
   if (Array.isArray(obj)) {
     return obj.map(keysToSnake);
   } else if (obj !== null && typeof obj === "object") {
-    return Object.entries(obj as Record<string, any>).reduce(
+    return Object.entries(obj as Record<string, unknown>).reduce(
       (acc, [key, val]) => {
         const snakeKey = toSnakeCase(key);
         // Preserve values as-is, only convert keys
         acc[snakeKey] = val;
         return acc;
       },
-      {} as Record<string, any>,
+      {} as Record<string, unknown>,
     );
   }
   // Return primitive values directly

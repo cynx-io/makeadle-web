@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import React, { useState } from "react";
 import { userClient } from "@/lib/janus/client/hermes";
-import { newJanusError } from "@/lib/janus/error";
+import { newJanusError } from "@/lib/janus/client/error";
 import { showSuccessToast } from "@/lib/toast";
 
 export function LoginForm({

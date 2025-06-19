@@ -9,25 +9,69 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
-import { useState, useEffect, useRef } from "react";
-import { answerCategoryClient, answerClient } from "@/lib/janus/client/plato";
-import { JanusError, newJanusError } from "@/lib/janus/error";
-import { showSuccessToast } from "@/lib/toast";
+import { useState, useRef } from "react";
+import { answerClient } from "@/lib/janus/client/plato";
+import { newJanusError } from "@/lib/janus/client/error";
+import {
+  showErrorToast,
+  showSuccessToast,
+  showWarningToast,
+} from "@/lib/toast";
+import AnswerCell from "@/components/admin/answer/table/AnswerCell";
+import { PlusIcon } from "lucide-react";
 
 type Props = {
   detailAnswers: DetailAnswer[];
+  topicId: number;
 };
 
-export function DashboardAnswerTable({ detailAnswers }: Props) {
-  const [editing, setEditing] = useState<{
-    id: number;
-    category: string;
-  } | null>(null);
-  const [value, setValue] = useState("");
-  const [isUpdating, setIsUpdating] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
+export function DashboardAnswerTable({
+  detailAnswers: initialAns,
+  topicId,
+}: Props) {
+  const [uniqueCategories, setUniqueCategories] = useState<string[]>([]);
+  const [detailAnswers, setDetailAnswers] =
+    useState<DetailAnswer[]>(initialAns);
+  const [newRow, setNewRow] = useState(false);
+  const [newCol, setNewCol] = useState(false);
 
-  const uniqueCategories: string[] = [];
+  const categoryInputRef = useRef<HTMLInputElement>(null);
+  const newAnswerInputRef = useRef<HTMLInputElement>(null);
+
+  const [newCategoryName, setNewCategoryName] = useState("");
+  const [newAnswerName, setNewAnswerName] = useState("");
+
+  const addAnswer = async (name: string) => {
+    if (!name.trim()) {
+      showWarningToast("Please enter a valid answer name.");
+      return;
+    }
+
+    const newAnswer = await answerClient
+      .insertAnswer({
+        name: name,
+        iconUrl: "tes",
+        topicId: topicId,
+      })
+      .catch((err) => {
+        newJanusError(err).handle();
+      });
+    if (!newAnswer) {
+      showErrorToast("Failed to add answer.");
+      return;
+    }
+
+    setDetailAnswers([
+      ...detailAnswers,
+      {
+        answer: newAnswer.answer,
+        answerCategories: [],
+        $typeName: "plato.DetailAnswer",
+      },
+    ]);
+    showSuccessToast("New answer added successfully.");
+  };
+
   detailAnswers.forEach((answer) => {
     answer.answerCategories.forEach((category) => {
       if (!uniqueCategories.includes(category.name)) {
@@ -36,108 +80,152 @@ export function DashboardAnswerTable({ detailAnswers }: Props) {
     });
   });
 
-  // Handle starting edit mode
-  const startEditing = (id: number, category: string, initialValue: string) => {
-    setEditing({ id, category });
-    setValue(initialValue);
-  };
-
-  // Handle saving changes
-  const saveChanges = async () => {
-    if (!editing || value === "") return;
-
-    setIsUpdating(true);
-    try {
-      await answerCategoryClient.insertAnswerCategory({
-        name: editing.category,
-        value: value,
-        answerId: editing.id,
-        type: "string",
-      });
-      showSuccessToast("Changes Saved");
-    } catch (err) {
-      console.error("Failed to update:", err);
-      newJanusError(err).handle();
-      // Handle error (e.g., show toast notification)
-    } finally {
-      setIsUpdating(false);
-      setEditing(null);
-    }
-  };
-
-  // Handle key events
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
-      saveChanges();
-    } else if (e.key === "Escape") {
-      setEditing(null);
-    }
-  };
-
-  // Focus input when editing starts
-  useEffect(() => {
-    if (editing && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [editing]);
-
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead>Answer</TableHead>
-          {uniqueCategories.map((category) => (
-            <TableHead key={category}>{category}</TableHead>
-          ))}
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {detailAnswers.map((detailAnswer) => {
-          const answerId = detailAnswer.answer?.id;
-          if (!answerId) return null;
-
-          return (
-            <TableRow key={answerId}>
-              <TableCell>{detailAnswer?.answer?.name || ""}</TableCell>
-              {uniqueCategories.map((category) => {
-                const categoryData = detailAnswer.answerCategories.find(
-                  (c) => c.name === category,
-                );
-                const cellKey = `${answerId}-${category}`;
-                const isEditing =
-                  editing?.id == answerId && editing?.category === category;
-                const displayValue = categoryData?.value || "";
+    <div className="relative overflow-auto max-w-full">
+      {/* Horizontal Scroll + Plus Bar */}
+      <div className="overflow-x-auto relative">
+        <div className="flex">
+          <Table className="min-w-max">
+            <TableHeader>
+              <TableRow>
+                <TableHead>Answer</TableHead>
+                {uniqueCategories.map((category) => (
+                  <TableHead key={category}>{category}</TableHead>
+                ))}
+                {newCol && (
+                  <TableHead>
+                    <Input
+                      ref={categoryInputRef}
+                      value={newCategoryName}
+                      onChange={(e) => setNewCategoryName(e.target.value)}
+                      placeholder="New Category"
+                      className="w-full"
+                      onBlur={() => {
+                        if (newCategoryName.trim()) {
+                          setUniqueCategories([
+                            ...uniqueCategories,
+                            newCategoryName.trim(),
+                          ]);
+                        }
+                        setNewCol(false);
+                        setNewCategoryName("");
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault();
+                          if (newCategoryName.trim()) {
+                            setUniqueCategories([
+                              ...uniqueCategories,
+                              newCategoryName.trim(),
+                            ]);
+                          }
+                          setNewCol(false);
+                          setNewCategoryName("");
+                        }
+                      }}
+                    />
+                  </TableHead>
+                )}
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {detailAnswers.map((detailAnswer) => {
+                const answerId = detailAnswer.answer?.id;
+                if (!answerId) return null;
 
                 return (
-                  <TableCell
-                    key={cellKey}
-                    onClick={() =>
-                      startEditing(answerId, category, displayValue)
-                    }
-                    className="cursor-pointer"
-                  >
-                    {isEditing ? (
-                      <Input
-                        ref={inputRef}
-                        value={value}
-                        onChange={(e) => setValue(e.target.value)}
-                        onBlur={saveChanges}
-                        onKeyDown={handleKeyDown}
-                        disabled={isUpdating}
-                        className="w-full h-8"
+                  <TableRow key={answerId}>
+                    <TableCell>{detailAnswer?.answer?.name || ""}</TableCell>
+                    {uniqueCategories.map((category) => {
+                      const categoryData = detailAnswer.answerCategories.find(
+                        (c) => c.name === category,
+                      );
+                      const cellKey = `${answerId}-${category}`;
+
+                      return (
+                        <AnswerCell
+                          key={cellKey}
+                          answerId={answerId}
+                          categoryName={category}
+                          type={"string"}
+                          initialValue={categoryData?.value || ""}
+                        />
+                      );
+                    })}
+                    {newCol && (
+                      <TableCell
+                        className="bg-gray-50 cursor-pointer"
+                        onClick={() => {
+                          if (!newCategoryName.trim()) {
+                            showWarningToast("Please enter a category name.");
+                            categoryInputRef.current?.focus();
+                          }
+                        }}
                       />
-                    ) : (
-                      <div className="min-h-[2rem] flex items-center">
-                        {displayValue}
-                      </div>
                     )}
-                  </TableCell>
+                  </TableRow>
                 );
               })}
-            </TableRow>
-          );
-        })}
-      </TableBody>
-    </Table>
+
+              {newRow && (
+                <TableRow>
+                  <TableCell>
+                    <Input
+                      ref={newAnswerInputRef}
+                      value={newAnswerName}
+                      onChange={(e) => setNewAnswerName(e.target.value)}
+                      placeholder="New Answer"
+                      onBlur={async () => {
+                        if (newAnswerName.trim()) {
+                          await addAnswer(newAnswerName);
+                        }
+                        setNewRow(false);
+                        setNewAnswerName("");
+                      }}
+                      onKeyDown={async (e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault();
+                          if (newAnswerName.trim()) {
+                            await addAnswer(newAnswerName);
+                          }
+                          setNewRow(false);
+                          setNewAnswerName("");
+                        }
+                      }}
+                    />
+                  </TableCell>
+                  {uniqueCategories.map((_, idx) => (
+                    <TableCell key={idx}></TableCell>
+                  ))}
+                  {newCol && <TableCell />}
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+
+          {/* Hoverable vertical bar */}
+          <div
+            onClick={() => {
+              setNewCol(true);
+              setTimeout(() => categoryInputRef.current?.focus(), 0);
+            }}
+            className="group w-6 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors cursor-pointer flex items-center justify-center"
+          >
+            <PlusIcon className="w-4 h-4 text-gray-600 group-hover:text-black" />
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom horizontal bar */}
+      <div
+        onClick={() => {
+          setNewRow(true);
+          setTimeout(() => newAnswerInputRef.current?.focus(), 0);
+        }}
+        className="flex items-center justify-center h-6 rounded-md bg-gray-100 hover:bg-gray-200 transition-colors cursor-pointer mt-1"
+      >
+        <PlusIcon className="w-4 h-4 text-gray-600 hover:text-black" />
+      </div>
+    </div>
   );
 }

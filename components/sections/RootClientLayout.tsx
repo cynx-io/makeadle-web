@@ -1,11 +1,10 @@
 "use client";
 
-import FloatingIcon from "@/components/ui/FloatingIcon";
 import { useEffect, useState, useRef } from "react";
 
 export default function RootClientLayout() {
   // This is the eased scroll position
-  const [scrollY, setScrollY] = useState(0);
+  const [, setScrollY] = useState(0);
 
   // Keep track of the target scroll position
   const targetScrollY = useRef(0);

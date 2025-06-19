@@ -1,11 +1,10 @@
-import { topicClient } from "@/lib/janus/client/plato";
-import { newJanusError } from "@/lib/janus/error";
 import { AdminTopicCard } from "@/components/admin/AdminTopicCard";
 import { topicServerClient } from "@/lib/janus/server-client/plato";
+import { newJanusServerError } from "@/lib/janus/server-client/error";
 
 export default async function DashboardPage() {
   const topics = await topicServerClient.listTopicsByUserId({}).catch((err) => {
-    newJanusError(err).handle();
+    newJanusServerError(err).handle();
   });
   if (!topics) {
     return (

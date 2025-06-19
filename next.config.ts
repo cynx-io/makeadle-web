@@ -6,8 +6,8 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "coin-images.coingecko.com",
-        pathname: "/**",
+        hostname: "d3mc3mkalq2lrt.cloudfront.net",
+        pathname: "**",
       },
     ],
   },
@@ -18,7 +18,12 @@ const nextConfig: NextConfig = {
   experimental: {
     serverComponentsHmrCache: false,
   },
-  allowedDevOrigins: ["devspace.local", "*.devspace.local"],
+  allowedDevOrigins: [
+    "devspace.local",
+    "*.devspace.local",
+    "makeadle.com",
+    "*.makeadle.com",
+  ],
 };
 
 export default nextConfig;

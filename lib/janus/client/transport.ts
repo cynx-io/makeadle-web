@@ -1,8 +1,11 @@
+"use client";
+
 import { BaseResponse } from "@/proto/janus/core/core_pb";
 import { createConnectTransport } from "@connectrpc/connect-web";
+import { getJanusBaseUrl } from "@/lib/utils";
 
 export const transport = createConnectTransport({
-  baseUrl: "http://api.devspace.local:31500",
+  baseUrl: getJanusBaseUrl(),
   jsonOptions: {
     useProtoFieldName: true,
   },
@@ -24,7 +27,6 @@ async function fetchJanus(
   init?: RequestInit,
 ): Promise<Response> {
   console.log("Fetch URL:", input);
-  console.log("Fetch init:", init);
 
   const response = await fetch(input, {
     ...init,

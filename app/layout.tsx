@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased min-h-screen w-full bg-animated-gradient overflow-y-scroll scrollbar scrollbar-thumb-slate-700 scrollbar-track-slate-300">
+      <body className="antialiased min-h-screen w-full overflow-y-scroll scrollbar scrollbar-thumb-slate-700 scrollbar-track-slate-300">
         <RootClientLayout />
         {children}
         <Toaster />

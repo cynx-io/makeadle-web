@@ -36,7 +36,7 @@ import type { Message } from "@bufbuild/protobuf";
 export const file_plato_topic: GenFile =
   /*@__PURE__*/
   fileDesc(
-    "ChFwbGF0by90b3BpYy5wcm90bxIFcGxhdG8iWAoVUGFnaW5hdGVUb3BpY1Jlc3BvbnNlEiEKBGJhc2UYASABKAsyEy5wbGF0by5CYXNlUmVzcG9uc2USHAoGdG9waWNzGAIgAygLMgwucGxhdG8uVG9waWMiTwoNVG9waWNSZXNwb25zZRIhCgRiYXNlGAEgASgLMhMucGxhdG8uQmFzZVJlc3BvbnNlEhsKBXRvcGljGAIgASgLMgwucGxhdG8uVG9waWMilgEKEkluc2VydFRvcGljUmVxdWVzdBIoCgRiYXNlGAEgASgLMhIucGxhdG8uQmFzZVJlcXVlc3RCBrpIA8gBARINCgV0aXRsZRgCIAEoCRITCgtkZXNjcmlwdGlvbhgDIAEoCRIQCghpY29uX3VybBgEIAEoCRISCgpiYW5uZXJfdXJsGAUgASgJEgwKBHNsdWcYBiABKAki3gEKElVwZGF0ZVRvcGljUmVxdWVzdBIoCgRiYXNlGAEgASgLMhIucGxhdG8uQmFzZVJlcXVlc3RCBrpIA8gBARIKCgJpZBgCIAEoBRISCgV0aXRsZRgDIAEoCUgAiAEBEhgKC2Rlc2NyaXB0aW9uGAQgASgJSAGIAQESFQoIaWNvbl91cmwYBSABKAlIAogBARIXCgpiYW5uZXJfdXJsGAYgASgJSAOIAQFCCAoGX3RpdGxlQg4KDF9kZXNjcmlwdGlvbkILCglfaWNvbl91cmxCDQoLX2Jhbm5lcl91cmwy6gMKEVBsYXRvVG9waWNTZXJ2aWNlEkAKC0luc2VydFRvcGljEhkucGxhdG8uSW5zZXJ0VG9waWNSZXF1ZXN0GhQucGxhdG8uVG9waWNSZXNwb25zZSIAEkAKC1VwZGF0ZVRvcGljEhkucGxhdG8uVXBkYXRlVG9waWNSZXF1ZXN0GhQucGxhdG8uVG9waWNSZXNwb25zZSIAEj4KC0RlbGV0ZVRvcGljEhUucGxhdG8uVG9waWNJZFJlcXVlc3QaFi5wbGF0by5HZW5lcmljUmVzcG9uc2UiABJLChJMaXN0VG9waWNzQnlVc2VySWQSFS5wbGF0by5HZW5lcmljUmVxdWVzdBocLnBsYXRvLlBhZ2luYXRlVG9waWNSZXNwb25zZSIAEkcKDVBhZ2luYXRlVG9waWMSFi5wbGF0by5QYWdpbmF0ZVJlcXVlc3QaHC5wbGF0by5QYWdpbmF0ZVRvcGljUmVzcG9uc2UiABI9CgxHZXRUb3BpY0J5SWQSFS5wbGF0by5Ub3BpY0lkUmVxdWVzdBoULnBsYXRvLlRvcGljUmVzcG9uc2UiABI8Cg5HZXRUb3BpY0J5U2x1ZxISLnBsYXRvLlNsdWdSZXF1ZXN0GhQucGxhdG8uVG9waWNSZXNwb25zZSIAQhFaD3BsYXRvL2FwaS9wcm90b2IGcHJvdG8z",
+    "ChFwbGF0by90b3BpYy5wcm90bxIFcGxhdG8iWAoVUGFnaW5hdGVUb3BpY1Jlc3BvbnNlEiEKBGJhc2UYASABKAsyEy5wbGF0by5CYXNlUmVzcG9uc2USHAoGdG9waWNzGAIgAygLMgwucGxhdG8uVG9waWMiTwoNVG9waWNSZXNwb25zZRIhCgRiYXNlGAEgASgLMhMucGxhdG8uQmFzZVJlc3BvbnNlEhsKBXRvcGljGAIgASgLMgwucGxhdG8uVG9waWMi3AEKEkluc2VydFRvcGljUmVxdWVzdBIoCgRiYXNlGAEgASgLMhIucGxhdG8uQmFzZVJlcXVlc3RCBrpIA8gBARINCgV0aXRsZRgCIAEoCRITCgtkZXNjcmlwdGlvbhgDIAEoCRIMCgRzbHVnGAYgASgJEhAKCGljb25fdXJsGBQgASgJEhcKCmJhbm5lcl91cmwYFSABKAlIAIgBARIcCg90aXRsZV9pbWFnZV91cmwYFiABKAlIAYgBAUINCgtfYmFubmVyX3VybEISChBfdGl0bGVfaW1hZ2VfdXJsIpACChJVcGRhdGVUb3BpY1JlcXVlc3QSKAoEYmFzZRgBIAEoCzISLnBsYXRvLkJhc2VSZXF1ZXN0Qga6SAPIAQESCgoCaWQYAiABKAUSEgoFdGl0bGUYAyABKAlIAIgBARIYCgtkZXNjcmlwdGlvbhgEIAEoCUgBiAEBEhUKCGljb25fdXJsGAUgASgJSAKIAQESFwoKYmFubmVyX3VybBgGIAEoCUgDiAEBEhwKD3RpdGxlX2ltYWdlX3VybBgHIAEoCUgEiAEBQggKBl90aXRsZUIOCgxfZGVzY3JpcHRpb25CCwoJX2ljb25fdXJsQg0KC19iYW5uZXJfdXJsQhIKEF90aXRsZV9pbWFnZV91cmwy6gMKEVBsYXRvVG9waWNTZXJ2aWNlEkAKC0luc2VydFRvcGljEhkucGxhdG8uSW5zZXJ0VG9waWNSZXF1ZXN0GhQucGxhdG8uVG9waWNSZXNwb25zZSIAEkAKC1VwZGF0ZVRvcGljEhkucGxhdG8uVXBkYXRlVG9waWNSZXF1ZXN0GhQucGxhdG8uVG9waWNSZXNwb25zZSIAEj4KC0RlbGV0ZVRvcGljEhUucGxhdG8uVG9waWNJZFJlcXVlc3QaFi5wbGF0by5HZW5lcmljUmVzcG9uc2UiABJLChJMaXN0VG9waWNzQnlVc2VySWQSFS5wbGF0by5HZW5lcmljUmVxdWVzdBocLnBsYXRvLlBhZ2luYXRlVG9waWNSZXNwb25zZSIAEkcKDVBhZ2luYXRlVG9waWMSFi5wbGF0by5QYWdpbmF0ZVJlcXVlc3QaHC5wbGF0by5QYWdpbmF0ZVRvcGljUmVzcG9uc2UiABI9CgxHZXRUb3BpY0J5SWQSFS5wbGF0by5Ub3BpY0lkUmVxdWVzdBoULnBsYXRvLlRvcGljUmVzcG9uc2UiABI8Cg5HZXRUb3BpY0J5U2x1ZxISLnBsYXRvLlNsdWdSZXF1ZXN0GhQucGxhdG8uVG9waWNSZXNwb25zZSIAQhFaD3BsYXRvL2FwaS9wcm90b2IGcHJvdG8z",
     [file_core_core, file_plato_generic, file_plato_object],
   );
 
@@ -106,19 +106,24 @@ export type InsertTopicRequest = Message<"plato.InsertTopicRequest"> & {
   description: string;
 
   /**
-   * @generated from field: string icon_url = 4;
+   * @generated from field: string slug = 6;
+   */
+  slug: string;
+
+  /**
+   * @generated from field: string icon_url = 20;
    */
   iconUrl: string;
 
   /**
-   * @generated from field: string banner_url = 5;
+   * @generated from field: optional string banner_url = 21;
    */
-  bannerUrl: string;
+  bannerUrl?: string;
 
   /**
-   * @generated from field: string slug = 6;
+   * @generated from field: optional string title_image_url = 22;
    */
-  slug: string;
+  titleImageUrl?: string;
 };
 
 /**
@@ -162,6 +167,11 @@ export type UpdateTopicRequest = Message<"plato.UpdateTopicRequest"> & {
    * @generated from field: optional string banner_url = 6;
    */
   bannerUrl?: string;
+
+  /**
+   * @generated from field: optional string title_image_url = 7;
+   */
+  titleImageUrl?: string;
 };
 
 /**

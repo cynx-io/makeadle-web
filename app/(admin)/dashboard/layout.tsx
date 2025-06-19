@@ -1,8 +1,8 @@
 import React from "react";
-import { newJanusError } from "@/lib/janus/error";
 import { topicServerClient } from "@/lib/janus/server-client/plato";
 import { DashboardSidebar } from "@/components/admin/DashboardSidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
+import { newJanusServerError } from "@/lib/janus/server-client/error";
 
 export const metadata = {
   title: "Dashboard",
@@ -12,7 +12,7 @@ type Props = { children: React.ReactNode };
 
 export default async function DashboardLayout({ children }: Props) {
   const resp = await topicServerClient.listTopicsByUserId({}).catch((err) => {
-    newJanusError(err).handle();
+    newJanusServerError(err).handle();
   });
 
   if (resp == null) {

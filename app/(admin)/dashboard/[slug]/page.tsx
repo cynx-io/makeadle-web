@@ -1,11 +1,10 @@
 import { notFound } from "next/navigation";
-import { newJanusError } from "@/lib/janus/error";
 import {
   answerServerClient,
   topicServerClient,
 } from "@/lib/janus/server-client/plato";
 import { DashboardAnswerTable } from "@/components/admin/answer/table/DashboardAnswerTable";
-import { cookies } from "next/headers";
+import { newJanusServerError } from "@/lib/janus/server-client/error";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -17,7 +16,7 @@ export default async function TopicPage({ params }: Props) {
   const topicResp = await topicServerClient
     .getTopicBySlug({ slug })
     .catch((err) => {
-      newJanusError(err).handle();
+      newJanusServerError(err).handle();
     });
   const topic = topicResp?.topic;
   if (!topic) return notFound();
@@ -25,7 +24,7 @@ export default async function TopicPage({ params }: Props) {
   const detailAnswersResp = await answerServerClient
     .listDetailAnswersByTopicId({ topicId: topic.id })
     .catch((err) => {
-      newJanusError(err).handle();
+      newJanusServerError(err).handle();
     });
   if (!detailAnswersResp) return notFound();
   const detailAnswers = detailAnswersResp.detailAnswers;
@@ -42,7 +41,7 @@ export default async function TopicPage({ params }: Props) {
       <h1 className="text-4xl font-bold mb-2">{topic.title}</h1>
       <p className="text-gray-600">{topic.description}</p>
 
-      <DashboardAnswerTable detailAnswers={detailAnswers} />
+      <DashboardAnswerTable detailAnswers={detailAnswers} topicId={topic.id} />
     </div>
   );
 }

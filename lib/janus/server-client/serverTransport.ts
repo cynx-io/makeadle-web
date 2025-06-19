@@ -1,9 +1,10 @@
 import { BaseResponse } from "@/proto/janus/core/core_pb";
 import { createConnectTransport } from "@connectrpc/connect-web";
 import { cookies } from "next/headers";
+import { getJanusBaseUrl } from "@/lib/utils";
 
 export const serverTransport = createConnectTransport({
-  baseUrl: "http://api.devspace.local:31500",
+  baseUrl: getJanusBaseUrl(),
   jsonOptions: {
     useProtoFieldName: true,
   },
@@ -25,7 +26,6 @@ async function fetchJanus(
   init?: RequestInit,
 ): Promise<Response> {
   console.log("Fetch URL:", input);
-  console.log("Fetch init:", init);
 
   const cookie = await cookies();
   const cookieHeader = cookie.toString();
@@ -41,7 +41,9 @@ async function fetchJanus(
     credentials: "include",
   });
 
-  console.log("Response status:", response.status);
+  if (response.status != 200) {
+    console.log("Response status:", response.status);
+  }
 
   if (!response.ok) {
     console.error("Fetch error:", response.statusText);
@@ -52,6 +54,7 @@ async function fetchJanus(
     const responseData = await response.clone().json();
     const base = responseData.base as BaseResponse;
 
+    console.log("Response data:", responseData);
     if (base?.code !== "00") {
       console.error("Error in response:", base.code);
       throw new ServiceError(base.code, base.desc);
