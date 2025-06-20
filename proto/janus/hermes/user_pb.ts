@@ -22,9 +22,56 @@ import type { Message } from "@bufbuild/protobuf";
 export const file_hermes_user: GenFile =
   /*@__PURE__*/
   fileDesc(
-    "ChFoZXJtZXMvdXNlci5wcm90bxIGaGVybWVzIioKDEJhc2VSZXNwb25zZRIMCgRjb2RlGAEgASgJEgwKBGRlc2MYAiABKAkiKAoUQ2hlY2tVc2VybmFtZVJlcXVlc3QSEAoIdXNlcm5hbWUYASABKAkiSwoVQ2hlY2tVc2VybmFtZVJlc3BvbnNlEiIKBGJhc2UYASABKAsyFC5oZXJtZXMuQmFzZVJlc3BvbnNlEg4KBmV4aXN0cxgCIAEoCCIiCg5HZXRVc2VyUmVxdWVzdBIQCgh1c2VybmFtZRgBIAEoCSJVCg9HZXRVc2VyUmVzcG9uc2USIgoEYmFzZRgBIAEoCzIULmhlcm1lcy5CYXNlUmVzcG9uc2USHgoEdXNlchgCIAEoCzIQLmhlcm1lcy5Vc2VyRGF0YSI9ChdWYWxpZGF0ZVBhc3N3b3JkUmVxdWVzdBIQCgh1c2VybmFtZRgBIAEoCRIQCghwYXNzd29yZBgCIAEoCSJeChhWYWxpZGF0ZVBhc3N3b3JkUmVzcG9uc2USIgoEYmFzZRgBIAEoCzIULmhlcm1lcy5CYXNlUmVzcG9uc2USHgoEdXNlchgCIAEoCzIQLmhlcm1lcy5Vc2VyRGF0YSI3ChFDcmVhdGVVc2VyUmVxdWVzdBIQCgh1c2VybmFtZRgBIAEoCRIQCghwYXNzd29yZBgCIAEoCSJYChJDcmVhdGVVc2VyUmVzcG9uc2USIgoEYmFzZRgBIAEoCzIULmhlcm1lcy5CYXNlUmVzcG9uc2USHgoEdXNlchgCIAEoCzIQLmhlcm1lcy5Vc2VyRGF0YSJTCg9QYWdpbmF0ZVJlcXVlc3QSDAoEcGFnZRgBIAEoBRINCgVsaW1pdBgCIAEoBRIPCgdzb3J0X2J5GAMgASgJEhIKCnNvcnRfb3JkZXIYBCABKAkinQEKFVBhZ2luYXRlVXNlcnNSZXNwb25zZRIiCgRiYXNlGAEgASgLMhQuaGVybWVzLkJhc2VSZXNwb25zZRIfCgV1c2VycxgCIAMoCzIQLmhlcm1lcy5Vc2VyRGF0YRINCgV0b3RhbBgDIAEoBRIMCgRwYWdlGAQgASgFEg0KBWxpbWl0GAUgASgFEhMKC3RvdGFsX3BhZ2VzGAYgASgFIpoBCghVc2VyRGF0YRIKCgJpZBgBIAEoBRIQCgh1c2VybmFtZRgCIAEoCRIMCgRjb2luGAMgASgFEjAKDGNyZWF0ZWRfZGF0ZRgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASMAoMdXBkYXRlZF9kYXRlGAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcDKMAwoRSGVybWVzVXNlclNlcnZpY2USTgoNQ2hlY2tVc2VybmFtZRIcLmhlcm1lcy5DaGVja1VzZXJuYW1lUmVxdWVzdBodLmhlcm1lcy5DaGVja1VzZXJuYW1lUmVzcG9uc2UiABI8CgdHZXRVc2VyEhYuaGVybWVzLkdldFVzZXJSZXF1ZXN0GhcuaGVybWVzLkdldFVzZXJSZXNwb25zZSIAEkUKCkNyZWF0ZVVzZXISGS5oZXJtZXMuQ3JlYXRlVXNlclJlcXVlc3QaGi5oZXJtZXMuQ3JlYXRlVXNlclJlc3BvbnNlIgASSQoNUGFnaW5hdGVVc2VycxIXLmhlcm1lcy5QYWdpbmF0ZVJlcXVlc3QaHS5oZXJtZXMuUGFnaW5hdGVVc2Vyc1Jlc3BvbnNlIgASVwoQVmFsaWRhdGVQYXNzd29yZBIfLmhlcm1lcy5WYWxpZGF0ZVBhc3N3b3JkUmVxdWVzdBogLmhlcm1lcy5WYWxpZGF0ZVBhc3N3b3JkUmVzcG9uc2UiAEISWhBoZXJtZXMvYXBpL3Byb3RvYgZwcm90bzM",
+    "ChFoZXJtZXMvdXNlci5wcm90bxIGaGVybWVzIsQBCgtCYXNlUmVxdWVzdBISCgpyZXF1ZXN0X2lkGAEgASgJEhYKDnJlcXVlc3Rfb3JpZ2luGAIgASgJEhQKDHJlcXVlc3RfcGF0aBgDIAEoCRItCgl0aW1lc3RhbXAYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhQKB3VzZXJfaWQYBSABKAVIAIgBARIVCgh1c2VybmFtZRgGIAEoCUgBiAEBQgoKCF91c2VyX2lkQgsKCV91c2VybmFtZSIqCgxCYXNlUmVzcG9uc2USDAoEY29kZRgBIAEoCRIMCgRkZXNjGAIgASgJIksKFENoZWNrVXNlcm5hbWVSZXF1ZXN0EiEKBGJhc2UYASABKAsyEy5oZXJtZXMuQmFzZVJlcXVlc3QSEAoIdXNlcm5hbWUYAiABKAkiSwoVQ2hlY2tVc2VybmFtZVJlc3BvbnNlEiIKBGJhc2UYASABKAsyFC5oZXJtZXMuQmFzZVJlc3BvbnNlEg4KBmV4aXN0cxgCIAEoCCIiCg5HZXRVc2VyUmVxdWVzdBIQCgh1c2VybmFtZRgBIAEoCSJVCg9HZXRVc2VyUmVzcG9uc2USIgoEYmFzZRgBIAEoCzIULmhlcm1lcy5CYXNlUmVzcG9uc2USHgoEdXNlchgCIAEoCzIQLmhlcm1lcy5Vc2VyRGF0YSI9ChdWYWxpZGF0ZVBhc3N3b3JkUmVxdWVzdBIQCgh1c2VybmFtZRgBIAEoCRIQCghwYXNzd29yZBgCIAEoCSJeChhWYWxpZGF0ZVBhc3N3b3JkUmVzcG9uc2USIgoEYmFzZRgBIAEoCzIULmhlcm1lcy5CYXNlUmVzcG9uc2USHgoEdXNlchgCIAEoCzIQLmhlcm1lcy5Vc2VyRGF0YSI3ChFDcmVhdGVVc2VyUmVxdWVzdBIQCgh1c2VybmFtZRgBIAEoCRIQCghwYXNzd29yZBgCIAEoCSJYChJDcmVhdGVVc2VyUmVzcG9uc2USIgoEYmFzZRgBIAEoCzIULmhlcm1lcy5CYXNlUmVzcG9uc2USHgoEdXNlchgCIAEoCzIQLmhlcm1lcy5Vc2VyRGF0YSJTCg9QYWdpbmF0ZVJlcXVlc3QSDAoEcGFnZRgBIAEoBRINCgVsaW1pdBgCIAEoBRIPCgdzb3J0X2J5GAMgASgJEhIKCnNvcnRfb3JkZXIYBCABKAkinQEKFVBhZ2luYXRlVXNlcnNSZXNwb25zZRIiCgRiYXNlGAEgASgLMhQuaGVybWVzLkJhc2VSZXNwb25zZRIfCgV1c2VycxgCIAMoCzIQLmhlcm1lcy5Vc2VyRGF0YRINCgV0b3RhbBgDIAEoBRIMCgRwYWdlGAQgASgFEg0KBWxpbWl0GAUgASgFEhMKC3RvdGFsX3BhZ2VzGAYgASgFIpoBCghVc2VyRGF0YRIKCgJpZBgBIAEoBRIQCgh1c2VybmFtZRgCIAEoCRIMCgRjb2luGAMgASgFEjAKDGNyZWF0ZWRfZGF0ZRgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASMAoMdXBkYXRlZF9kYXRlGAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcDKMAwoRSGVybWVzVXNlclNlcnZpY2USTgoNQ2hlY2tVc2VybmFtZRIcLmhlcm1lcy5DaGVja1VzZXJuYW1lUmVxdWVzdBodLmhlcm1lcy5DaGVja1VzZXJuYW1lUmVzcG9uc2UiABI8CgdHZXRVc2VyEhYuaGVybWVzLkdldFVzZXJSZXF1ZXN0GhcuaGVybWVzLkdldFVzZXJSZXNwb25zZSIAEkUKCkNyZWF0ZVVzZXISGS5oZXJtZXMuQ3JlYXRlVXNlclJlcXVlc3QaGi5oZXJtZXMuQ3JlYXRlVXNlclJlc3BvbnNlIgASSQoNUGFnaW5hdGVVc2VycxIXLmhlcm1lcy5QYWdpbmF0ZVJlcXVlc3QaHS5oZXJtZXMuUGFnaW5hdGVVc2Vyc1Jlc3BvbnNlIgASVwoQVmFsaWRhdGVQYXNzd29yZBIfLmhlcm1lcy5WYWxpZGF0ZVBhc3N3b3JkUmVxdWVzdBogLmhlcm1lcy5WYWxpZGF0ZVBhc3N3b3JkUmVzcG9uc2UiAEISWhBoZXJtZXMvYXBpL3Byb3RvYgZwcm90bzM",
     [file_google_protobuf_timestamp],
   );
+
+/**
+ * @generated from message hermes.BaseRequest
+ */
+export type BaseRequest = Message<"hermes.BaseRequest"> & {
+  /**
+   * string length 1–100
+   *
+   * @generated from field: string request_id = 1;
+   */
+  requestId: string;
+
+  /**
+   * @generated from field: string request_origin = 2;
+   */
+  requestOrigin: string;
+
+  /**
+   * @generated from field: string request_path = 3;
+   */
+  requestPath: string;
+
+  /**
+   * timestamp must be in the past
+   *
+   * @generated from field: google.protobuf.Timestamp timestamp = 4;
+   */
+  timestamp?: Timestamp;
+
+  /**
+   * @generated from field: optional int32 user_id = 5;
+   */
+  userId?: number;
+
+  /**
+   * @generated from field: optional string username = 6;
+   */
+  username?: string;
+};
+
+/**
+ * Describes the message hermes.BaseRequest.
+ * Use `create(BaseRequestSchema)` to create a new message.
+ */
+export const BaseRequestSchema: GenMessage<BaseRequest> =
+  /*@__PURE__*/
+  messageDesc(file_hermes_user, 0);
 
 /**
  * @generated from message hermes.BaseResponse
@@ -47,7 +94,7 @@ export type BaseResponse = Message<"hermes.BaseResponse"> & {
  */
 export const BaseResponseSchema: GenMessage<BaseResponse> =
   /*@__PURE__*/
-  messageDesc(file_hermes_user, 0);
+  messageDesc(file_hermes_user, 1);
 
 /**
  * Request message for checking username
@@ -56,7 +103,12 @@ export const BaseResponseSchema: GenMessage<BaseResponse> =
  */
 export type CheckUsernameRequest = Message<"hermes.CheckUsernameRequest"> & {
   /**
-   * @generated from field: string username = 1;
+   * @generated from field: hermes.BaseRequest base = 1;
+   */
+  base?: BaseRequest;
+
+  /**
+   * @generated from field: string username = 2;
    */
   username: string;
 };
@@ -67,7 +119,7 @@ export type CheckUsernameRequest = Message<"hermes.CheckUsernameRequest"> & {
  */
 export const CheckUsernameRequestSchema: GenMessage<CheckUsernameRequest> =
   /*@__PURE__*/
-  messageDesc(file_hermes_user, 1);
+  messageDesc(file_hermes_user, 2);
 
 /**
  * Response message for checking username
@@ -92,7 +144,7 @@ export type CheckUsernameResponse = Message<"hermes.CheckUsernameResponse"> & {
  */
 export const CheckUsernameResponseSchema: GenMessage<CheckUsernameResponse> =
   /*@__PURE__*/
-  messageDesc(file_hermes_user, 2);
+  messageDesc(file_hermes_user, 3);
 
 /**
  * Request message for getting user
@@ -112,7 +164,7 @@ export type GetUserRequest = Message<"hermes.GetUserRequest"> & {
  */
 export const GetUserRequestSchema: GenMessage<GetUserRequest> =
   /*@__PURE__*/
-  messageDesc(file_hermes_user, 3);
+  messageDesc(file_hermes_user, 4);
 
 /**
  * Response message for getting user
@@ -137,7 +189,7 @@ export type GetUserResponse = Message<"hermes.GetUserResponse"> & {
  */
 export const GetUserResponseSchema: GenMessage<GetUserResponse> =
   /*@__PURE__*/
-  messageDesc(file_hermes_user, 4);
+  messageDesc(file_hermes_user, 5);
 
 /**
  * Request message for getting user
@@ -163,7 +215,7 @@ export type ValidatePasswordRequest =
  */
 export const ValidatePasswordRequestSchema: GenMessage<ValidatePasswordRequest> =
   /*@__PURE__*/
-  messageDesc(file_hermes_user, 5);
+  messageDesc(file_hermes_user, 6);
 
 /**
  * Response message for getting user
@@ -189,7 +241,7 @@ export type ValidatePasswordResponse =
  */
 export const ValidatePasswordResponseSchema: GenMessage<ValidatePasswordResponse> =
   /*@__PURE__*/
-  messageDesc(file_hermes_user, 6);
+  messageDesc(file_hermes_user, 7);
 
 /**
  * Request message for creating user
@@ -214,7 +266,7 @@ export type CreateUserRequest = Message<"hermes.CreateUserRequest"> & {
  */
 export const CreateUserRequestSchema: GenMessage<CreateUserRequest> =
   /*@__PURE__*/
-  messageDesc(file_hermes_user, 7);
+  messageDesc(file_hermes_user, 8);
 
 /**
  * Response message for creating user
@@ -239,7 +291,7 @@ export type CreateUserResponse = Message<"hermes.CreateUserResponse"> & {
  */
 export const CreateUserResponseSchema: GenMessage<CreateUserResponse> =
   /*@__PURE__*/
-  messageDesc(file_hermes_user, 8);
+  messageDesc(file_hermes_user, 9);
 
 /**
  * Request message for paginating users
@@ -274,7 +326,7 @@ export type PaginateRequest = Message<"hermes.PaginateRequest"> & {
  */
 export const PaginateRequestSchema: GenMessage<PaginateRequest> =
   /*@__PURE__*/
-  messageDesc(file_hermes_user, 9);
+  messageDesc(file_hermes_user, 10);
 
 /**
  * Response message for paginating users
@@ -319,7 +371,7 @@ export type PaginateUsersResponse = Message<"hermes.PaginateUsersResponse"> & {
  */
 export const PaginateUsersResponseSchema: GenMessage<PaginateUsersResponse> =
   /*@__PURE__*/
-  messageDesc(file_hermes_user, 10);
+  messageDesc(file_hermes_user, 11);
 
 /**
  * User response message
@@ -359,7 +411,7 @@ export type UserData = Message<"hermes.UserData"> & {
  */
 export const UserDataSchema: GenMessage<UserData> =
   /*@__PURE__*/
-  messageDesc(file_hermes_user, 11);
+  messageDesc(file_hermes_user, 12);
 
 /**
  * User service definition

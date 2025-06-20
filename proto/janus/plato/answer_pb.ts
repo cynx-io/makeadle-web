@@ -12,17 +12,17 @@ import {
   messageDesc,
   serviceDesc,
 } from "@bufbuild/protobuf/codegenv2";
-import type {
-  BaseRequest,
-  BaseResponse,
-  GenericResponseSchema,
-} from "../core/core_pb";
-import { file_core_core } from "../core/core_pb";
 import type { AnswerIdRequestSchema, TopicIdRequestSchema } from "./generic_pb";
 import { file_plato_generic } from "./generic_pb";
 import type { Answer, DetailAnswer } from "./object_pb";
 import { file_plato_object } from "./object_pb";
 
+import type {
+  BaseRequest,
+  BaseResponse,
+  GenericResponseSchema,
+} from "../core_pb";
+import { file_core } from "../core_pb";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
@@ -31,8 +31,8 @@ import type { Message } from "@bufbuild/protobuf";
 export const file_plato_answer: GenFile =
   /*@__PURE__*/
   fileDesc(
-    "ChJwbGF0by9hbnN3ZXIucHJvdG8SBXBsYXRvInUKFFNlYXJjaEFuc3dlcnNSZXF1ZXN0EiAKBGJhc2UYASABKAsyEi5wbGF0by5CYXNlUmVxdWVzdBIYCgVxdWVyeRgCIAEoCUIJukgGcgQQARhkEhAKCHRvcGljX2lkGAMgASgFEg8KB21vZGVfaWQYBCABKAUiWAoTTGlzdEFuc3dlcnNSZXNwb25zZRIhCgRiYXNlGAEgASgLMhMucGxhdG8uQmFzZVJlc3BvbnNlEh4KB2Fuc3dlcnMYAiADKAsyDS5wbGF0by5BbnN3ZXIiawoZTGlzdERldGFpbEFuc3dlcnNSZXNwb25zZRIhCgRiYXNlGAEgASgLMhMucGxhdG8uQmFzZVJlc3BvbnNlEisKDmRldGFpbF9hbnN3ZXJzGAIgAygLMhMucGxhdG8uRGV0YWlsQW5zd2VyIlIKDkFuc3dlclJlc3BvbnNlEiEKBGJhc2UYASABKAsyEy5wbGF0by5CYXNlUmVzcG9uc2USHQoGYW5zd2VyGAIgASgLMg0ucGxhdG8uQW5zd2VyImUKFERldGFpbEFuc3dlclJlc3BvbnNlEiEKBGJhc2UYASABKAsyEy5wbGF0by5CYXNlUmVzcG9uc2USKgoNZGV0YWlsX2Fuc3dlchgCIAEoCzITLnBsYXRvLkRldGFpbEFuc3dlciKDAQoTSW5zZXJ0QW5zd2VyUmVxdWVzdBIoCgRiYXNlGAEgASgLMhIucGxhdG8uQmFzZVJlcXVlc3RCBrpIA8gBARIMCgRuYW1lGAIgASgJEhUKCGljb25fdXJsGAMgASgJSACIAQESEAoIdG9waWNfaWQYBCABKAVCCwoJX2ljb25fdXJsIpIBChNVcGRhdGVBbnN3ZXJSZXF1ZXN0EigKBGJhc2UYASABKAsyEi5wbGF0by5CYXNlUmVxdWVzdEIGukgDyAEBEhEKBG5hbWUYAiABKAlIAIgBARIVCghpY29uX3VybBgDIAEoCUgBiAEBEhEKCWFuc3dlcl9pZBgEIAEoBUIHCgVfbmFtZUILCglfaWNvbl91cmwy4gQKElBsYXRvQW5zd2VyU2VydmljZRJACg1HZXRBbnN3ZXJCeUlkEhYucGxhdG8uQW5zd2VySWRSZXF1ZXN0GhUucGxhdG8uQW5zd2VyUmVzcG9uc2UiABJMChNHZXREZXRhaWxBbnN3ZXJCeUlkEhYucGxhdG8uQW5zd2VySWRSZXF1ZXN0GhsucGxhdG8uRGV0YWlsQW5zd2VyUmVzcG9uc2UiABJLChRMaXN0QW5zd2Vyc0J5VG9waWNJZBIVLnBsYXRvLlRvcGljSWRSZXF1ZXN0GhoucGxhdG8uTGlzdEFuc3dlcnNSZXNwb25zZSIAElcKGkxpc3REZXRhaWxBbnN3ZXJzQnlUb3BpY0lkEhUucGxhdG8uVG9waWNJZFJlcXVlc3QaIC5wbGF0by5MaXN0RGV0YWlsQW5zd2Vyc1Jlc3BvbnNlIgASQwoMSW5zZXJ0QW5zd2VyEhoucGxhdG8uSW5zZXJ0QW5zd2VyUmVxdWVzdBoVLnBsYXRvLkFuc3dlclJlc3BvbnNlIgASQwoMVXBkYXRlQW5zd2VyEhoucGxhdG8uVXBkYXRlQW5zd2VyUmVxdWVzdBoVLnBsYXRvLkFuc3dlclJlc3BvbnNlIgASQAoMRGVsZXRlQW5zd2VyEhYucGxhdG8uQW5zd2VySWRSZXF1ZXN0GhYucGxhdG8uR2VuZXJpY1Jlc3BvbnNlIgASSgoNU2VhcmNoQW5zd2VycxIbLnBsYXRvLlNlYXJjaEFuc3dlcnNSZXF1ZXN0GhoucGxhdG8uTGlzdEFuc3dlcnNSZXNwb25zZSIAQhFaD3BsYXRvL2FwaS9wcm90b2IGcHJvdG8z",
-    [file_core_core, file_plato_generic, file_plato_object],
+    "ChJwbGF0by9hbnN3ZXIucHJvdG8SBXBsYXRvInQKFFNlYXJjaEFuc3dlcnNSZXF1ZXN0Eh8KBGJhc2UYASABKAsyES5jb3JlLkJhc2VSZXF1ZXN0EhgKBXF1ZXJ5GAIgASgJQgm6SAZyBBABGGQSEAoIdG9waWNfaWQYAyABKAUSDwoHbW9kZV9pZBgEIAEoBSJXChNMaXN0QW5zd2Vyc1Jlc3BvbnNlEiAKBGJhc2UYASABKAsyEi5jb3JlLkJhc2VSZXNwb25zZRIeCgdhbnN3ZXJzGAIgAygLMg0ucGxhdG8uQW5zd2VyImoKGUxpc3REZXRhaWxBbnN3ZXJzUmVzcG9uc2USIAoEYmFzZRgBIAEoCzISLmNvcmUuQmFzZVJlc3BvbnNlEisKDmRldGFpbF9hbnN3ZXJzGAIgAygLMhMucGxhdG8uRGV0YWlsQW5zd2VyIlEKDkFuc3dlclJlc3BvbnNlEiAKBGJhc2UYASABKAsyEi5jb3JlLkJhc2VSZXNwb25zZRIdCgZhbnN3ZXIYAiABKAsyDS5wbGF0by5BbnN3ZXIiZAoURGV0YWlsQW5zd2VyUmVzcG9uc2USIAoEYmFzZRgBIAEoCzISLmNvcmUuQmFzZVJlc3BvbnNlEioKDWRldGFpbF9hbnN3ZXIYAiABKAsyEy5wbGF0by5EZXRhaWxBbnN3ZXIiggEKE0luc2VydEFuc3dlclJlcXVlc3QSJwoEYmFzZRgBIAEoCzIRLmNvcmUuQmFzZVJlcXVlc3RCBrpIA8gBARIMCgRuYW1lGAIgASgJEhUKCGljb25fdXJsGAMgASgJSACIAQESEAoIdG9waWNfaWQYBCABKAVCCwoJX2ljb25fdXJsIpEBChNVcGRhdGVBbnN3ZXJSZXF1ZXN0EicKBGJhc2UYASABKAsyES5jb3JlLkJhc2VSZXF1ZXN0Qga6SAPIAQESEQoEbmFtZRgCIAEoCUgAiAEBEhUKCGljb25fdXJsGAMgASgJSAGIAQESEQoJYW5zd2VyX2lkGAQgASgFQgcKBV9uYW1lQgsKCV9pY29uX3VybDLhBAoSUGxhdG9BbnN3ZXJTZXJ2aWNlEkAKDUdldEFuc3dlckJ5SWQSFi5wbGF0by5BbnN3ZXJJZFJlcXVlc3QaFS5wbGF0by5BbnN3ZXJSZXNwb25zZSIAEkwKE0dldERldGFpbEFuc3dlckJ5SWQSFi5wbGF0by5BbnN3ZXJJZFJlcXVlc3QaGy5wbGF0by5EZXRhaWxBbnN3ZXJSZXNwb25zZSIAEksKFExpc3RBbnN3ZXJzQnlUb3BpY0lkEhUucGxhdG8uVG9waWNJZFJlcXVlc3QaGi5wbGF0by5MaXN0QW5zd2Vyc1Jlc3BvbnNlIgASVwoaTGlzdERldGFpbEFuc3dlcnNCeVRvcGljSWQSFS5wbGF0by5Ub3BpY0lkUmVxdWVzdBogLnBsYXRvLkxpc3REZXRhaWxBbnN3ZXJzUmVzcG9uc2UiABJDCgxJbnNlcnRBbnN3ZXISGi5wbGF0by5JbnNlcnRBbnN3ZXJSZXF1ZXN0GhUucGxhdG8uQW5zd2VyUmVzcG9uc2UiABJDCgxVcGRhdGVBbnN3ZXISGi5wbGF0by5VcGRhdGVBbnN3ZXJSZXF1ZXN0GhUucGxhdG8uQW5zd2VyUmVzcG9uc2UiABI/CgxEZWxldGVBbnN3ZXISFi5wbGF0by5BbnN3ZXJJZFJlcXVlc3QaFS5jb3JlLkdlbmVyaWNSZXNwb25zZSIAEkoKDVNlYXJjaEFuc3dlcnMSGy5wbGF0by5TZWFyY2hBbnN3ZXJzUmVxdWVzdBoaLnBsYXRvLkxpc3RBbnN3ZXJzUmVzcG9uc2UiAEIRWg9wbGF0by9hcGkvcHJvdG9iBnByb3RvMw",
+    [file_plato_generic, file_plato_object, file_core],
   );
 
 /**
@@ -40,7 +40,7 @@ export const file_plato_answer: GenFile =
  */
 export type SearchAnswersRequest = Message<"plato.SearchAnswersRequest"> & {
   /**
-   * @generated from field: plato.BaseRequest base = 1;
+   * @generated from field: core.BaseRequest base = 1;
    */
   base?: BaseRequest;
 
@@ -73,7 +73,7 @@ export const SearchAnswersRequestSchema: GenMessage<SearchAnswersRequest> =
  */
 export type ListAnswersResponse = Message<"plato.ListAnswersResponse"> & {
   /**
-   * @generated from field: plato.BaseResponse base = 1;
+   * @generated from field: core.BaseResponse base = 1;
    */
   base?: BaseResponse;
 
@@ -97,7 +97,7 @@ export const ListAnswersResponseSchema: GenMessage<ListAnswersResponse> =
 export type ListDetailAnswersResponse =
   Message<"plato.ListDetailAnswersResponse"> & {
     /**
-     * @generated from field: plato.BaseResponse base = 1;
+     * @generated from field: core.BaseResponse base = 1;
      */
     base?: BaseResponse;
 
@@ -120,7 +120,7 @@ export const ListDetailAnswersResponseSchema: GenMessage<ListDetailAnswersRespon
  */
 export type AnswerResponse = Message<"plato.AnswerResponse"> & {
   /**
-   * @generated from field: plato.BaseResponse base = 1;
+   * @generated from field: core.BaseResponse base = 1;
    */
   base?: BaseResponse;
 
@@ -143,7 +143,7 @@ export const AnswerResponseSchema: GenMessage<AnswerResponse> =
  */
 export type DetailAnswerResponse = Message<"plato.DetailAnswerResponse"> & {
   /**
-   * @generated from field: plato.BaseResponse base = 1;
+   * @generated from field: core.BaseResponse base = 1;
    */
   base?: BaseResponse;
 
@@ -166,7 +166,7 @@ export const DetailAnswerResponseSchema: GenMessage<DetailAnswerResponse> =
  */
 export type InsertAnswerRequest = Message<"plato.InsertAnswerRequest"> & {
   /**
-   * @generated from field: plato.BaseRequest base = 1;
+   * @generated from field: core.BaseRequest base = 1;
    */
   base?: BaseRequest;
 
@@ -199,7 +199,7 @@ export const InsertAnswerRequestSchema: GenMessage<InsertAnswerRequest> =
  */
 export type UpdateAnswerRequest = Message<"plato.UpdateAnswerRequest"> & {
   /**
-   * @generated from field: plato.BaseRequest base = 1;
+   * @generated from field: core.BaseRequest base = 1;
    */
   base?: BaseRequest;
 

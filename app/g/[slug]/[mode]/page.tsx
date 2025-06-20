@@ -14,7 +14,7 @@ export default async function TopicModesPage({ params }: Props) {
   const { slug, mode } = await params;
 
   return (
-    <div className="">
+    <div className="w-full">
       <GameSection />
     </div>
   );

@@ -1,7 +1,7 @@
-import { BaseResponse } from "@/proto/janus/core/core_pb";
+import { getJanusBaseUrl } from "@/lib/utils";
+import { BaseResponse } from "@/proto/janus/core_pb";
 import { createConnectTransport } from "@connectrpc/connect-web";
 import { cookies } from "next/headers";
-import { getJanusBaseUrl } from "@/lib/utils";
 
 export const serverTransport = createConnectTransport({
   baseUrl: getJanusBaseUrl(),
@@ -12,10 +12,7 @@ export const serverTransport = createConnectTransport({
 });
 
 export class ServiceError extends Error {
-  constructor(
-    public code: string,
-    message?: string,
-  ) {
+  constructor(public code: string, message?: string) {
     super(message ?? `Service returned error code ${code}`);
     this.name = "ServiceError";
   }
@@ -23,7 +20,7 @@ export class ServiceError extends Error {
 
 async function fetchJanus(
   input: RequestInfo | URL,
-  init?: RequestInit,
+  init?: RequestInit
 ): Promise<Response> {
   console.log("Fetch URL:", input);
 

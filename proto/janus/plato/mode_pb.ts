@@ -16,8 +16,8 @@ import type {
   BaseRequest,
   BaseResponse,
   GenericResponseSchema,
-} from "../core/core_pb";
-import { file_core_core } from "../core/core_pb";
+} from "../core_pb";
+import { file_core } from "../core_pb";
 import type { ModeIdRequestSchema, TopicIdRequestSchema } from "./generic_pb";
 import { file_plato_generic } from "./generic_pb";
 import type { DailyGameGuessStats, Mode } from "./object_pb";
@@ -31,8 +31,8 @@ import type { Message } from "@bufbuild/protobuf";
 export const file_plato_mode: GenFile =
   /*@__PURE__*/
   fileDesc(
-    "ChBwbGF0by9tb2RlLnByb3RvEgVwbGF0byJSChFMaXN0TW9kZXNSZXNwb25zZRIhCgRiYXNlGAEgASgLMhMucGxhdG8uQmFzZVJlc3BvbnNlEhoKBW1vZGVzGAIgAygLMgsucGxhdG8uTW9kZSKnAQoMTW9kZVJlc3BvbnNlEiEKBGJhc2UYASABKAsyEy5wbGF0by5CYXNlUmVzcG9uc2USGQoEbW9kZRgCIAEoCzILLnBsYXRvLk1vZGUSHQoVY3VycmVudF9kYWlseV9nYW1lX2lkGAMgASgFEjoKFmRhaWx5X2dhbWVfZ3Vlc3Nfc3RhdHMYBCABKAsyGi5wbGF0by5EYWlseUdhbWVHdWVzc1N0YXRzIqcBChFJbnNlcnRNb2RlUmVxdWVzdBIoCgRiYXNlGAEgASgLMhIucGxhdG8uQmFzZVJlcXVlc3RCBrpIA8gBARINCgV0aXRsZRgCIAEoCRITCgtkZXNjcmlwdGlvbhgDIAEoCRIQCghpY29uX3VybBgEIAEoCRISCgpiYW5uZXJfdXJsGAUgASgJEgwKBHNsdWcYBiABKAkSEAoIdG9waWNfaWQYByABKAUi3QEKEVVwZGF0ZU1vZGVSZXF1ZXN0EigKBGJhc2UYASABKAsyEi5wbGF0by5CYXNlUmVxdWVzdEIGukgDyAEBEgoKAmlkGAIgASgFEhIKBXRpdGxlGAMgASgJSACIAQESGAoLZGVzY3JpcHRpb24YBCABKAlIAYgBARIVCghpY29uX3VybBgFIAEoCUgCiAEBEhcKCmJhbm5lcl91cmwYBiABKAlIA4gBAUIICgZfdGl0bGVCDgoMX2Rlc2NyaXB0aW9uQgsKCV9pY29uX3VybEINCgtfYmFubmVyX3VybDLTAgoQUGxhdG9Nb2RlU2VydmljZRI6CgtHZXRNb2RlQnlJZBIULnBsYXRvLk1vZGVJZFJlcXVlc3QaEy5wbGF0by5Nb2RlUmVzcG9uc2UiABI9CgpJbnNlcnRNb2RlEhgucGxhdG8uSW5zZXJ0TW9kZVJlcXVlc3QaEy5wbGF0by5Nb2RlUmVzcG9uc2UiABI9CgpVcGRhdGVNb2RlEhgucGxhdG8uVXBkYXRlTW9kZVJlcXVlc3QaEy5wbGF0by5Nb2RlUmVzcG9uc2UiABI8CgpEZWxldGVNb2RlEhQucGxhdG8uTW9kZUlkUmVxdWVzdBoWLnBsYXRvLkdlbmVyaWNSZXNwb25zZSIAEkcKEkxpc3RNb2Rlc0J5VG9waWNJZBIVLnBsYXRvLlRvcGljSWRSZXF1ZXN0GhgucGxhdG8uTGlzdE1vZGVzUmVzcG9uc2UiAEIRWg9wbGF0by9hcGkvcHJvdG9iBnByb3RvMw",
-    [file_core_core, file_plato_generic, file_plato_object],
+    "ChBwbGF0by9tb2RlLnByb3RvEgVwbGF0byJRChFMaXN0TW9kZXNSZXNwb25zZRIgCgRiYXNlGAEgASgLMhIuY29yZS5CYXNlUmVzcG9uc2USGgoFbW9kZXMYAiADKAsyCy5wbGF0by5Nb2RlIqYBCgxNb2RlUmVzcG9uc2USIAoEYmFzZRgBIAEoCzISLmNvcmUuQmFzZVJlc3BvbnNlEhkKBG1vZGUYAiABKAsyCy5wbGF0by5Nb2RlEh0KFWN1cnJlbnRfZGFpbHlfZ2FtZV9pZBgDIAEoBRI6ChZkYWlseV9nYW1lX2d1ZXNzX3N0YXRzGAQgASgLMhoucGxhdG8uRGFpbHlHYW1lR3Vlc3NTdGF0cyKmAQoRSW5zZXJ0TW9kZVJlcXVlc3QSJwoEYmFzZRgBIAEoCzIRLmNvcmUuQmFzZVJlcXVlc3RCBrpIA8gBARINCgV0aXRsZRgCIAEoCRITCgtkZXNjcmlwdGlvbhgDIAEoCRIQCghpY29uX3VybBgEIAEoCRISCgpiYW5uZXJfdXJsGAUgASgJEgwKBHNsdWcYBiABKAkSEAoIdG9waWNfaWQYByABKAUi3AEKEVVwZGF0ZU1vZGVSZXF1ZXN0EicKBGJhc2UYASABKAsyES5jb3JlLkJhc2VSZXF1ZXN0Qga6SAPIAQESCgoCaWQYAiABKAUSEgoFdGl0bGUYAyABKAlIAIgBARIYCgtkZXNjcmlwdGlvbhgEIAEoCUgBiAEBEhUKCGljb25fdXJsGAUgASgJSAKIAQESFwoKYmFubmVyX3VybBgGIAEoCUgDiAEBQggKBl90aXRsZUIOCgxfZGVzY3JpcHRpb25CCwoJX2ljb25fdXJsQg0KC19iYW5uZXJfdXJsMtICChBQbGF0b01vZGVTZXJ2aWNlEjoKC0dldE1vZGVCeUlkEhQucGxhdG8uTW9kZUlkUmVxdWVzdBoTLnBsYXRvLk1vZGVSZXNwb25zZSIAEj0KCkluc2VydE1vZGUSGC5wbGF0by5JbnNlcnRNb2RlUmVxdWVzdBoTLnBsYXRvLk1vZGVSZXNwb25zZSIAEj0KClVwZGF0ZU1vZGUSGC5wbGF0by5VcGRhdGVNb2RlUmVxdWVzdBoTLnBsYXRvLk1vZGVSZXNwb25zZSIAEjsKCkRlbGV0ZU1vZGUSFC5wbGF0by5Nb2RlSWRSZXF1ZXN0GhUuY29yZS5HZW5lcmljUmVzcG9uc2UiABJHChJMaXN0TW9kZXNCeVRvcGljSWQSFS5wbGF0by5Ub3BpY0lkUmVxdWVzdBoYLnBsYXRvLkxpc3RNb2Rlc1Jlc3BvbnNlIgBCEVoPcGxhdG8vYXBpL3Byb3RvYgZwcm90bzM",
+    [file_core, file_plato_generic, file_plato_object],
   );
 
 /**
@@ -40,7 +40,7 @@ export const file_plato_mode: GenFile =
  */
 export type ListModesResponse = Message<"plato.ListModesResponse"> & {
   /**
-   * @generated from field: plato.BaseResponse base = 1;
+   * @generated from field: core.BaseResponse base = 1;
    */
   base?: BaseResponse;
 
@@ -63,7 +63,7 @@ export const ListModesResponseSchema: GenMessage<ListModesResponse> =
  */
 export type ModeResponse = Message<"plato.ModeResponse"> & {
   /**
-   * @generated from field: plato.BaseResponse base = 1;
+   * @generated from field: core.BaseResponse base = 1;
    */
   base?: BaseResponse;
 
@@ -96,7 +96,7 @@ export const ModeResponseSchema: GenMessage<ModeResponse> =
  */
 export type InsertModeRequest = Message<"plato.InsertModeRequest"> & {
   /**
-   * @generated from field: plato.BaseRequest base = 1;
+   * @generated from field: core.BaseRequest base = 1;
    */
   base?: BaseRequest;
 
@@ -144,7 +144,7 @@ export const InsertModeRequestSchema: GenMessage<InsertModeRequest> =
  */
 export type UpdateModeRequest = Message<"plato.UpdateModeRequest"> & {
   /**
-   * @generated from field: plato.BaseRequest base = 1;
+   * @generated from field: core.BaseRequest base = 1;
    */
   base?: BaseRequest;
 

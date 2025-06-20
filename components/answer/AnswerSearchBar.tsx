@@ -18,7 +18,7 @@ export default function AnswerSearchBar({ onSelect, answers }: Props) {
   const [results, setResults] = useState<DetailAnswer[]>([]);
 
   useEffect(() => {
-    const handler = debounce(async (q: string) => {
+    const handler = async (q: string) => {
       if (!q) {
         setResults([]);
         return;
@@ -31,10 +31,9 @@ export default function AnswerSearchBar({ onSelect, answers }: Props) {
       } catch {
         setResults([]);
       }
-    }, 300);
+    };
 
     handler(query);
-    return () => handler.cancel();
   }, [query]);
 
   const showDropdown = results.length > 0;
@@ -61,33 +60,30 @@ export default function AnswerSearchBar({ onSelect, answers }: Props) {
               className="mt-1 bg-white rounded-lg shadow-lg z-50 overflow-hidden"
             >
               <CommandList>
+                {results.map((detailAnswer) => {
+                  if (!detailAnswer.answer) return null;
+                  const answer = detailAnswer.answer;
 
-                {
-                  results.map((detailAnswer) => {
-                    if (!detailAnswer.answer) return null;
-                    const answer = detailAnswer.answer;
-
-                    return (
-                      <CommandItem
-                        key={answer.id}
-                        value={answer.name}
-                        onSelect={() => onSelect(answer.id)}
-                        className="flex items-center gap-2 cursor-pointer"
-                      >
-                        <Image
-                          src={answer.iconUrl ?? "/img/invalid.png"}
-                          alt={answer.name}
-                          width={24}
-                          height={24}
-                          className="rounded-full"
-                        />
-                        <div>
-                          <p className="text-sm font-medium">{answer.name}</p>
-                        </div>
-                      </CommandItem>
-                    );
-                  })
-                }
+                  return (
+                    <CommandItem
+                      key={answer.id}
+                      value={answer.name}
+                      onSelect={() => onSelect(answer.id)}
+                      className="flex items-center gap-2 cursor-pointer"
+                    >
+                      <Image
+                        src={answer.iconUrl ?? "/img/invalid.png"}
+                        alt={answer.name}
+                        width={24}
+                        height={24}
+                        className="rounded-full"
+                      />
+                      <div>
+                        <p className="text-sm font-medium">{answer.name}</p>
+                      </div>
+                    </CommandItem>
+                  );
+                })}
 
                 {query && results.length === 0 && (
                   <CommandItem disabled>No answers found</CommandItem>
