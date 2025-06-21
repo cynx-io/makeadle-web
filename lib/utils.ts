@@ -13,6 +13,14 @@ export function getJanusBaseUrl(): string {
   return baseUrl;
 }
 
+export function getJanusServerBaseUrl(): string {
+  const baseUrl = process.env.JANUS_BASE_URL;
+  if (!baseUrl) {
+    throw new Error("JANUS_BASE_URL is not set");
+  }
+  return baseUrl;
+}
+
 function toSnakeCase(str: string): string {
   return str.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`);
 }

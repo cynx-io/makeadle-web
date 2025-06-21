@@ -1,10 +1,10 @@
-import { getJanusBaseUrl } from "@/lib/utils";
+import { getJanusServerBaseUrl } from "@/lib/utils";
 import { BaseResponse } from "@/proto/janus/core_pb";
 import { createConnectTransport } from "@connectrpc/connect-web";
 import { cookies } from "next/headers";
 
 export const serverTransport = createConnectTransport({
-  baseUrl: getJanusBaseUrl(),
+  baseUrl: getJanusServerBaseUrl(),
   jsonOptions: {
     useProtoFieldName: true,
   },

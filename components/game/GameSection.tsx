@@ -4,7 +4,7 @@ import { useGame } from "@/context/GameContext";
 import { WordleGame } from "./modes/wordle/WordleGame";
 
 export function GameSection() {
-  const { topic, modes, currentMode } = useGame();
+  const { currentMode } = useGame();
 
   switch (currentMode.Type) {
     case "WORDLE":

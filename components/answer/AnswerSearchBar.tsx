@@ -1,15 +1,13 @@
 "use client";
 
-import { debounce } from "lodash";
-import { Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Command, CommandInput, CommandItem, CommandList } from "../ui/command";
 import Image from "next/image";
-import { Answer, DetailAnswer } from "@/proto/janus/plato/object_pb";
+import { DetailAnswer } from "@/proto/janus/plato/object_pb";
 
 type Props = {
-  onSelect: (answerId: number) => void;
+  onSelect: (answerId: number) => Promise<void>;
   answers: DetailAnswer[];
 };
 
@@ -36,11 +34,11 @@ export default function AnswerSearchBar({ onSelect, answers }: Props) {
     handler(query);
   }, [query]);
 
-  const handleOnSelect = (answerId: number) => {
-    setQuery("")
-    setResults([])
-    onSelect(answerId)
-  }
+  const handleOnSelect = async (answerId: number) => {
+    setQuery("");
+    setResults([]);
+    onSelect(answerId);
+  };
 
   const showDropdown = results.length > 0;
 
@@ -52,7 +50,7 @@ export default function AnswerSearchBar({ onSelect, answers }: Props) {
           onValueChange={(val) => {
             setQuery(val);
           }}
-          placeholder="Search for a answer..."
+          placeholder="Search"
           className="text-sm"
         />
 

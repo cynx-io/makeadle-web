@@ -1,5 +1,4 @@
-import { GameContext, GameProvider } from "@/context/GameContext";
-import { dailyGameClient } from "@/lib/janus/client/plato";
+import { GameProvider } from "@/context/GameContext";
 import { newJanusServerError } from "@/lib/janus/server-client/error";
 import {
   answerServerClient,
@@ -99,11 +98,13 @@ export default async function TopicLayout({ children, params }: Props) {
               className=""
             >
               <div className="w-12 h-12 rounded-full overflow-hidden mb-3 border-2 border-white/50">
-                <img
+                <Image
                   src={mode.iconUrl || "/img/default-icon.png"}
                   alt={mode.title}
                   className="w-full h-full object-cover"
                   loading="lazy"
+                  height={100}
+                  width={100}
                 />
               </div>
             </Link>
