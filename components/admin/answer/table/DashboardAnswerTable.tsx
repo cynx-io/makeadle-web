@@ -81,7 +81,7 @@ export function DashboardAnswerTable({
   });
 
   return (
-    <div className="relative overflow-auto max-w-full">
+    <div className="relative h-full max-w-full">
       {/* Horizontal Scroll + Plus Bar */}
       <div className="overflow-x-auto relative">
         <div className="flex">

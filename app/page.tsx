@@ -13,14 +13,14 @@ export default async function Home() {
 
   if (!res) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex items-center justify-center h-screen">
         <p className="text-lg">Loading...</p>
       </div>
     );
   }
 
   return (
-    <div className="relative min-h-screen bg-animated-gradient p-8 sm:p-20">
+    <div className="relative h-screen bg-animated-gradient p-8 sm:p-20">
       <div className="grid place-items-center gap-8 relative z-10">
         <h1 className="text-4xl font-bold text-center">Make your own DLE</h1>
         <div className={"flex w-full"}>

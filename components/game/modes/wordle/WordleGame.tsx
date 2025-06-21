@@ -6,7 +6,8 @@ import { newJanusError } from "@/lib/janus/client/error";
 import { dailyGameClient } from "@/lib/janus/client/plato";
 import { AttemptAnswerResponse } from "@/proto/janus/plato/dailygame_pb";
 import { DetailAnswer } from "@/proto/janus/plato/object_pb";
-import { useState } from "react";
+import Image from "next/image";
+import React, { useState } from "react";
 
 export function WordleGame() {
   const { topic, modes, currentMode, answers, dailyGame } = useGame();
@@ -15,11 +16,11 @@ export function WordleGame() {
   const [attempts, setAttempts] = useState<AttemptAnswerResponse[]>([]);
   const categories = Array.from(
     new Set(
-      availableAnswers.flatMap(answer =>
-        answer.answerCategories.map(category => category.name)
-      )
-    )
-  );  
+      availableAnswers.flatMap((answer) =>
+        answer.answerCategories.map((category) => category.name),
+      ),
+    ),
+  );
 
   async function onSelect(answerId: number) {
     console.log("Selected answer:", answerId);
@@ -46,28 +47,78 @@ export function WordleGame() {
       return;
     }
 
-    setAttempts([...attempts, attemptAnswerResp]);
+    attempts.unshift(attemptAnswerResp)
+    setAttempts([...attempts]);
   }
 
+  const gridCols = `grid-cols-${categories.length + 2}`;
+
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col w-[50vw] mx-auto">
       <AnswerSearchBar answers={availableAnswers} onSelect={onSelect} />
-      <div className={`grid grid-cols-${categories.length} gap-4 mt-4`}>
 
+      {/* Header row: fixed, no scroll */}
+      <div className={`grid ${gridCols} gap-2 gap-x-20 mt-4 px-5`}>
+        <div className="text-center col-span-2">{currentMode.answerType}</div>
         {categories.map((category) => (
-          <div key={category}>{category}</div>
+          <div key={category} className="text-center font-bold">
+            {category}
+          </div>
         ))}
+      </div>
 
-          {attempts.map((attempt) => {
+      {/* Scrollable attempts container */}
+      <div
+        className={`grid ${gridCols} gap-2 gap-x-20 mt-1 px-5`}
+      >
+        {attempts.map((attempt) => {
+          if (!attempt.attemptDetailAnswer?.answer) return null;
+          const answer = attempt.attemptDetailAnswer.answer;
 
-            if (!attempt.attemptDetailAnswer?.answer) return null;
-            const answer = attempt.attemptDetailAnswer.answer;
+          return (
+            <React.Fragment key={answer.id}>
+              <div className="flex gap-3 w-full col-span-2">
+                <Image
+                  src={answer.iconUrl ?? "/img/invalid.png"}
+                  alt={answer.name}
+                  width={50}
+                  height={50}
+                  className="object-contain"
+                />
+                <div className="my-auto font-extrabold text-2xl">{answer.name}</div>
+              </div>
 
-            return <div key={answer.id} className="flex w-full h-52 bg-red-400">
-              jawa
-              
-            </div>
-          })}
+              {categories.map((category) => {
+                const answerCategory =
+                  attempt.attemptDetailAnswer?.answerCategories.findLast(
+                    (c) => c.name == category,
+                  );
+                if (answerCategory == undefined) {
+                  return <div key={category}></div>;
+                }
+                let bgColor = "bg-red-500";
+
+                switch (answerCategory.correctness) {
+                  case 0:
+                    // continue without change, red default
+                    break;
+                  case 1:
+                    bgColor = "bg-yellow-500";
+                    break;
+                  case 2:
+                    bgColor = "bg-green-500";
+                    break;
+                }
+
+                return (
+                  <div key={category} className={`text-center my-auto ${bgColor}`}>
+                    {answerCategory?.value}
+                  </div>
+                );
+              })}
+            </React.Fragment>
+          );
+        })}
       </div>
     </div>
   );

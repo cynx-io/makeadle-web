@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const DIR = path.resolve(__dirname, "../proto/janus");
+const DIR = path.resolve(__dirname, "../proto");
 
 function walk(dir, callback) {
   fs.readdirSync(dir).forEach((f) => {

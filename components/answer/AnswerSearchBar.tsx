@@ -36,10 +36,16 @@ export default function AnswerSearchBar({ onSelect, answers }: Props) {
     handler(query);
   }, [query]);
 
+  const handleOnSelect = (answerId: number) => {
+    setQuery("")
+    setResults([])
+    onSelect(answerId)
+  }
+
   const showDropdown = results.length > 0;
 
   return (
-    <div className="w-full">
+    <div className="w-full relative">
       <Command className="w-full">
         <CommandInput
           value={query}
@@ -57,7 +63,7 @@ export default function AnswerSearchBar({ onSelect, answers }: Props) {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.2 }}
-              className="mt-1 bg-white rounded-lg shadow-lg z-50 overflow-hidden"
+              className="mt-1 bg-white rounded-lg top-full shadow-lg z-50 overflow-hidden absolute w-full"
             >
               <CommandList>
                 {results.map((detailAnswer) => {
@@ -68,7 +74,7 @@ export default function AnswerSearchBar({ onSelect, answers }: Props) {
                     <CommandItem
                       key={answer.id}
                       value={answer.name}
-                      onSelect={() => onSelect(answer.id)}
+                      onSelect={() => handleOnSelect(answer.id)}
                       className="flex items-center gap-2 cursor-pointer"
                     >
                       <Image

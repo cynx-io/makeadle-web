@@ -12,8 +12,17 @@ import {
   messageDesc,
   serviceDesc,
 } from "@bufbuild/protobuf/codegenv2";
-import type { Timestamp } from "@bufbuild/protobuf/wkt";
 import { file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
+import type { BaseResponse, GenericRequestSchema } from "../core_pb";
+import { file_core } from "../core_pb";
+import type {
+  PaginateRequestSchema,
+  UsernamePasswordRequestSchema,
+  UsernameRequestSchema,
+} from "./generic_pb";
+import { file_hermes_generic } from "./generic_pb";
+import type { User } from "./object_pb";
+import { file_hermes_object } from "./object_pb";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
@@ -22,104 +31,37 @@ import type { Message } from "@bufbuild/protobuf";
 export const file_hermes_user: GenFile =
   /*@__PURE__*/
   fileDesc(
-    "ChFoZXJtZXMvdXNlci5wcm90bxIGaGVybWVzIsQBCgtCYXNlUmVxdWVzdBISCgpyZXF1ZXN0X2lkGAEgASgJEhYKDnJlcXVlc3Rfb3JpZ2luGAIgASgJEhQKDHJlcXVlc3RfcGF0aBgDIAEoCRItCgl0aW1lc3RhbXAYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhQKB3VzZXJfaWQYBSABKAVIAIgBARIVCgh1c2VybmFtZRgGIAEoCUgBiAEBQgoKCF91c2VyX2lkQgsKCV91c2VybmFtZSIqCgxCYXNlUmVzcG9uc2USDAoEY29kZRgBIAEoCRIMCgRkZXNjGAIgASgJIksKFENoZWNrVXNlcm5hbWVSZXF1ZXN0EiEKBGJhc2UYASABKAsyEy5oZXJtZXMuQmFzZVJlcXVlc3QSEAoIdXNlcm5hbWUYAiABKAkiSwoVQ2hlY2tVc2VybmFtZVJlc3BvbnNlEiIKBGJhc2UYASABKAsyFC5oZXJtZXMuQmFzZVJlc3BvbnNlEg4KBmV4aXN0cxgCIAEoCCIiCg5HZXRVc2VyUmVxdWVzdBIQCgh1c2VybmFtZRgBIAEoCSJVCg9HZXRVc2VyUmVzcG9uc2USIgoEYmFzZRgBIAEoCzIULmhlcm1lcy5CYXNlUmVzcG9uc2USHgoEdXNlchgCIAEoCzIQLmhlcm1lcy5Vc2VyRGF0YSI9ChdWYWxpZGF0ZVBhc3N3b3JkUmVxdWVzdBIQCgh1c2VybmFtZRgBIAEoCRIQCghwYXNzd29yZBgCIAEoCSJeChhWYWxpZGF0ZVBhc3N3b3JkUmVzcG9uc2USIgoEYmFzZRgBIAEoCzIULmhlcm1lcy5CYXNlUmVzcG9uc2USHgoEdXNlchgCIAEoCzIQLmhlcm1lcy5Vc2VyRGF0YSI3ChFDcmVhdGVVc2VyUmVxdWVzdBIQCgh1c2VybmFtZRgBIAEoCRIQCghwYXNzd29yZBgCIAEoCSJYChJDcmVhdGVVc2VyUmVzcG9uc2USIgoEYmFzZRgBIAEoCzIULmhlcm1lcy5CYXNlUmVzcG9uc2USHgoEdXNlchgCIAEoCzIQLmhlcm1lcy5Vc2VyRGF0YSJTCg9QYWdpbmF0ZVJlcXVlc3QSDAoEcGFnZRgBIAEoBRINCgVsaW1pdBgCIAEoBRIPCgdzb3J0X2J5GAMgASgJEhIKCnNvcnRfb3JkZXIYBCABKAkinQEKFVBhZ2luYXRlVXNlcnNSZXNwb25zZRIiCgRiYXNlGAEgASgLMhQuaGVybWVzLkJhc2VSZXNwb25zZRIfCgV1c2VycxgCIAMoCzIQLmhlcm1lcy5Vc2VyRGF0YRINCgV0b3RhbBgDIAEoBRIMCgRwYWdlGAQgASgFEg0KBWxpbWl0GAUgASgFEhMKC3RvdGFsX3BhZ2VzGAYgASgFIpoBCghVc2VyRGF0YRIKCgJpZBgBIAEoBRIQCgh1c2VybmFtZRgCIAEoCRIMCgRjb2luGAMgASgFEjAKDGNyZWF0ZWRfZGF0ZRgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASMAoMdXBkYXRlZF9kYXRlGAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcDKMAwoRSGVybWVzVXNlclNlcnZpY2USTgoNQ2hlY2tVc2VybmFtZRIcLmhlcm1lcy5DaGVja1VzZXJuYW1lUmVxdWVzdBodLmhlcm1lcy5DaGVja1VzZXJuYW1lUmVzcG9uc2UiABI8CgdHZXRVc2VyEhYuaGVybWVzLkdldFVzZXJSZXF1ZXN0GhcuaGVybWVzLkdldFVzZXJSZXNwb25zZSIAEkUKCkNyZWF0ZVVzZXISGS5oZXJtZXMuQ3JlYXRlVXNlclJlcXVlc3QaGi5oZXJtZXMuQ3JlYXRlVXNlclJlc3BvbnNlIgASSQoNUGFnaW5hdGVVc2VycxIXLmhlcm1lcy5QYWdpbmF0ZVJlcXVlc3QaHS5oZXJtZXMuUGFnaW5hdGVVc2Vyc1Jlc3BvbnNlIgASVwoQVmFsaWRhdGVQYXNzd29yZBIfLmhlcm1lcy5WYWxpZGF0ZVBhc3N3b3JkUmVxdWVzdBogLmhlcm1lcy5WYWxpZGF0ZVBhc3N3b3JkUmVzcG9uc2UiAEISWhBoZXJtZXMvYXBpL3Byb3RvYgZwcm90bzM",
-    [file_google_protobuf_timestamp],
+    "ChFoZXJtZXMvdXNlci5wcm90bxIGaGVybWVzIkwKDFVzZXJSZXNwb25zZRIgCgRiYXNlGAEgASgLMhIuY29yZS5CYXNlUmVzcG9uc2USGgoEdXNlchgCIAEoCzIMLmhlcm1lcy5Vc2VyIkkKFUNoZWNrVXNlcm5hbWVSZXNwb25zZRIgCgRiYXNlGAEgASgLMhIuY29yZS5CYXNlUmVzcG9uc2USDgoGZXhpc3RzGAIgASgIIlYKFVBhZ2luYXRlVXNlcnNSZXNwb25zZRIgCgRiYXNlGAEgASgLMhIuY29yZS5CYXNlUmVzcG9uc2USGwoFdXNlcnMYAiADKAsyDC5oZXJtZXMuVXNlcjK6AwoRSGVybWVzVXNlclNlcnZpY2USSQoNQ2hlY2tVc2VybmFtZRIXLmhlcm1lcy5Vc2VybmFtZVJlcXVlc3QaHS5oZXJtZXMuQ2hlY2tVc2VybmFtZVJlc3BvbnNlIgASOgoHR2V0VXNlchIXLmhlcm1lcy5Vc2VybmFtZVJlcXVlc3QaFC5oZXJtZXMuVXNlclJlc3BvbnNlIgASRQoKQ3JlYXRlVXNlchIfLmhlcm1lcy5Vc2VybmFtZVBhc3N3b3JkUmVxdWVzdBoULmhlcm1lcy5Vc2VyUmVzcG9uc2UiABI/Cg9VcHNlcnRHdWVzdFVzZXISFC5jb3JlLkdlbmVyaWNSZXF1ZXN0GhQuaGVybWVzLlVzZXJSZXNwb25zZSIAEkkKDVBhZ2luYXRlVXNlcnMSFy5oZXJtZXMuUGFnaW5hdGVSZXF1ZXN0Gh0uaGVybWVzLlBhZ2luYXRlVXNlcnNSZXNwb25zZSIAEksKEFZhbGlkYXRlUGFzc3dvcmQSHy5oZXJtZXMuVXNlcm5hbWVQYXNzd29yZFJlcXVlc3QaFC5oZXJtZXMuVXNlclJlc3BvbnNlIgBCEloQaGVybWVzL2FwaS9wcm90b2IGcHJvdG8z",
+    [
+      file_google_protobuf_timestamp,
+      file_core,
+      file_hermes_generic,
+      file_hermes_object,
+    ],
   );
 
 /**
- * @generated from message hermes.BaseRequest
+ * @generated from message hermes.UserResponse
  */
-export type BaseRequest = Message<"hermes.BaseRequest"> & {
+export type UserResponse = Message<"hermes.UserResponse"> & {
   /**
-   * string length 1–100
-   *
-   * @generated from field: string request_id = 1;
+   * @generated from field: core.BaseResponse base = 1;
    */
-  requestId: string;
+  base?: BaseResponse;
 
   /**
-   * @generated from field: string request_origin = 2;
+   * @generated from field: hermes.User user = 2;
    */
-  requestOrigin: string;
-
-  /**
-   * @generated from field: string request_path = 3;
-   */
-  requestPath: string;
-
-  /**
-   * timestamp must be in the past
-   *
-   * @generated from field: google.protobuf.Timestamp timestamp = 4;
-   */
-  timestamp?: Timestamp;
-
-  /**
-   * @generated from field: optional int32 user_id = 5;
-   */
-  userId?: number;
-
-  /**
-   * @generated from field: optional string username = 6;
-   */
-  username?: string;
+  user?: User;
 };
 
 /**
- * Describes the message hermes.BaseRequest.
- * Use `create(BaseRequestSchema)` to create a new message.
+ * Describes the message hermes.UserResponse.
+ * Use `create(UserResponseSchema)` to create a new message.
  */
-export const BaseRequestSchema: GenMessage<BaseRequest> =
+export const UserResponseSchema: GenMessage<UserResponse> =
   /*@__PURE__*/
   messageDesc(file_hermes_user, 0);
-
-/**
- * @generated from message hermes.BaseResponse
- */
-export type BaseResponse = Message<"hermes.BaseResponse"> & {
-  /**
-   * @generated from field: string code = 1;
-   */
-  code: string;
-
-  /**
-   * @generated from field: string desc = 2;
-   */
-  desc: string;
-};
-
-/**
- * Describes the message hermes.BaseResponse.
- * Use `create(BaseResponseSchema)` to create a new message.
- */
-export const BaseResponseSchema: GenMessage<BaseResponse> =
-  /*@__PURE__*/
-  messageDesc(file_hermes_user, 1);
-
-/**
- * Request message for checking username
- *
- * @generated from message hermes.CheckUsernameRequest
- */
-export type CheckUsernameRequest = Message<"hermes.CheckUsernameRequest"> & {
-  /**
-   * @generated from field: hermes.BaseRequest base = 1;
-   */
-  base?: BaseRequest;
-
-  /**
-   * @generated from field: string username = 2;
-   */
-  username: string;
-};
-
-/**
- * Describes the message hermes.CheckUsernameRequest.
- * Use `create(CheckUsernameRequestSchema)` to create a new message.
- */
-export const CheckUsernameRequestSchema: GenMessage<CheckUsernameRequest> =
-  /*@__PURE__*/
-  messageDesc(file_hermes_user, 2);
 
 /**
  * Response message for checking username
@@ -128,7 +70,7 @@ export const CheckUsernameRequestSchema: GenMessage<CheckUsernameRequest> =
  */
 export type CheckUsernameResponse = Message<"hermes.CheckUsernameResponse"> & {
   /**
-   * @generated from field: hermes.BaseResponse base = 1;
+   * @generated from field: core.BaseResponse base = 1;
    */
   base?: BaseResponse;
 
@@ -144,189 +86,7 @@ export type CheckUsernameResponse = Message<"hermes.CheckUsernameResponse"> & {
  */
 export const CheckUsernameResponseSchema: GenMessage<CheckUsernameResponse> =
   /*@__PURE__*/
-  messageDesc(file_hermes_user, 3);
-
-/**
- * Request message for getting user
- *
- * @generated from message hermes.GetUserRequest
- */
-export type GetUserRequest = Message<"hermes.GetUserRequest"> & {
-  /**
-   * @generated from field: string username = 1;
-   */
-  username: string;
-};
-
-/**
- * Describes the message hermes.GetUserRequest.
- * Use `create(GetUserRequestSchema)` to create a new message.
- */
-export const GetUserRequestSchema: GenMessage<GetUserRequest> =
-  /*@__PURE__*/
-  messageDesc(file_hermes_user, 4);
-
-/**
- * Response message for getting user
- *
- * @generated from message hermes.GetUserResponse
- */
-export type GetUserResponse = Message<"hermes.GetUserResponse"> & {
-  /**
-   * @generated from field: hermes.BaseResponse base = 1;
-   */
-  base?: BaseResponse;
-
-  /**
-   * @generated from field: hermes.UserData user = 2;
-   */
-  user?: UserData;
-};
-
-/**
- * Describes the message hermes.GetUserResponse.
- * Use `create(GetUserResponseSchema)` to create a new message.
- */
-export const GetUserResponseSchema: GenMessage<GetUserResponse> =
-  /*@__PURE__*/
-  messageDesc(file_hermes_user, 5);
-
-/**
- * Request message for getting user
- *
- * @generated from message hermes.ValidatePasswordRequest
- */
-export type ValidatePasswordRequest =
-  Message<"hermes.ValidatePasswordRequest"> & {
-    /**
-     * @generated from field: string username = 1;
-     */
-    username: string;
-
-    /**
-     * @generated from field: string password = 2;
-     */
-    password: string;
-  };
-
-/**
- * Describes the message hermes.ValidatePasswordRequest.
- * Use `create(ValidatePasswordRequestSchema)` to create a new message.
- */
-export const ValidatePasswordRequestSchema: GenMessage<ValidatePasswordRequest> =
-  /*@__PURE__*/
-  messageDesc(file_hermes_user, 6);
-
-/**
- * Response message for getting user
- *
- * @generated from message hermes.ValidatePasswordResponse
- */
-export type ValidatePasswordResponse =
-  Message<"hermes.ValidatePasswordResponse"> & {
-    /**
-     * @generated from field: hermes.BaseResponse base = 1;
-     */
-    base?: BaseResponse;
-
-    /**
-     * @generated from field: hermes.UserData user = 2;
-     */
-    user?: UserData;
-  };
-
-/**
- * Describes the message hermes.ValidatePasswordResponse.
- * Use `create(ValidatePasswordResponseSchema)` to create a new message.
- */
-export const ValidatePasswordResponseSchema: GenMessage<ValidatePasswordResponse> =
-  /*@__PURE__*/
-  messageDesc(file_hermes_user, 7);
-
-/**
- * Request message for creating user
- *
- * @generated from message hermes.CreateUserRequest
- */
-export type CreateUserRequest = Message<"hermes.CreateUserRequest"> & {
-  /**
-   * @generated from field: string username = 1;
-   */
-  username: string;
-
-  /**
-   * @generated from field: string password = 2;
-   */
-  password: string;
-};
-
-/**
- * Describes the message hermes.CreateUserRequest.
- * Use `create(CreateUserRequestSchema)` to create a new message.
- */
-export const CreateUserRequestSchema: GenMessage<CreateUserRequest> =
-  /*@__PURE__*/
-  messageDesc(file_hermes_user, 8);
-
-/**
- * Response message for creating user
- *
- * @generated from message hermes.CreateUserResponse
- */
-export type CreateUserResponse = Message<"hermes.CreateUserResponse"> & {
-  /**
-   * @generated from field: hermes.BaseResponse base = 1;
-   */
-  base?: BaseResponse;
-
-  /**
-   * @generated from field: hermes.UserData user = 2;
-   */
-  user?: UserData;
-};
-
-/**
- * Describes the message hermes.CreateUserResponse.
- * Use `create(CreateUserResponseSchema)` to create a new message.
- */
-export const CreateUserResponseSchema: GenMessage<CreateUserResponse> =
-  /*@__PURE__*/
-  messageDesc(file_hermes_user, 9);
-
-/**
- * Request message for paginating users
- *
- * @generated from message hermes.PaginateRequest
- */
-export type PaginateRequest = Message<"hermes.PaginateRequest"> & {
-  /**
-   * @generated from field: int32 page = 1;
-   */
-  page: number;
-
-  /**
-   * @generated from field: int32 limit = 2;
-   */
-  limit: number;
-
-  /**
-   * @generated from field: string sort_by = 3;
-   */
-  sortBy: string;
-
-  /**
-   * @generated from field: string sort_order = 4;
-   */
-  sortOrder: string;
-};
-
-/**
- * Describes the message hermes.PaginateRequest.
- * Use `create(PaginateRequestSchema)` to create a new message.
- */
-export const PaginateRequestSchema: GenMessage<PaginateRequest> =
-  /*@__PURE__*/
-  messageDesc(file_hermes_user, 10);
+  messageDesc(file_hermes_user, 1);
 
 /**
  * Response message for paginating users
@@ -335,34 +95,14 @@ export const PaginateRequestSchema: GenMessage<PaginateRequest> =
  */
 export type PaginateUsersResponse = Message<"hermes.PaginateUsersResponse"> & {
   /**
-   * @generated from field: hermes.BaseResponse base = 1;
+   * @generated from field: core.BaseResponse base = 1;
    */
   base?: BaseResponse;
 
   /**
-   * @generated from field: repeated hermes.UserData users = 2;
+   * @generated from field: repeated hermes.User users = 2;
    */
-  users: UserData[];
-
-  /**
-   * @generated from field: int32 total = 3;
-   */
-  total: number;
-
-  /**
-   * @generated from field: int32 page = 4;
-   */
-  page: number;
-
-  /**
-   * @generated from field: int32 limit = 5;
-   */
-  limit: number;
-
-  /**
-   * @generated from field: int32 total_pages = 6;
-   */
-  totalPages: number;
+  users: User[];
 };
 
 /**
@@ -371,47 +111,7 @@ export type PaginateUsersResponse = Message<"hermes.PaginateUsersResponse"> & {
  */
 export const PaginateUsersResponseSchema: GenMessage<PaginateUsersResponse> =
   /*@__PURE__*/
-  messageDesc(file_hermes_user, 11);
-
-/**
- * User response message
- *
- * @generated from message hermes.UserData
- */
-export type UserData = Message<"hermes.UserData"> & {
-  /**
-   * @generated from field: int32 id = 1;
-   */
-  id: number;
-
-  /**
-   * @generated from field: string username = 2;
-   */
-  username: string;
-
-  /**
-   * @generated from field: int32 coin = 3;
-   */
-  coin: number;
-
-  /**
-   * @generated from field: google.protobuf.Timestamp created_date = 4;
-   */
-  createdDate?: Timestamp;
-
-  /**
-   * @generated from field: google.protobuf.Timestamp updated_date = 5;
-   */
-  updatedDate?: Timestamp;
-};
-
-/**
- * Describes the message hermes.UserData.
- * Use `create(UserDataSchema)` to create a new message.
- */
-export const UserDataSchema: GenMessage<UserData> =
-  /*@__PURE__*/
-  messageDesc(file_hermes_user, 12);
+  messageDesc(file_hermes_user, 2);
 
 /**
  * User service definition
@@ -426,7 +126,7 @@ export const HermesUserService: GenService<{
    */
   checkUsername: {
     methodKind: "unary";
-    input: typeof CheckUsernameRequestSchema;
+    input: typeof UsernameRequestSchema;
     output: typeof CheckUsernameResponseSchema;
   };
   /**
@@ -436,8 +136,8 @@ export const HermesUserService: GenService<{
    */
   getUser: {
     methodKind: "unary";
-    input: typeof GetUserRequestSchema;
-    output: typeof GetUserResponseSchema;
+    input: typeof UsernameRequestSchema;
+    output: typeof UserResponseSchema;
   };
   /**
    * Create new user
@@ -446,8 +146,18 @@ export const HermesUserService: GenService<{
    */
   createUser: {
     methodKind: "unary";
-    input: typeof CreateUserRequestSchema;
-    output: typeof CreateUserResponseSchema;
+    input: typeof UsernamePasswordRequestSchema;
+    output: typeof UserResponseSchema;
+  };
+  /**
+   * Create new user
+   *
+   * @generated from rpc hermes.HermesUserService.UpsertGuestUser
+   */
+  upsertGuestUser: {
+    methodKind: "unary";
+    input: typeof GenericRequestSchema;
+    output: typeof UserResponseSchema;
   };
   /**
    * Paginate users
@@ -464,7 +174,7 @@ export const HermesUserService: GenService<{
    */
   validatePassword: {
     methodKind: "unary";
-    input: typeof ValidatePasswordRequestSchema;
-    output: typeof ValidatePasswordResponseSchema;
+    input: typeof UsernamePasswordRequestSchema;
+    output: typeof UserResponseSchema;
   };
 }> = /*@__PURE__*/ serviceDesc(file_hermes_user, 0);

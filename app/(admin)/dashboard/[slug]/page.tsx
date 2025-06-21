@@ -37,7 +37,7 @@ export default async function TopicPage({ params }: Props) {
     );
 
   return (
-    <div className="p-6 max-w-2xl mx-auto">
+    <div className="p-6 w-full mx-auto h-screen overflow-y-scroll">
       <h1 className="text-4xl font-bold mb-2">{topic.title}</h1>
       <p className="text-gray-600">{topic.description}</p>
 
