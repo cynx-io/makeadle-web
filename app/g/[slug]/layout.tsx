@@ -1,3 +1,4 @@
+import MakeadleBar from "@/components/game/MakeadleBar";
 import {
   Tooltip,
   TooltipContent,
@@ -80,9 +81,11 @@ export default async function TopicLayout({ children, params }: Props) {
 
   return (
     <div
-      className="h-screen w-screen overflow-y-auto bg-cover bg-center bg-fixed text-white"
+      className="h-screen w-screen overflow-y-auto bg-cover bg-center bg-fixed text-white bg-animate-glow"
       style={{ backgroundImage: `url(${backgroundUrl || "/img/invalid.png"})` }}
     >
+      <MakeadleBar />
+  
       <div className="flex flex-col items-center px-4 py-10 mb-[20vh]">
         <Image
           src={topic.titleImageUrl || "/img/invalid.png"}

@@ -142,60 +142,60 @@ export function WordleGame() {
 
             return (
               <React.Fragment key={answer.id}>
-                  <div className={`flex w-full ${cellWidth} ${cellHeight}`}>
-                    <Tooltip>
-                      <TooltipTrigger>
-                        <Image
-                          src={answer.iconUrl ?? "/img/invalid.png"}
-                          alt={answer.name}
-                          width={100}
-                          height={100}
-                          className="object-contain border-2"
-                        />
-                      </TooltipTrigger>
+                <div className={`flex w-full ${cellWidth} ${cellHeight}`}>
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <Image
+                        src={answer.iconUrl ?? "/img/invalid.png"}
+                        alt={answer.name}
+                        width={100}
+                        height={100}
+                        className="object-contain border-2"
+                      />
+                    </TooltipTrigger>
 
-                      <TooltipContent>
-                        <p>{answer.name}</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </div>
+                    <TooltipContent>
+                      <p>{answer.name}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </div>
 
-                  {categories.map((category) => {
-                    const matchedCategories =
-                      attempt.attemptDetailAnswer?.answerCategories.filter(
-                        (c) => c.name === category,
-                      ) ?? [];
-                    if (matchedCategories.length === 0) {
-                      return (
-                        <CategorySquare
-                          key={category}
-                          category={category}
-                          cellSizeCss="w-full h-full"
-                          type={CorrectnessType.UNKNOWN}
-                          value={"x"}
-                        />
-                      );
-                    }
-                    const categoryType = matchedCategories[0]?.type ?? "string";
-                    const maxCorrectness = Math.max(
-                      ...matchedCategories.map((c) => c.correctness),
-                    );
-
-                    const correctnessType = getCorrectnessType(
-                      categoryType,
-                      maxCorrectness,
-                    );
+                {categories.map((category) => {
+                  const matchedCategories =
+                    attempt.attemptDetailAnswer?.answerCategories.filter(
+                      (c) => c.name === category,
+                    ) ?? [];
+                  if (matchedCategories.length === 0) {
                     return (
                       <CategorySquare
                         key={category}
                         category={category}
                         cellSizeCss="w-full h-full"
-                        type={correctnessType}
-                        value={matchedCategories.map((c) => c.value).join(", ")}
+                        type={CorrectnessType.UNKNOWN}
+                        value={"x"}
                       />
                     );
-                  })}
-                  <Separator className="col-span-6 bg-neutral-500/30" />
+                  }
+                  const categoryType = matchedCategories[0]?.type ?? "string";
+                  const maxCorrectness = Math.max(
+                    ...matchedCategories.map((c) => c.correctness),
+                  );
+
+                  const correctnessType = getCorrectnessType(
+                    categoryType,
+                    maxCorrectness,
+                  );
+                  return (
+                    <CategorySquare
+                      key={category}
+                      category={category}
+                      cellSizeCss="w-full h-full"
+                      type={correctnessType}
+                      value={matchedCategories.map((c) => c.value).join(", ")}
+                    />
+                  );
+                })}
+                <Separator className="col-span-6 bg-neutral-500/30" />
               </React.Fragment>
             );
           })}

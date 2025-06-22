@@ -6,7 +6,8 @@ import {
   Tooltip,
 } from "@/components/ui/tooltip";
 import { CorrectnessType } from "@/types/game/correctnessType";
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
+import React from "react";
 
 export type Props = {
   value: string;
@@ -65,8 +66,13 @@ export const CategorySquare = ({
     >
       <Tooltip>
         <TooltipTrigger asChild>
-          <div className="w-full h-full flex justify-center items-center">
-            {value}
+          <div className="w-full h-full flex flex-wrap justify-center items-center">
+            {value.split(", ").map((part, idx) => (
+              <React.Fragment key={idx}>
+                {part}
+                {idx < value.split(", ").length - 1 && <br />}
+              </React.Fragment>
+            ))}
           </div>
         </TooltipTrigger>
         <TooltipContent className="bg-red-600 opacity-90 text-white">

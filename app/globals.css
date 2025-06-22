@@ -113,6 +113,16 @@
     }
   }
 
+  @keyframes bgGlow {
+    0%,
+    100% {
+      filter: brightness(1);
+    }
+    50% {
+      filter: brightness(1.15);
+    }
+  }
+
   /* Background size */
   --background-size-gradient: 300% 300%;
 
@@ -134,6 +144,10 @@
     );
     background-size: var(--background-size-gradient);
     animation: var(--animate-gradient);
+  }
+
+  .bg-animate-glow {
+    animation: bgGlow 6s ease-in-out infinite;
   }
 
   .bg-white-gradient {
