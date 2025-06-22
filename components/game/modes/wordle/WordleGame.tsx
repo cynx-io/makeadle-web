@@ -14,6 +14,9 @@ import { AttemptAnswerResponse } from "@/proto/janus/plato/dailygame_pb";
 import { DetailAnswer } from "@/proto/janus/plato/object_pb";
 import Image from "next/image";
 import React, { useRef, useState } from "react";
+import { CorrectnessType } from "@/types/game/correctnessType";
+import { CategorySquare } from "./CategorySquare";
+import getCorrectnessType from "@/helper/game/getCorrectnessType";
 
 export function WordleGame() {
   const { currentMode, answers, dailyGame } = useGame();
@@ -139,101 +142,60 @@ export function WordleGame() {
 
             return (
               <React.Fragment key={answer.id}>
-                <div className={`flex w-full ${cellWidth} ${cellHeight}`}>
-                  <Tooltip>
-                    <TooltipTrigger>
-                      <Image
-                        src={answer.iconUrl ?? "/img/invalid.png"}
-                        alt={answer.name}
-                        width={100}
-                        height={100}
-                        className="object-contain border-2"
-                      />
-                    </TooltipTrigger>
+                  <div className={`flex w-full ${cellWidth} ${cellHeight}`}>
+                    <Tooltip>
+                      <TooltipTrigger>
+                        <Image
+                          src={answer.iconUrl ?? "/img/invalid.png"}
+                          alt={answer.name}
+                          width={100}
+                          height={100}
+                          className="object-contain border-2"
+                        />
+                      </TooltipTrigger>
 
-                    <TooltipContent>
-                      <p>{answer.name}</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </div>
+                      <TooltipContent>
+                        <p>{answer.name}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </div>
 
-                {categories.map((category) => {
-                  const matchedCategories =
-                    attempt.attemptDetailAnswer?.answerCategories.filter(
-                      (c) => c.name === category,
-                    ) ?? [];
-                  if (matchedCategories.length === 0) {
-                    return (
-                      <Tooltip key={category}>
-                        <TooltipTrigger>
-                          <div
-                            key={category}
-                            className={`text-center text-lg font-bold rounded-xs my-auto mx-auto justify-center flex items-center bg-gray-900 opacity-20 cursor-default ${cellHeight} ${cellWidth} border-2 text-shadow-2xs`}
-                          >
-                            x
-                          </div>
-                        </TooltipTrigger>
-                        <TooltipContent className="bg-red-600 opacity-90 text-white">
-                          <p>Not set by Owner</p>
-                        </TooltipContent>
-                      </Tooltip>
+                  {categories.map((category) => {
+                    const matchedCategories =
+                      attempt.attemptDetailAnswer?.answerCategories.filter(
+                        (c) => c.name === category,
+                      ) ?? [];
+                    if (matchedCategories.length === 0) {
+                      return (
+                        <CategorySquare
+                          key={category}
+                          category={category}
+                          cellSizeCss="w-full h-full"
+                          type={CorrectnessType.UNKNOWN}
+                          value={"x"}
+                        />
+                      );
+                    }
+                    const categoryType = matchedCategories[0]?.type ?? "string";
+                    const maxCorrectness = Math.max(
+                      ...matchedCategories.map((c) => c.correctness),
                     );
-                  }
-                  let correctnessCss = "bg-red-700";
-                  const categoryType = matchedCategories[0]?.type ?? "string";
-                  const maxCorrectness = Math.max(
-                    ...matchedCategories.map((c) => c.correctness),
-                  );
 
-                  if (categoryType == "string") {
-                    switch (maxCorrectness) {
-                      case -1:
-                        correctnessCss = "bg-gray-700";
-                        break;
-                      case 0:
-                        // continue without change, red default
-                        break;
-                      case 1:
-                        correctnessCss = "bg-yellow-900";
-                        break;
-                      case 2:
-                        correctnessCss = "bg-green-700";
-                        break;
-                    }
-                  } else if (categoryType == "number") {
-                    switch (maxCorrectness) {
-                      case -1:
-                        correctnessCss = "bg-gray-700";
-                        break;
-                      case 0:
-                        correctnessCss = "bg-blue-900";
-                        break;
-                      case 1:
-                        correctnessCss = "bg-green-700";
-                        break;
-                      case 2:
-                        correctnessCss = "bg-yellow-900";
-                        break;
-                    }
-                  }
-
-                  return (
-                    <div
-                      key={category}
-                      className={`text-center  flex-wrap leading-tight text-lg font-bold rounded-xs my-auto mx-auto justify-center flex items-center ${correctnessCss} ${cellHeight} ${cellWidth} border-2 text-shadow-2xs`}
-                    >
-                    <p className="leading-tight max-w-28 whitespace-normal break-words">
-                      {matchedCategories.map((c, i) => (
-                        <span key={c.value}>
-                          {c.value}
-                          {i < matchedCategories.length - 1 ? ", " : ""}
-                        </span>
-                      ))}
-                    </p>
-                    </div>
-                  );
-                })}
-                <Separator className="col-span-6 bg-neutral-500/30" />
+                    const correctnessType = getCorrectnessType(
+                      categoryType,
+                      maxCorrectness,
+                    );
+                    return (
+                      <CategorySquare
+                        key={category}
+                        category={category}
+                        cellSizeCss="w-full h-full"
+                        type={correctnessType}
+                        value={matchedCategories.map((c) => c.value).join(", ")}
+                      />
+                    );
+                  })}
+                  <Separator className="col-span-6 bg-neutral-500/30" />
               </React.Fragment>
             );
           })}
