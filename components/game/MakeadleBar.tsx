@@ -42,7 +42,9 @@ export default function MakeadleBar() {
       } w-full bg-slate-950 font-semibold text-xs px-7 py-3 flex items-end`}
     >
       <Link href={"/"} className="hover:brightness-75">
-        <span className="text-orange-400 text-lg ml-1 leading-none">Makeadle</span>
+        <span className="text-orange-400 text-lg ml-1 leading-none">
+          Makeadle
+        </span>
         <span className="leading-none">.com</span>
       </Link>
     </div>

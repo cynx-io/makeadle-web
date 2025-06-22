@@ -1,0 +1,13 @@
+# Block all crawlers from accessing the /admin directory
+User-agent: *
+Disallow: /dashboard/
+Disallow: /api/ # Generally good to disallow API routes if they return raw data not meant for direct indexing
+
+# Specify the location of your sitemap(s)
+Sitemap: https://www.makeadle.com/sitemap.xml
+Sitemap: https://www.makeadle.com/sitemap-topics.xml
+# Add more sitemaps if you split them (e.g., for different content types)
+
+# Allow all crawlers for the rest of the site (default behavior if not disallowed)
+User-agent: *
+Allow: /
