@@ -1,5 +1,7 @@
 "use client";
 
+import { newJanusError } from "@/lib/janus/client/error";
+import { userClient } from "@/lib/janus/client/hermes";
 import { useEffect, useState, useRef } from "react";
 
 export default function RootClientLayout() {
@@ -8,6 +10,15 @@ export default function RootClientLayout() {
 
   // Keep track of the target scroll position
   const targetScrollY = useRef(0);
+
+  useEffect(() => {
+    const token = document.cookie.includes("token=");
+    if (!token) {
+      userClient
+        .upsertGuestUser({})
+        .catch((err) => newJanusError(err).handle());
+    }
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {

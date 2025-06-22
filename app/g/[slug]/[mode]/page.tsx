@@ -4,7 +4,7 @@ type Props = {
   params: Promise<{ slug: string; mode: string }>;
 };
 
-export default async function TopicModesPage({ params }: Props) {
+export default async function TopicModesPage({}: Props) {
   // const { slug, mode } = await params;
 
   return (

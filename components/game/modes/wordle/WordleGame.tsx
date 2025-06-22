@@ -2,6 +2,11 @@
 
 import AnswerSearchBar from "@/components/answer/AnswerSearchBar";
 import { Separator } from "@/components/ui/separator";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { useGame } from "@/context/GameContext";
 import { newJanusError } from "@/lib/janus/client/error";
 import { dailyGameClient } from "@/lib/janus/client/plato";
@@ -16,13 +21,18 @@ export function WordleGame() {
   const [lastSelectedAnswer, setLastSelectedAnswer] = useState<DetailAnswer>();
   const [attempts, setAttempts] = useState<AttemptAnswerResponse[]>([]);
   const isLoading = useRef(false);
-  const categories = Array.from(
-    new Set(
-      availableAnswers.flatMap((answer) =>
-        answer.answerCategories.map((category) => category.name),
-      ),
-    ),
-  );
+  const categoryValueMap = new Map<string, Set<string>>();
+
+  availableAnswers.forEach((answer) => {
+    answer.answerCategories.forEach((cat) => {
+      if (!categoryValueMap.has(cat.name)) {
+        categoryValueMap.set(cat.name, new Set());
+      }
+      categoryValueMap.get(cat.name)!.add(cat.value);
+    });
+  });
+
+  const categories = Array.from(categoryValueMap.keys());
 
   async function onSelect(answerId: number) {
     console.log("Selected answer:", answerId);
@@ -57,47 +67,66 @@ export function WordleGame() {
     isLoading.current = false;
   }
 
-  const columnCount = categories.length + 2;
+  const columnCount = categories.length + 1;
 
   const gridCols =
     {
       1: "grid-cols-1",
       2: "grid-cols-2",
       3: "grid-cols-3",
-      4: "grid-cols-4",
-      5: "grid-cols-5 gap-3",
-      6: "grid-cols-6",
-      7: "grid-cols-7",
-      8: "grid-cols-8",
-      9: "grid-cols-9",
+      4: "grid-cols-4 gap-x-1 gap-y-2",
+      5: "grid-cols-5 gap-x-1 gap-y-2",
+      6: "grid-cols-6 gap-x-1 gap-y-2",
+      7: "grid-cols-7 gap-x-1 gap-y-2",
+      8: "grid-cols-8 gap-x-1 gap-y-2",
+      9: "grid-cols-9 gap-x-1 gap-y-2",
       10: "grid-cols-10",
     }[columnCount] ?? "grid-cols-4";
 
   const cellWidth = {
-    5: "w-[90px]",
+    6: "w-full",
   }[columnCount];
 
   const cellHeight = {
-    5: "h-[70px]",
+    6: "h-full",
   }[columnCount];
 
   return (
     <div className="flex flex-col mx-auto">
-      <div className="w-[50vw] min-w-96 mx-auto">
+      <div className="w-[30vw] min-w-96 mx-auto">
         <AnswerSearchBar answers={availableAnswers} onSelect={onSelect} />
       </div>
 
       <div className={`max-w-[80vw] min-w-[20vw] mx-auto`}>
         {/* Header row: fixed, no scroll */}
-        <div className={`grid ${gridCols} mt-[5vh] mb-[2vh]`}>
-          <div className="text-center col-span-2 font-extrabold">
+        <div className={`grid ${gridCols} mt-[5vh] mb-[2vh] items-end`}>
+          <div className="text-center font-extrabold cursor-default">
             {currentMode.answerType}
             <Separator className="mt-1 rounded-4xl bg-neutral-300"></Separator>
           </div>
           {categories.map((category) => (
-            <div key={category} className={`text-center font-semibold `}>
-              <div className={`${cellWidth} mx-auto`}>{category}</div>
-              <Separator className="mt-1 rounded-4xl bg-neutral-300"></Separator>
+            <div
+              key={category}
+              className="text-center flex flex-col font-semibold cursor-default"
+            >
+              {(() => {
+                const possibleValues = Array.from(
+                  categoryValueMap.get(category) ?? [],
+                );
+
+                return (
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <span>{category}</span>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>{possibleValues.join(", ")}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                );
+              })()}
+
+              <Separator className="mt-1 rounded-4xl bg-neutral-300" />
             </div>
           ))}
         </div>
@@ -110,55 +139,122 @@ export function WordleGame() {
 
             return (
               <React.Fragment key={answer.id}>
-                <div className="flex w-full col-span-2 mx-4 pr-6 relative z-0">
-                  <div className=" flex w-full py-1 px-2 gap-2 bg-neutral-700/50 rounded-md">
-                    <Image
-                      src={answer.iconUrl ?? "/img/invalid.png"}
-                      alt={answer.name}
-                      width={50}
-                      height={50}
-                      className="object-contain"
-                    />
-                    <div className="my-auto font-extrabold text-2xl">
-                      {answer.name}
-                    </div>
-                  </div>
+                <div className={`flex w-full ${cellWidth} ${cellHeight}`}>
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <Image
+                        src={answer.iconUrl ?? "/img/invalid.png"}
+                        alt={answer.name}
+                        width={100}
+                        height={100}
+                        className="object-contain border-2"
+                      />
+                    </TooltipTrigger>
+
+                    <TooltipContent>
+                      <p>{answer.name}</p>
+                    </TooltipContent>
+                  </Tooltip>
                 </div>
 
                 {categories.map((category) => {
-                  const answerCategory =
-                    attempt.attemptDetailAnswer?.answerCategories.findLast(
-                      (c) => c.name == category,
+                  const matchedCategories =
+                    attempt.attemptDetailAnswer?.answerCategories.filter(
+                      (c) => c.name === category,
+                    ) ?? [];
+                  if (matchedCategories.length === 0) {
+                    return (
+                      <Tooltip key={category}>
+                        <TooltipTrigger>
+                          <div
+                            key={category}
+                            className={`text-center text-lg font-bold rounded-xs my-auto mx-auto justify-center flex items-center bg-gray-900 opacity-20 cursor-default ${cellHeight} ${cellWidth} border-2 text-shadow-2xs`}
+                          >
+                            x
+                          </div>
+                        </TooltipTrigger>
+                        <TooltipContent className="bg-red-600 opacity-90 text-white">
+                          <p>Not set by Owner</p>
+                        </TooltipContent>
+                      </Tooltip>
                     );
-                  if (answerCategory == undefined) {
-                    return <div key={category}></div>;
                   }
-                  let bgColor = "bg-red-500";
+                  let correctnessCss = "bg-red-700";
+                  const categoryType = matchedCategories[0]?.type ?? "string";
+                  const maxCorrectness = Math.max(
+                    ...matchedCategories.map((c) => c.correctness),
+                  );
 
-                  switch (answerCategory.correctness) {
-                    case 0:
-                      // continue without change, red default
-                      break;
-                    case 1:
-                      bgColor = "bg-yellow-500";
-                      break;
-                    case 2:
-                      bgColor = "bg-green-500";
-                      break;
+                  if (categoryType == "string") {
+                    switch (maxCorrectness) {
+                      case -1:
+                        correctnessCss = "bg-gray-700";
+                        break;
+                      case 0:
+                        // continue without change, red default
+                        break;
+                      case 1:
+                        correctnessCss = "bg-yellow-900";
+                        break;
+                      case 2:
+                        correctnessCss = "bg-green-700";
+                        break;
+                    }
+                  } else if (categoryType == "number") {
+                    switch (maxCorrectness) {
+                      case -1:
+                        correctnessCss = "bg-gray-700";
+                        break;
+                      case 0:
+                        correctnessCss = "bg-blue-900";
+                        break;
+                      case 1:
+                        correctnessCss = "bg-green-700";
+                        break;
+                      case 2:
+                        correctnessCss = "bg-yellow-900";
+                        break;
+                    }
                   }
 
                   return (
                     <div
                       key={category}
-                      className={`text-center rounded-xs my-auto mx-auto justify-center flex items-center ${bgColor} ${cellHeight} ${cellWidth} border-2 text-shadow-2xs`}
+                      className={`text-center  flex-wrap leading-tight text-lg font-bold rounded-xs my-auto mx-auto justify-center flex items-center ${correctnessCss} ${cellHeight} ${cellWidth} border-2 text-shadow-2xs`}
                     >
-                      {answerCategory?.value}
+                    <p className="leading-tight max-w-28 whitespace-normal break-words">
+                      {matchedCategories.map((c, i) => (
+                        <span key={c.value}>
+                          {c.value}
+                          {i < matchedCategories.length - 1 ? ", " : ""}
+                        </span>
+                      ))}
+                    </p>
                     </div>
                   );
                 })}
+                <Separator className="col-span-6 bg-neutral-500/30" />
               </React.Fragment>
             );
           })}
+        </div>
+      </div>
+
+      <div className="border-2 mt-20 py-4 mx-auto from-sky-950 bg-gradient-to-br to-blue-950 rounded-md sm:w-96 w-[90%]">
+        <h3 className="text-center">Color Indicator</h3>
+        <div className="flex gap-5 justify-center mt-5">
+          <span className="flex flex-col items-center">
+            <div className="bg-green-600 w-8 h-8"></div>
+            <p>Correct</p>
+          </span>
+          <span className="flex flex-col items-center">
+            <div className="bg-red-700 w-8 h-8"></div>
+            <p>Incorrect</p>
+          </span>
+          <span className="flex flex-col items-center">
+            <div className="bg-orange-600 w-8 h-8"></div>
+            <p>Partial</p>
+          </span>
         </div>
       </div>
     </div>

@@ -1,3 +1,8 @@
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { GameProvider } from "@/context/GameContext";
 import { newJanusServerError } from "@/lib/janus/server-client/error";
 import {
@@ -78,15 +83,15 @@ export default async function TopicLayout({ children, params }: Props) {
       className="h-screen w-screen overflow-y-auto bg-cover bg-center bg-fixed text-white"
       style={{ backgroundImage: `url(${backgroundUrl || "/img/invalid.png"})` }}
     >
-      <div className="flex flex-col items-center px-4 py-10">
+      <div className="flex flex-col items-center px-4 py-10 mb-[20vh]">
         <Image
           src={topic.titleImageUrl || "/img/invalid.png"}
           alt={topic.title}
           width={600}
           height={200}
-          className="mb-1 mt-[10vh]"
+          className="mt-[10vh]"
         />
-        <p className="text-lg text-center max-w-2xl mb-10">
+        <p className="text-xl font-bold shadow-2xl text-center max-w-2xl mb-5">
           {currentMode.description}
         </p>
 
@@ -97,15 +102,23 @@ export default async function TopicLayout({ children, params }: Props) {
               href={`/g/${slug}/${mode.Type.toLowerCase()}`}
               className=""
             >
-              <div className="w-12 h-12 rounded-full overflow-hidden mb-3 border-2 border-white/50">
-                <Image
-                  src={mode.iconUrl || "/img/default-icon.png"}
-                  alt={mode.title}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                  height={100}
-                  width={100}
-                />
+              <div className="size-16 rounded-full overflow-hidden mb-3 border-2 border-white/50 hover:brightness-75">
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Image
+                      src={mode.iconUrl || "/img/default-icon.png"}
+                      alt={mode.title}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                      height={100}
+                      width={100}
+                    />
+                  </TooltipTrigger>
+
+                  <TooltipContent>
+                    <p>{mode.title}</p>
+                  </TooltipContent>
+                </Tooltip>
               </div>
             </Link>
           ))}

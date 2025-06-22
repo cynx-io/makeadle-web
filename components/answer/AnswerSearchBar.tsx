@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { Command, CommandInput, CommandItem, CommandList } from "../ui/command";
 import Image from "next/image";
 import { DetailAnswer } from "@/proto/janus/plato/object_pb";
+import { Separator } from "../ui/separator";
 
 type Props = {
   onSelect: (answerId: number) => Promise<void>;
@@ -43,15 +44,15 @@ export default function AnswerSearchBar({ onSelect, answers }: Props) {
   const showDropdown = results.length > 0;
 
   return (
-    <div className="w-full relative">
-      <Command className="w-full">
+    <div className="w-full relative bg-blue-100">
+      <Command className="w-full bg-blue-100">
         <CommandInput
           value={query}
           onValueChange={(val) => {
             setQuery(val);
           }}
-          placeholder="Search"
-          className="text-sm"
+          placeholder="Type a Hero Name"
+          className="text-lg h-96"
         />
 
         <AnimatePresence>
@@ -61,9 +62,9 @@ export default function AnswerSearchBar({ onSelect, answers }: Props) {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.2 }}
-              className="mt-1 bg-white rounded-lg top-full shadow-lg z-50 overflow-hidden absolute w-full"
+              className="mt-1 bg-slate-100 top-full shadow-lg z-50 overflow-hidden absolute w-full "
             >
-              <CommandList>
+              <CommandList className=" hover:brightness-90">
                 {results.map((detailAnswer) => {
                   if (!detailAnswer.answer) return null;
                   const answer = detailAnswer.answer;
@@ -73,18 +74,21 @@ export default function AnswerSearchBar({ onSelect, answers }: Props) {
                       key={answer.id}
                       value={answer.name}
                       onSelect={() => handleOnSelect(answer.id)}
-                      className="flex items-center gap-2 cursor-pointer"
+                      className="flex items-center gap-2 my-2 cursor-pointer relative"
                     >
                       <Image
                         src={answer.iconUrl ?? "/img/invalid.png"}
                         alt={answer.name}
-                        width={24}
-                        height={24}
+                        width={50}
+                        height={50}
                         className="rounded-full"
                       />
                       <div>
-                        <p className="text-sm font-medium">{answer.name}</p>
+                        <p className="text-xl font-medium text-gray-700">
+                          {answer.name}
+                        </p>
                       </div>
+                      <Separator className="bg-gray-300 absolute bottom-0" />
                     </CommandItem>
                   );
                 })}
