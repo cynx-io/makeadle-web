@@ -13,9 +13,7 @@ import { newJanusError } from "@/lib/janus/client/error";
 import { dailyGameClient } from "@/lib/janus/client/plato";
 import { AttemptAnswerResponse } from "@/proto/janus/plato/dailygame_pb";
 import { DetailAnswer } from "@/proto/janus/plato/object_pb";
-import Image from "next/image"; // Needed for the Color Indicator section
 import React, { useRef, useState } from "react";
-import { CorrectnessType } from "@/types/game/correctnessType";
 import { WordleRow } from "./WordleRow"; // Import the new WordleRow component
 import getCorrectnessType from "@/helper/game/getCorrectnessType"; // Keep this function
 import WordleHelp from "./WordleHelp";

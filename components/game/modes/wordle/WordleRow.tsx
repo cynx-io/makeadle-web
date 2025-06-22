@@ -4,12 +4,8 @@
 import React from "react";
 import { motion } from "motion/react";
 import { CorrectnessType } from "@/types/game/correctnessType";
-import { WordleCell, WordleCellProps } from "./WordleCell"; // Import WordleCell and its props type
+import { WordleCell } from "./WordleCell"; // Import WordleCell and its props type
 import Image from "next/image"; // For the answer icon
-import {
-  AttemptDetailAnswer,
-  DetailAnswer,
-} from "@/proto/janus/plato/object_pb"; // Adjust path as needed
 import {
   Tooltip,
   TooltipContent,
