@@ -54,9 +54,10 @@ export const WordleCell = ({
       break;
     case CorrectnessType.WRONG:
       bgColor = "bg-red-700";
+      opacity = 0.4;
       break;
     case CorrectnessType.PARTIAL:
-      bgColor = "bg-yellow-900";
+      bgColor = "bg-yellow-700";
       break;
     case CorrectnessType.CORRECT:
       bgColor = "bg-green-700";
@@ -66,10 +67,10 @@ export const WordleCell = ({
       bgColor = "bg-gray-700";
       break;
     case CorrectnessType.HIGHER:
-      bgColor = "bg-yellow-900";
+      bgColor = "bg-yellow-700";
       break;
     case CorrectnessType.LOWER:
-      bgColor = "bg-blue-900";
+      bgColor = "bg-blue-700";
       break;
   }
 
@@ -79,7 +80,7 @@ export const WordleCell = ({
       variants={cellVariants}
       custom={custom} // Pass the custom prop received by WordleCell
       initial="hidden" // Add initial and animate back here for individual cell animation
-      animate="visible" // This ensures each cell animates when it enters the DOM
+      animate={{ opacity: opacity, scale: 1 }} // This ensures each cell animates when it enters the DOM
       className={`text-center text-lg font-bold rounded-xs justify-center items-center cursor-default border-2 text-shadow-2xs ${cellSizeCss} ${bgColor} flex mx-auto`}
     >
       {tooltipValue.length > 0 ? (

@@ -19,6 +19,10 @@ export const metadata: Metadata = {
     "online game",
     "mobile legends wordle",
     "league of legends wordle",
+    "pokemon wordle",
+    "mobiledle",
+    "loldle",
+    "pokedle",
   ],
   openGraph: {
     title: "Makeadle - Create & Play Custom Wordles",
@@ -28,7 +32,7 @@ export const metadata: Metadata = {
     siteName: "Makeadle",
     images: [
       {
-        url: "https://www.makeadle.com/img/makeadle-og-image.png", // Path to your default Open Graph image
+        url: "https://www.makeadle.com/icon.png", // Path to your default Open Graph image
         width: 1200,
         height: 630,
         alt: "Makeadle - Create and Play Custom Wordles",
@@ -44,7 +48,7 @@ export const metadata: Metadata = {
     title: "Makeadle - Create & Play Custom Wordles",
     description:
       "Makeadle is a platform where you can create and play custom Wordle-like games based on your favorite topics, like Mobile Legends, League of Legends, and more!",
-    images: ["https://www.makeadle.com/img/makeadle-og-image.png"],
+    images: ["https://www.makeadle.com/icon.png"],
   },
   // Add other useful meta tags
   authors: [
@@ -62,20 +66,28 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en">
-      {/* Google tag (gtag.js) */}
-      <Script
-        async
-        src="https://www.googletagmanager.com/gtag/js?id=G-H0R023VWX9"
-        strategy="afterInteractive"
-      />
-      <Script id="google-analytics" strategy="afterInteractive">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-H0R023VWX9');
-        `}
-      </Script>
+      <head>
+        {/* Google tag (gtag.js) */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-H0R023VWX9"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-H0R023VWX9');
+          `}
+        </Script>
+
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1374372173829138"
+          crossOrigin="anonymous"
+        ></script>
+      </head>
       <body className="antialiased h-screen w-screen overflow-hidden scrollbar scrollbar-thumb-slate-700 scrollbar-track-slate-300">
         <RootClientLayout />
         {children}

@@ -12,7 +12,11 @@ import {
   messageDesc,
   serviceDesc,
 } from "@bufbuild/protobuf/codegenv2";
-import type { AnswerIdRequestSchema, TopicIdRequestSchema } from "./generic_pb";
+import type {
+  AnswerIdRequestSchema,
+  TopicIdRequestSchema,
+  TopicModeRequestSchema,
+} from "./generic_pb";
 import { file_plato_generic } from "./generic_pb";
 import type { Answer, DetailAnswer } from "./object_pb";
 import { file_plato_object } from "./object_pb";
@@ -31,7 +35,7 @@ import type { Message } from "@bufbuild/protobuf";
 export const file_plato_answer: GenFile =
   /*@__PURE__*/
   fileDesc(
-    "ChJwbGF0by9hbnN3ZXIucHJvdG8SBXBsYXRvInQKFFNlYXJjaEFuc3dlcnNSZXF1ZXN0Eh8KBGJhc2UYASABKAsyES5jb3JlLkJhc2VSZXF1ZXN0EhgKBXF1ZXJ5GAIgASgJQgm6SAZyBBABGGQSEAoIdG9waWNfaWQYAyABKAUSDwoHbW9kZV9pZBgEIAEoBSJXChNMaXN0QW5zd2Vyc1Jlc3BvbnNlEiAKBGJhc2UYASABKAsyEi5jb3JlLkJhc2VSZXNwb25zZRIeCgdhbnN3ZXJzGAIgAygLMg0ucGxhdG8uQW5zd2VyImoKGUxpc3REZXRhaWxBbnN3ZXJzUmVzcG9uc2USIAoEYmFzZRgBIAEoCzISLmNvcmUuQmFzZVJlc3BvbnNlEisKDmRldGFpbF9hbnN3ZXJzGAIgAygLMhMucGxhdG8uRGV0YWlsQW5zd2VyIlEKDkFuc3dlclJlc3BvbnNlEiAKBGJhc2UYASABKAsyEi5jb3JlLkJhc2VSZXNwb25zZRIdCgZhbnN3ZXIYAiABKAsyDS5wbGF0by5BbnN3ZXIiZAoURGV0YWlsQW5zd2VyUmVzcG9uc2USIAoEYmFzZRgBIAEoCzISLmNvcmUuQmFzZVJlc3BvbnNlEioKDWRldGFpbF9hbnN3ZXIYAiABKAsyEy5wbGF0by5EZXRhaWxBbnN3ZXIilwEKE0luc2VydEFuc3dlclJlcXVlc3QSJwoEYmFzZRgBIAEoCzIRLmNvcmUuQmFzZVJlcXVlc3RCBrpIA8gBARIMCgRuYW1lGAIgASgJEhUKCGljb25fdXJsGAMgASgJSACIAQESEwoLYW5zd2VyX3R5cGUYBCABKAkSEAoIdG9waWNfaWQYCiABKAVCCwoJX2ljb25fdXJsIqYBChNVcGRhdGVBbnN3ZXJSZXF1ZXN0EicKBGJhc2UYASABKAsyES5jb3JlLkJhc2VSZXF1ZXN0Qga6SAPIAQESEQoEbmFtZRgCIAEoCUgAiAEBEhUKCGljb25fdXJsGAMgASgJSAGIAQESEwoLYW5zd2VyX3R5cGUYBCABKAkSEQoJYW5zd2VyX2lkGAogASgFQgcKBV9uYW1lQgsKCV9pY29uX3VybDLhBAoSUGxhdG9BbnN3ZXJTZXJ2aWNlEkAKDUdldEFuc3dlckJ5SWQSFi5wbGF0by5BbnN3ZXJJZFJlcXVlc3QaFS5wbGF0by5BbnN3ZXJSZXNwb25zZSIAEkwKE0dldERldGFpbEFuc3dlckJ5SWQSFi5wbGF0by5BbnN3ZXJJZFJlcXVlc3QaGy5wbGF0by5EZXRhaWxBbnN3ZXJSZXNwb25zZSIAEksKFExpc3RBbnN3ZXJzQnlUb3BpY0lkEhUucGxhdG8uVG9waWNJZFJlcXVlc3QaGi5wbGF0by5MaXN0QW5zd2Vyc1Jlc3BvbnNlIgASVwoaTGlzdERldGFpbEFuc3dlcnNCeVRvcGljSWQSFS5wbGF0by5Ub3BpY0lkUmVxdWVzdBogLnBsYXRvLkxpc3REZXRhaWxBbnN3ZXJzUmVzcG9uc2UiABJDCgxJbnNlcnRBbnN3ZXISGi5wbGF0by5JbnNlcnRBbnN3ZXJSZXF1ZXN0GhUucGxhdG8uQW5zd2VyUmVzcG9uc2UiABJDCgxVcGRhdGVBbnN3ZXISGi5wbGF0by5VcGRhdGVBbnN3ZXJSZXF1ZXN0GhUucGxhdG8uQW5zd2VyUmVzcG9uc2UiABI/CgxEZWxldGVBbnN3ZXISFi5wbGF0by5BbnN3ZXJJZFJlcXVlc3QaFS5jb3JlLkdlbmVyaWNSZXNwb25zZSIAEkoKDVNlYXJjaEFuc3dlcnMSGy5wbGF0by5TZWFyY2hBbnN3ZXJzUmVxdWVzdBoaLnBsYXRvLkxpc3RBbnN3ZXJzUmVzcG9uc2UiAEIRWg9wbGF0by9hcGkvcHJvdG9iBnByb3RvMw",
+    "ChJwbGF0by9hbnN3ZXIucHJvdG8SBXBsYXRvInQKFFNlYXJjaEFuc3dlcnNSZXF1ZXN0Eh8KBGJhc2UYASABKAsyES5jb3JlLkJhc2VSZXF1ZXN0EhgKBXF1ZXJ5GAIgASgJQgm6SAZyBBABGGQSEAoIdG9waWNfaWQYAyABKAUSDwoHbW9kZV9pZBgEIAEoBSJXChNMaXN0QW5zd2Vyc1Jlc3BvbnNlEiAKBGJhc2UYASABKAsyEi5jb3JlLkJhc2VSZXNwb25zZRIeCgdhbnN3ZXJzGAIgAygLMg0ucGxhdG8uQW5zd2VyImoKGUxpc3REZXRhaWxBbnN3ZXJzUmVzcG9uc2USIAoEYmFzZRgBIAEoCzISLmNvcmUuQmFzZVJlc3BvbnNlEisKDmRldGFpbF9hbnN3ZXJzGAIgAygLMhMucGxhdG8uRGV0YWlsQW5zd2VyIlEKDkFuc3dlclJlc3BvbnNlEiAKBGJhc2UYASABKAsyEi5jb3JlLkJhc2VSZXNwb25zZRIdCgZhbnN3ZXIYAiABKAsyDS5wbGF0by5BbnN3ZXIiZAoURGV0YWlsQW5zd2VyUmVzcG9uc2USIAoEYmFzZRgBIAEoCzISLmNvcmUuQmFzZVJlc3BvbnNlEioKDWRldGFpbF9hbnN3ZXIYAiABKAsyEy5wbGF0by5EZXRhaWxBbnN3ZXIilgEKE0luc2VydEFuc3dlclJlcXVlc3QSJwoEYmFzZRgBIAEoCzIRLmNvcmUuQmFzZVJlcXVlc3RCBrpIA8gBARIMCgRuYW1lGAIgASgJEhUKCGljb25fdXJsGAMgASgJSACIAQESEgoKQW5zd2VyVHlwZRgEIAEoCRIQCgh0b3BpY19pZBgUIAEoBUILCglfaWNvbl91cmwiuQEKE1VwZGF0ZUFuc3dlclJlcXVlc3QSJwoEYmFzZRgBIAEoCzIRLmNvcmUuQmFzZVJlcXVlc3RCBrpIA8gBARIRCgRuYW1lGAIgASgJSACIAQESFQoIaWNvbl91cmwYAyABKAlIAYgBARIXCgpBbnN3ZXJUeXBlGAQgASgJSAKIAQESEQoJYW5zd2VyX2lkGAogASgFQgcKBV9uYW1lQgsKCV9pY29uX3VybEINCgtfQW5zd2VyVHlwZTLnBAoSUGxhdG9BbnN3ZXJTZXJ2aWNlEkAKDUdldEFuc3dlckJ5SWQSFi5wbGF0by5BbnN3ZXJJZFJlcXVlc3QaFS5wbGF0by5BbnN3ZXJSZXNwb25zZSIAEkwKE0dldERldGFpbEFuc3dlckJ5SWQSFi5wbGF0by5BbnN3ZXJJZFJlcXVlc3QaGy5wbGF0by5EZXRhaWxBbnN3ZXJSZXNwb25zZSIAEksKFExpc3RBbnN3ZXJzQnlUb3BpY0lkEhUucGxhdG8uVG9waWNJZFJlcXVlc3QaGi5wbGF0by5MaXN0QW5zd2Vyc1Jlc3BvbnNlIgASQwoMSW5zZXJ0QW5zd2VyEhoucGxhdG8uSW5zZXJ0QW5zd2VyUmVxdWVzdBoVLnBsYXRvLkFuc3dlclJlc3BvbnNlIgASQwoMVXBkYXRlQW5zd2VyEhoucGxhdG8uVXBkYXRlQW5zd2VyUmVxdWVzdBoVLnBsYXRvLkFuc3dlclJlc3BvbnNlIgASPwoMRGVsZXRlQW5zd2VyEhYucGxhdG8uQW5zd2VySWRSZXF1ZXN0GhUuY29yZS5HZW5lcmljUmVzcG9uc2UiABJdCh5MaXN0RGV0YWlsQW5zd2Vyc0J5VG9waWNNb2RlSWQSFy5wbGF0by5Ub3BpY01vZGVSZXF1ZXN0GiAucGxhdG8uTGlzdERldGFpbEFuc3dlcnNSZXNwb25zZSIAEkoKDVNlYXJjaEFuc3dlcnMSGy5wbGF0by5TZWFyY2hBbnN3ZXJzUmVxdWVzdBoaLnBsYXRvLkxpc3RBbnN3ZXJzUmVzcG9uc2UiAEIRWg9wbGF0by9hcGkvcHJvdG9iBnByb3RvMw",
     [file_plato_generic, file_plato_object, file_core],
   );
 
@@ -181,14 +185,14 @@ export type InsertAnswerRequest = Message<"plato.InsertAnswerRequest"> & {
   iconUrl?: string;
 
   /**
-   * e.g., "Champion", "Hero", "Pokemon"
+   * "pokemon", "character", "item", etc.
    *
-   * @generated from field: string answer_type = 4;
+   * @generated from field: string AnswerType = 4;
    */
-  answerType: string;
+  AnswerType: string;
 
   /**
-   * @generated from field: int32 topic_id = 10;
+   * @generated from field: int32 topic_id = 20;
    */
   topicId: number;
 };
@@ -221,11 +225,11 @@ export type UpdateAnswerRequest = Message<"plato.UpdateAnswerRequest"> & {
   iconUrl?: string;
 
   /**
-   * e.g., "Champion", "Hero", "Pokemon"
+   * "pokemon", "character", "item", etc.
    *
-   * @generated from field: string answer_type = 4;
+   * @generated from field: optional string AnswerType = 4;
    */
-  answerType: string;
+  AnswerType?: string;
 
   /**
    * @generated from field: int32 answer_id = 10;
@@ -270,14 +274,6 @@ export const PlatoAnswerService: GenService<{
     output: typeof ListAnswersResponseSchema;
   };
   /**
-   * @generated from rpc plato.PlatoAnswerService.ListDetailAnswersByTopicId
-   */
-  listDetailAnswersByTopicId: {
-    methodKind: "unary";
-    input: typeof TopicIdRequestSchema;
-    output: typeof ListDetailAnswersResponseSchema;
-  };
-  /**
    * @generated from rpc plato.PlatoAnswerService.InsertAnswer
    */
   insertAnswer: {
@@ -300,6 +296,14 @@ export const PlatoAnswerService: GenService<{
     methodKind: "unary";
     input: typeof AnswerIdRequestSchema;
     output: typeof GenericResponseSchema;
+  };
+  /**
+   * @generated from rpc plato.PlatoAnswerService.ListDetailAnswersByTopicModeId
+   */
+  listDetailAnswersByTopicModeId: {
+    methodKind: "unary";
+    input: typeof TopicModeRequestSchema;
+    output: typeof ListDetailAnswersResponseSchema;
   };
   /**
    * @generated from rpc plato.PlatoAnswerService.SearchAnswers

@@ -11,25 +11,55 @@ import {
 import { useGame } from "@/context/GameContext";
 import { newJanusError } from "@/lib/janus/client/error";
 import { dailyGameClient } from "@/lib/janus/client/plato";
-import { AttemptAnswerResponse } from "@/proto/janus/plato/dailygame_pb";
-import { DetailAnswer } from "@/proto/janus/plato/object_pb";
-import React, { useRef, useState } from "react";
+import { Answer, AttemptDetailAnswer } from "@/proto/janus/plato/object_pb";
+import React, { useEffect, useRef, useState } from "react";
 import { WordleRow } from "./WordleRow"; // Import the new WordleRow component
 import getCorrectnessType from "@/helper/game/getCorrectnessType"; // Keep this function
 import WordleHelp from "./WordleHelp";
 
-export function WordleGame() {
+export type WordleGameProps = {
+  attempts: AttemptDetailAnswer[];
+  setAttempts: React.Dispatch<React.SetStateAction<AttemptDetailAnswer[]>>;
+};
+
+export function WordleGame({ attempts, setAttempts }: WordleGameProps) {
   const { currentMode, answers, dailyGame } = useGame();
-  const [availableAnswers, setAvailableAnswers] = useState(answers);
+  const [availableAnswers, setAvailableAnswers] = useState<Answer[]>(
+    answers.filter((ans) => {
+      return currentMode.answerTypes.includes(ans?.answerType ?? "");
+    }),
+  );
+
   const [lastSelectedAnswer, setLastSelectedAnswer] = useState<
-    DetailAnswer | undefined
-  >(); // Can be undefined
-  const [attempts, setAttempts] = useState<AttemptAnswerResponse[]>([]);
+    Answer | undefined
+  >();
   const isLoading = useRef(false);
   const categoryValueMap = new Map<string, Set<string>>();
 
-  availableAnswers.forEach((answer) => {
+  useEffect(() => {
+    setAvailableAnswers(
+      answers.filter((ans) => {
+        let isValid = currentMode.answerTypes.includes(ans?.answerType ?? "");
+        if (!isValid) {
+          return isValid;
+        }
+
+        isValid =
+          attempts.filter((attempt) => {
+            return attempt.answer?.id === ans?.id;
+          }).length === 0;
+
+        return isValid;
+      }),
+    );
+  }, [attempts]);
+
+  attempts.forEach((answer) => {
     answer.answerCategories.forEach((cat) => {
+      if (!currentMode.categoryNames.includes(cat.name)) {
+        return; // Skip categories not in the current mode
+      }
+
       if (!categoryValueMap.has(cat.name)) {
         categoryValueMap.set(cat.name, new Set());
       }
@@ -41,18 +71,13 @@ export function WordleGame() {
 
   async function onSelect(answerId: number) {
     console.log("Selected answer:", answerId);
-    if (isLoading.current || lastSelectedAnswer?.answer?.id === answerId)
-      return; // Use ===
+    if (isLoading.current || lastSelectedAnswer?.id === answerId) return; // Use ===
 
     isLoading.current = true;
     const selectedAnswer = availableAnswers.find(
-      (answer) => answer.answer?.id === answerId,
+      (answer) => answer?.id === answerId,
     );
     setLastSelectedAnswer(selectedAnswer);
-
-    setAvailableAnswers(
-      availableAnswers.filter((answer) => answer.answer?.id !== answerId),
-    );
 
     const attemptAnswerResp = await dailyGameClient
       .attemptAnswer({
@@ -61,24 +86,21 @@ export function WordleGame() {
       })
       .catch((err) => {
         newJanusError(err).handle();
-        // Only revert if lastSelectedAnswer is defined
-        if (selectedAnswer) {
-          setAvailableAnswers((prev) => [...prev, selectedAnswer]);
-        }
         return null;
       });
 
     if (!attemptAnswerResp) {
-      isLoading.current = false; // Reset loading state on error
-      // Revert if lastSelectedAnswer was successfully found
-      if (selectedAnswer) {
-        setAvailableAnswers((prev) => [...prev, selectedAnswer]);
-      }
+      isLoading.current = false;
       return;
     }
 
     // Add new attempt to the beginning of the array
-    setAttempts((prevAttempts) => [attemptAnswerResp, ...prevAttempts]);
+    setAttempts((prevAttempts) => {
+      if (!attemptAnswerResp.attemptDetailAnswer) {
+        return prevAttempts;
+      }
+      return [attemptAnswerResp.attemptDetailAnswer, ...prevAttempts];
+    });
     isLoading.current = false;
   }
 
@@ -95,16 +117,8 @@ export function WordleGame() {
       7: "grid-cols-7 gap-x-1 gap-y-3",
       8: "grid-cols-8 gap-x-1 gap-y-3",
       9: "grid-cols-9 gap-x-1 gap-y-3",
-      10: "grid-cols-10",
-    }[columnCount] ?? "grid-cols-4";
-
-  const cellWidth = {
-    6: "w-full", // Example: if columnCount is 6, cells take full width of their grid slot
-  }[columnCount];
-
-  const cellHeight = {
-    6: "h-full", // Example: if columnCount is 6, cells take full height of their grid slot
-  }[columnCount];
+      10: "grid-cols-10 gap-x-1 gap-y-3",
+    }[columnCount] ?? "grid-cols-10 gap-x-1 gap-y-3";
 
   return (
     <div className="flex flex-col mx-auto">
@@ -115,7 +129,7 @@ export function WordleGame() {
       <div className={`max-w-[80vw] min-w-[20vw] mx-auto`}>
         <div className={`grid ${gridCols} mt-[5vh] mb-[2vh] items-end`}>
           <div className="text-center font-extrabold cursor-default">
-            {currentMode.answerType}
+            {currentMode.answerTypes}
             <Separator className="mt-1 rounded-4xl bg-neutral-300"></Separator>
           </div>
           {categories.map((category) => (
@@ -142,19 +156,17 @@ export function WordleGame() {
 
         {/* Scrollable attempts container */}
         <div className={`grid ${gridCols} mt-1`}>
-          {/* Use React.Fragment for the overall grid structure */}
           {attempts.map((attempt) => {
-            if (!attempt.attemptDetailAnswer?.answer) return null;
-            const answer = attempt.attemptDetailAnswer.answer;
+            if (!attempt?.answer) return null;
+            const answer = attempt.answer;
 
             return (
-              // Each WordleRow component now represents one full attempt row
               <React.Fragment key={answer.id}>
                 <WordleRow
                   attemptAnswer={attempt}
                   categories={categories}
-                  cellSizeCss={`${cellWidth} ${cellHeight}`}
-                  getCorrectnessType={getCorrectnessType} // Pass the helper function
+                  cellSizeCss={`w-full`}
+                  getCorrectnessType={getCorrectnessType}
                 />
               </React.Fragment>
             );

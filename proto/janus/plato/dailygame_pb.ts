@@ -21,7 +21,7 @@ import type {
 import { file_plato_generic } from "./generic_pb";
 import type {
   AttemptDetailAnswer,
-  DailyGameAnswerStats,
+  Clue,
   DetailDailyGame,
   Mode,
   PublicDailyGame,
@@ -36,7 +36,7 @@ import type { Message } from "@bufbuild/protobuf";
 export const file_plato_dailygame: GenFile =
   /*@__PURE__*/
   fileDesc(
-    "ChVwbGF0by9kYWlseWdhbWUucHJvdG8SBXBsYXRvImsKFU1vZGVEYWlseUdhbWVSZXNwb25zZRIgCgRiYXNlGAEgASgLMhIuY29yZS5CYXNlUmVzcG9uc2USGQoEbW9kZRgCIAEoCzILLnBsYXRvLk1vZGUSFQoNZGFpbHlfZ2FtZV9pZBgDIAEoBSJuChdQdWJsaWNEYWlseUdhbWVSZXNwb25zZRIgCgRiYXNlGAEgASgLMhIuY29yZS5CYXNlUmVzcG9uc2USMQoRcHVibGljX2RhaWx5X2dhbWUYAiABKAsyFi5wbGF0by5QdWJsaWNEYWlseUdhbWUibgoXRGV0YWlsRGFpbHlHYW1lUmVzcG9uc2USIAoEYmFzZRgBIAEoCzISLmNvcmUuQmFzZVJlc3BvbnNlEjEKEWRldGFpbF9kYWlseV9nYW1lGAIgASgLMhYucGxhdG8uRGV0YWlsRGFpbHlHYW1lImkKFEF0dGVtcHRBbnN3ZXJSZXF1ZXN0EicKBGJhc2UYASABKAsyES5jb3JlLkJhc2VSZXF1ZXN0Qga6SAPIAQESFQoNZGFpbHlfZ2FtZV9pZBgCIAEoBRIRCglhbnN3ZXJfaWQYBCABKAUixgEKFUF0dGVtcHRBbnN3ZXJSZXNwb25zZRIgCgRiYXNlGAEgASgLMhIuY29yZS5CYXNlUmVzcG9uc2USEgoKaXNfY29ycmVjdBgCIAEoCBI5ChVhdHRlbXB0X2RldGFpbF9hbnN3ZXIYAyABKAsyGi5wbGF0by5BdHRlbXB0RGV0YWlsQW5zd2VyEjwKF2RhaWx5X2dhbWVfYW5zd2VyX3N0YXRzGAQgASgLMhsucGxhdG8uRGFpbHlHYW1lQW5zd2VyU3RhdHMy2AIKFVBsYXRvRGFpbHlHYW1lU2VydmljZRJVChZHZXREZXRhaWxEYWlseUdhbWVCeUlkEhkucGxhdG8uRGFpbHlHYW1lSWRSZXF1ZXN0Gh4ucGxhdG8uRGV0YWlsRGFpbHlHYW1lUmVzcG9uc2UiABJMChRHZXRNb2RlRGFpbHlHYW1lQnlJZBIULnBsYXRvLk1vZGVJZFJlcXVlc3QaHC5wbGF0by5Nb2RlRGFpbHlHYW1lUmVzcG9uc2UiABJMChJHZXRQdWJsaWNEYWlseUdhbWUSFC5wbGF0by5Nb2RlSWRSZXF1ZXN0Gh4ucGxhdG8uUHVibGljRGFpbHlHYW1lUmVzcG9uc2UiABJMCg1BdHRlbXB0QW5zd2VyEhsucGxhdG8uQXR0ZW1wdEFuc3dlclJlcXVlc3QaHC5wbGF0by5BdHRlbXB0QW5zd2VyUmVzcG9uc2UiAEIRWg9wbGF0by9hcGkvcHJvdG9iBnByb3RvMw",
+    "ChVwbGF0by9kYWlseWdhbWUucHJvdG8SBXBsYXRvImsKFU1vZGVEYWlseUdhbWVSZXNwb25zZRIgCgRiYXNlGAEgASgLMhIuY29yZS5CYXNlUmVzcG9uc2USGQoEbW9kZRgCIAEoCzILLnBsYXRvLk1vZGUSFQoNZGFpbHlfZ2FtZV9pZBgDIAEoBSJuChdQdWJsaWNEYWlseUdhbWVSZXNwb25zZRIgCgRiYXNlGAEgASgLMhIuY29yZS5CYXNlUmVzcG9uc2USMQoRcHVibGljX2RhaWx5X2dhbWUYAiABKAsyFi5wbGF0by5QdWJsaWNEYWlseUdhbWUibgoXRGV0YWlsRGFpbHlHYW1lUmVzcG9uc2USIAoEYmFzZRgBIAEoCzISLmNvcmUuQmFzZVJlc3BvbnNlEjEKEWRldGFpbF9kYWlseV9nYW1lGAIgASgLMhYucGxhdG8uRGV0YWlsRGFpbHlHYW1lImkKFEF0dGVtcHRBbnN3ZXJSZXF1ZXN0EicKBGJhc2UYASABKAsyES5jb3JlLkJhc2VSZXF1ZXN0Qga6SAPIAQESFQoNZGFpbHlfZ2FtZV9pZBgCIAEoBRIRCglhbnN3ZXJfaWQYBCABKAUikAEKFUF0dGVtcHRBbnN3ZXJSZXNwb25zZRIgCgRiYXNlGAEgASgLMhIuY29yZS5CYXNlUmVzcG9uc2USOQoVYXR0ZW1wdF9kZXRhaWxfYW5zd2VyGAMgASgLMhoucGxhdG8uQXR0ZW1wdERldGFpbEFuc3dlchIaCgVjbHVlcxgEIAMoCzILLnBsYXRvLkNsdWUikgEKFkF0dGVtcHRIaXN0b3J5UmVzcG9uc2USIAoEYmFzZRgBIAEoCzISLmNvcmUuQmFzZVJlc3BvbnNlEjoKFmF0dGVtcHRfZGV0YWlsX2Fuc3dlcnMYAiADKAsyGi5wbGF0by5BdHRlbXB0RGV0YWlsQW5zd2VyEhoKBWNsdWVzGAUgAygLMgsucGxhdG8uQ2x1ZTKmAwoVUGxhdG9EYWlseUdhbWVTZXJ2aWNlElUKFkdldERldGFpbERhaWx5R2FtZUJ5SWQSGS5wbGF0by5EYWlseUdhbWVJZFJlcXVlc3QaHi5wbGF0by5EZXRhaWxEYWlseUdhbWVSZXNwb25zZSIAEkwKFEdldE1vZGVEYWlseUdhbWVCeUlkEhQucGxhdG8uTW9kZUlkUmVxdWVzdBocLnBsYXRvLk1vZGVEYWlseUdhbWVSZXNwb25zZSIAEkwKEkdldFB1YmxpY0RhaWx5R2FtZRIULnBsYXRvLk1vZGVJZFJlcXVlc3QaHi5wbGF0by5QdWJsaWNEYWlseUdhbWVSZXNwb25zZSIAEkwKDUF0dGVtcHRBbnN3ZXISGy5wbGF0by5BdHRlbXB0QW5zd2VyUmVxdWVzdBocLnBsYXRvLkF0dGVtcHRBbnN3ZXJSZXNwb25zZSIAEkwKDkF0dGVtcHRIaXN0b3J5EhkucGxhdG8uRGFpbHlHYW1lSWRSZXF1ZXN0Gh0ucGxhdG8uQXR0ZW1wdEhpc3RvcnlSZXNwb25zZSIAQhFaD3BsYXRvL2FwaS9wcm90b2IGcHJvdG8z",
     [file_core, file_plato_generic, file_plato_object],
   );
 
@@ -154,19 +154,14 @@ export type AttemptAnswerResponse = Message<"plato.AttemptAnswerResponse"> & {
   base?: BaseResponse;
 
   /**
-   * @generated from field: bool is_correct = 2;
-   */
-  isCorrect: boolean;
-
-  /**
    * @generated from field: plato.AttemptDetailAnswer attempt_detail_answer = 3;
    */
   attemptDetailAnswer?: AttemptDetailAnswer;
 
   /**
-   * @generated from field: plato.DailyGameAnswerStats daily_game_answer_stats = 4;
+   * @generated from field: repeated plato.Clue clues = 4;
    */
-  dailyGameAnswerStats?: DailyGameAnswerStats;
+  clues: Clue[];
 };
 
 /**
@@ -176,6 +171,34 @@ export type AttemptAnswerResponse = Message<"plato.AttemptAnswerResponse"> & {
 export const AttemptAnswerResponseSchema: GenMessage<AttemptAnswerResponse> =
   /*@__PURE__*/
   messageDesc(file_plato_dailygame, 4);
+
+/**
+ * @generated from message plato.AttemptHistoryResponse
+ */
+export type AttemptHistoryResponse = Message<"plato.AttemptHistoryResponse"> & {
+  /**
+   * @generated from field: core.BaseResponse base = 1;
+   */
+  base?: BaseResponse;
+
+  /**
+   * @generated from field: repeated plato.AttemptDetailAnswer attempt_detail_answers = 2;
+   */
+  attemptDetailAnswers: AttemptDetailAnswer[];
+
+  /**
+   * @generated from field: repeated plato.Clue clues = 5;
+   */
+  clues: Clue[];
+};
+
+/**
+ * Describes the message plato.AttemptHistoryResponse.
+ * Use `create(AttemptHistoryResponseSchema)` to create a new message.
+ */
+export const AttemptHistoryResponseSchema: GenMessage<AttemptHistoryResponse> =
+  /*@__PURE__*/
+  messageDesc(file_plato_dailygame, 5);
 
 /**
  * @generated from service plato.PlatoDailyGameService
@@ -212,5 +235,13 @@ export const PlatoDailyGameService: GenService<{
     methodKind: "unary";
     input: typeof AttemptAnswerRequestSchema;
     output: typeof AttemptAnswerResponseSchema;
+  };
+  /**
+   * @generated from rpc plato.PlatoDailyGameService.AttemptHistory
+   */
+  attemptHistory: {
+    methodKind: "unary";
+    input: typeof DailyGameIdRequestSchema;
+    output: typeof AttemptHistoryResponseSchema;
   };
 }> = /*@__PURE__*/ serviceDesc(file_plato_dailygame, 0);

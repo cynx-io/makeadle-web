@@ -1,18 +1,36 @@
-"use client";
+import { notFound, redirect } from "next/navigation";
+import {
+  modeServerClient,
+  topicServerClient,
+} from "@/lib/janus/server-client/plato";
+import { newJanusServerError } from "@/lib/janus/server-client/error";
+type Props = {
+  params: Promise<{ slug: string }>;
+};
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { useGame } from "@/context/GameContext";
+export default async function TopicModesPage({ params }: Props) {
+  const { slug } = await params;
 
-export default function TopicModesPage() {
-  const { topic, currentMode: mode } = useGame();
-  const router = useRouter();
+  const topicResp = await topicServerClient
+    .getTopicBySlug({ slug: slug })
+    .catch((err) => newJanusServerError(err).handle());
+  const topic = topicResp?.topic;
+  if (!topic) {
+    return notFound();
+  }
 
-  useEffect(() => {
-    if (topic && mode) {
-      router.replace(`/g/${topic.slug}/${mode.Type.toLowerCase()}`);
-    }
-  }, [topic, mode, router]);
+  console.log("Topic found:", topic);
 
-  return null; // or a loading indicator
+  const modesResp = await modeServerClient
+    .listModesByTopicId({ topicId: topic.id })
+    .catch((err) => newJanusServerError(err).handle());
+
+  const modes = modesResp?.modes;
+  if (!modes || modes.length === 0) {
+    return notFound();
+  }
+
+  // router.replace(`/g/${topic.slug}/${modes[0].title.toLowerCase()}`);
+  redirect(`/g/${topic.slug}/${modes[0].title.toLowerCase()}`);
+  return <></>;
 }

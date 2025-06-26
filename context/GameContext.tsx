@@ -4,7 +4,7 @@ import type {
   Topic,
   Mode,
   PublicDailyGame,
-  DetailAnswer,
+  Answer,
 } from "@/proto/janus/plato/object_pb";
 import { createContext, useContext } from "react";
 
@@ -13,7 +13,7 @@ type Props = {
   modes: Mode[];
   currentMode: Mode;
   dailyGame: PublicDailyGame;
-  answers: DetailAnswer[];
+  answers: Answer[];
 };
 
 export const GameContext = createContext<Props | null>(null);

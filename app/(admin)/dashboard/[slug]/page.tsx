@@ -22,7 +22,7 @@ export default async function TopicPage({ params }: Props) {
   if (!topic) return notFound();
 
   const detailAnswersResp = await answerServerClient
-    .listDetailAnswersByTopicId({ topicId: topic.id })
+    .listDetailAnswersByTopicModeId({ topicId: topic.id })
     .catch((err) => {
       newJanusServerError(err).handle();
     });

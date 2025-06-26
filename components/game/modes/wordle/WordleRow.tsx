@@ -11,10 +11,10 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"; // For the answer icon tooltip
-import { AttemptAnswerResponse } from "@/proto/janus/plato/dailygame_pb";
+import { AttemptDetailAnswer } from "@/proto/janus/plato/object_pb";
 
 export type WordleRowProps = {
-  attemptAnswer: AttemptAnswerResponse; // The full answer object for the row
+  attemptAnswer: AttemptDetailAnswer; // The full answer object for the row
   categories: string[]; // List of category names
   cellSizeCss: string;
   // You might want to pass the `getCorrectnessType` function as a prop if it's external,
@@ -46,7 +46,7 @@ export const WordleRow = ({
   cellSizeCss,
   getCorrectnessType,
 }: WordleRowProps) => {
-  const detailAnswer = attemptAnswer.attemptDetailAnswer;
+  const detailAnswer = attemptAnswer;
   if (!detailAnswer) return <div>Error no Detail Answer</div>;
 
   const answer = detailAnswer.answer;
@@ -64,6 +64,7 @@ export const WordleRow = ({
         <Tooltip>
           <TooltipTrigger>
             <Image
+              loader={({ src }) => src}
               src={answer.iconUrl ?? "/img/invalid.png"}
               alt={answer.name}
               width={100}

@@ -54,7 +54,7 @@ async function fetchJanus(
     const responseData = await response.clone().json();
     const base = responseData.base as BaseResponse;
 
-    console.log("Response data:", responseData);
+    // console.log("Response data:", responseData);
     if (base?.code !== "00") {
       console.error("Error in response:", base.code);
       throw new ServiceError(base.code, base.desc);

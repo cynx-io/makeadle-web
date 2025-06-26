@@ -31,6 +31,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
+    "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.16.0",
     "google-protobuf": "^3.21.4",
     "grpc-web": "^1.5.0",

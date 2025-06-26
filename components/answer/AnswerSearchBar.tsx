@@ -4,17 +4,20 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Command, CommandInput, CommandItem, CommandList } from "../ui/command";
 import Image from "next/image";
-import { DetailAnswer } from "@/proto/janus/plato/object_pb";
+import { Answer } from "@/proto/janus/plato/object_pb";
 import { Separator } from "../ui/separator";
 
 type Props = {
   onSelect: (answerId: number) => Promise<void>;
-  answers: DetailAnswer[];
+  answers: Answer[];
 };
 
-export default function AnswerSearchBar({ onSelect, answers }: Props) {
+export default function AnswerSearchBar({
+  onSelect,
+  answers,
+}: Readonly<Props>) {
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState<DetailAnswer[]>([]);
+  const [results, setResults] = useState<Answer[]>([]);
 
   useEffect(() => {
     const handler = async (q: string) => {
@@ -24,7 +27,7 @@ export default function AnswerSearchBar({ onSelect, answers }: Props) {
       }
       try {
         const filteredAnswers = answers.filter((answer) =>
-          answer.answer?.name.toLowerCase().includes(q.toLowerCase()),
+          answer?.name.toLowerCase().includes(q.toLowerCase()),
         );
         setResults(filteredAnswers);
       } catch {
@@ -65,9 +68,9 @@ export default function AnswerSearchBar({ onSelect, answers }: Props) {
               className="mt-1 bg-slate-100 top-full shadow-lg z-50 overflow-hidden absolute w-full "
             >
               <CommandList className=" hover:brightness-90">
-                {results.map((detailAnswer) => {
-                  if (!detailAnswer.answer) return null;
-                  const answer = detailAnswer.answer;
+                {results.map((ans) => {
+                  if (!ans) return null;
+                  const answer = ans;
 
                   return (
                     <CommandItem
@@ -77,6 +80,7 @@ export default function AnswerSearchBar({ onSelect, answers }: Props) {
                       className="flex items-center gap-2 my-2 cursor-pointer relative"
                     >
                       <Image
+                        loader={({ src }) => src}
                         src={answer.iconUrl ?? "/img/invalid.png"}
                         alt={answer.name}
                         width={50}

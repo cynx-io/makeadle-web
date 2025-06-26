@@ -14,7 +14,7 @@ import type { Message } from "@bufbuild/protobuf";
 export const file_plato_object: GenFile =
   /*@__PURE__*/
   fileDesc(
-    "ChJwbGF0by9vYmplY3QucHJvdG8SBXBsYXRvIt4BCgVUb3BpYxIKCgJpZBgBIAEoBRIPCgd1c2VyX2lkGAIgASgFEg0KBXRpdGxlGAMgASgJEhMKC2Rlc2NyaXB0aW9uGAQgASgJEgwKBHNsdWcYByABKAkSEQoEbGluaxgIIAEoCUgAiAEBEhAKCGljb25fdXJsGBQgASgJEhcKCmJhbm5lcl91cmwYFSABKAlIAYgBARIcCg90aXRsZV9pbWFnZV91cmwYFiABKAlIAogBAUIHCgVfbGlua0INCgtfYmFubmVyX3VybEISChBfdGl0bGVfaW1hZ2VfdXJsIocDCgRNb2RlEgoKAmlkGAEgASgFEg0KBXRpdGxlGAIgASgJEhMKC2Rlc2NyaXB0aW9uGAMgASgJEhUKCGljb25fdXJsGAQgASgJSACIAQESGwoOYmFja2dyb3VuZF91cmwYBSABKAlIAYgBARITCgthbnN3ZXJfdHlwZRgGIAEoCRIMCgRUeXBlGAcgASgJEhIKBXRleHQxGAkgASgJSAKIAQESEgoFdGV4dDIYCiABKAlIA4gBARISCgV0ZXh0MxgLIAEoCUgEiAEBEhIKBXRleHQ0GAwgASgJSAWIAQESEgoFdGV4dDUYDSABKAlIBogBARIcCg9hZGRpdGlvbmFsX2RhdGEYDiABKAlIB4gBARIQCgh0b3BpY19pZBgUIAEoBUILCglfaWNvbl91cmxCEQoPX2JhY2tncm91bmRfdXJsQggKBl90ZXh0MUIICgZfdGV4dDJCCAoGX3RleHQzQggKBl90ZXh0NEIICgZfdGV4dDVCEgoQX2FkZGl0aW9uYWxfZGF0YSJtCgZBbnN3ZXISCgoCaWQYASABKAUSDAoEbmFtZRgCIAEoCRIVCghpY29uX3VybBgDIAEoCUgAiAEBEhMKC2Fuc3dlcl90eXBlGAQgASgJEhAKCHRvcGljX2lkGBQgASgFQgsKCV9pY29uX3VybCJfCgxEZXRhaWxBbnN3ZXISHQoGYW5zd2VyGAEgASgLMg0ucGxhdG8uQW5zd2VyEjAKEWFuc3dlcl9jYXRlZ29yaWVzGAIgAygLMhUucGxhdG8uQW5zd2VyQ2F0ZWdvcnkibQoTQXR0ZW1wdERldGFpbEFuc3dlchIdCgZhbnN3ZXIYASABKAsyDS5wbGF0by5BbnN3ZXISNwoRYW5zd2VyX2NhdGVnb3JpZXMYAiADKAsyHC5wbGF0by5BdHRlbXB0QW5zd2VyQ2F0ZWdvcnkibAoOQW5zd2VyQ2F0ZWdvcnkSCgoCaWQYASABKAUSDAoEbmFtZRgCIAEoCRIMCgR0eXBlGAMgASgJEg0KBXZhbHVlGAQgASgJEhAKCHRvcGljX2lkGAUgASgFEhEKCWFuc3dlcl9pZBgGIAEoBSKIAQoVQXR0ZW1wdEFuc3dlckNhdGVnb3J5EgoKAmlkGAEgASgFEgwKBG5hbWUYAiABKAkSDAoEdHlwZRgDIAEoCRINCgV2YWx1ZRgEIAEoCRITCgtjb3JyZWN0bmVzcxgFIAEoBRIQCgh0b3BpY19pZBgPIAEoBRIRCglhbnN3ZXJfaWQYECABKAUidwoJRGFpbHlHYW1lEgoKAmlkGAEgASgFEigKBGRhdGUYAyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhEKCWFuc3dlcl9pZBgKIAEoBRIPCgdtb2RlX2lkGAsgASgFEhAKCHRvcGljX2lkGAwgASgFIlcKFERhaWx5R2FtZUFuc3dlclN0YXRzEhUKDXRvdGFsX2d1ZXNzZXMYAiABKAUSFQoNZGFpbHlfZ2FtZV9pZBgKIAEoBRIRCglhbnN3ZXJfaWQYCyABKAUivQEKGkRldGFpbERhaWx5R2FtZUFuc3dlclN0YXRzEhUKDXRvdGFsX2d1ZXNzZXMYAiABKAUSFwoPY29ycmVjdF9ndWVzc2VzGAMgASgFEhkKEWluY29ycmVjdF9ndWVzc2VzGAQgASgFEhUKDWRhaWx5X2dhbWVfaWQYCiABKAUSEQoJYW5zd2VyX2lkGAsgASgFEioKDWRldGFpbF9hbnN3ZXIYDCABKAsyEy5wbGF0by5EZXRhaWxBbnN3ZXIidwoTRGFpbHlHYW1lR3Vlc3NTdGF0cxIVCg10b3RhbF9ndWVzc2VzGAIgASgFEhcKD2NvcnJlY3RfZ3Vlc3NlcxgDIAEoBRIZChFpbmNvcnJlY3RfZ3Vlc3NlcxgEIAEoBRIVCg1kYWlseV9nYW1lX2lkGAogASgFIuUBCg9EZXRhaWxEYWlseUdhbWUSJAoKZGFpbHlfZ2FtZRgBIAEoCzIQLnBsYXRvLkRhaWx5R2FtZRIyChVjdXJyZW50X2RldGFpbF9hbnN3ZXIYAiABKAsyEy5wbGF0by5EZXRhaWxBbnN3ZXISPAoXZGFpbHlfZ2FtZV9hbnN3ZXJfc3RhdHMYAyADKAsyGy5wbGF0by5EYWlseUdhbWVBbnN3ZXJTdGF0cxI6ChZkYWlseV9nYW1lX2d1ZXNzX3N0YXRzGAQgASgLMhoucGxhdG8uRGFpbHlHYW1lR3Vlc3NTdGF0cyKIAQoPUHVibGljRGFpbHlHYW1lEhUKDWRhaWx5X2dhbWVfaWQYASABKAUSKAoEZGF0ZRgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASFQoNdG90YWxfZ3Vlc3NlcxgDIAEoBRIdChV0b3RhbF9jb3JyZWN0X2d1ZXNzZXMYBCABKAVCEVoPcGxhdG8vYXBpL3Byb3RvYgZwcm90bzM",
+    "ChJwbGF0by9vYmplY3QucHJvdG8SBXBsYXRvIt4BCgVUb3BpYxIKCgJpZBgBIAEoBRIPCgd1c2VyX2lkGAIgASgFEg0KBXRpdGxlGAMgASgJEhMKC2Rlc2NyaXB0aW9uGAQgASgJEgwKBHNsdWcYByABKAkSEQoEbGluaxgIIAEoCUgAiAEBEhAKCGljb25fdXJsGBQgASgJEhcKCmJhbm5lcl91cmwYFSABKAlIAYgBARIcCg90aXRsZV9pbWFnZV91cmwYFiABKAlIAogBAUIHCgVfbGlua0INCgtfYmFubmVyX3VybEISChBfdGl0bGVfaW1hZ2VfdXJsIvwDCgRNb2RlEgoKAmlkGAEgASgFEg0KBXRpdGxlGAIgASgJEhMKC2Rlc2NyaXB0aW9uGAMgASgJEhUKCGljb25fdXJsGAQgASgJSACIAQESGwoOYmFja2dyb3VuZF91cmwYBSABKAlIAYgBARIMCgRUeXBlGAcgASgJEhIKBXRleHQxGAkgASgJSAKIAQESEgoFdGV4dDIYCiABKAlIA4gBARISCgV0ZXh0MxgLIAEoCUgEiAEBEhIKBXRleHQ0GAwgASgJSAWIAQESEgoFdGV4dDUYDSABKAlIBogBARIcCg9hZGRpdGlvbmFsX2RhdGEYDiABKAlIB4gBARIUCgxhbnN3ZXJfdHlwZXMYDyADKAkSFgoOY2F0ZWdvcnlfbmFtZXMYECADKAkSGwoTY2x1ZV9jYXRlZ29yeV9uYW1lcxgRIAMoCRISCgpjbHVlX2NvdW50GBIgASgFEhUKDWNsdWVfaW50ZXJ2YWwYEyABKAUSEgoKY2x1ZV9zdGFydBgUIAEoBRIQCgh0b3BpY19pZBgyIAEoBUILCglfaWNvbl91cmxCEQoPX2JhY2tncm91bmRfdXJsQggKBl90ZXh0MUIICgZfdGV4dDJCCAoGX3RleHQzQggKBl90ZXh0NEIICgZfdGV4dDVCEgoQX2FkZGl0aW9uYWxfZGF0YSJtCgZBbnN3ZXISCgoCaWQYASABKAUSDAoEbmFtZRgCIAEoCRIVCghpY29uX3VybBgDIAEoCUgAiAEBEhMKC2Fuc3dlcl90eXBlGAQgASgJEhAKCHRvcGljX2lkGBQgASgFQgsKCV9pY29uX3VybCJfCgxEZXRhaWxBbnN3ZXISHQoGYW5zd2VyGAEgASgLMg0ucGxhdG8uQW5zd2VyEjAKEWFuc3dlcl9jYXRlZ29yaWVzGAIgAygLMhUucGxhdG8uQW5zd2VyQ2F0ZWdvcnkimAEKE0F0dGVtcHREZXRhaWxBbnN3ZXISHQoGYW5zd2VyGAEgASgLMg0ucGxhdG8uQW5zd2VyEjcKEWFuc3dlcl9jYXRlZ29yaWVzGAIgAygLMhwucGxhdG8uQXR0ZW1wdEFuc3dlckNhdGVnb3J5EhIKCmlzX2NvcnJlY3QYAyABKAgSFQoNdG90YWxfZ3Vlc3NlcxgEIAEoBSKiAQoOQW5zd2VyQ2F0ZWdvcnkSCgoCaWQYASABKAUSDAoEbmFtZRgCIAEoCRIMCgR0eXBlGAMgASgJEg0KBXZhbHVlGAQgASgJEh4KEXZhbHVlX2Rlc2NyaXB0aW9uGAUgASgJSACIAQESEAoIdG9waWNfaWQYCiABKAUSEQoJYW5zd2VyX2lkGAsgASgFQhQKEl92YWx1ZV9kZXNjcmlwdGlvbiJ5CgRDbHVlEgwKBG5hbWUYAiABKAkSDAoEdHlwZRgDIAEoCRINCgV2YWx1ZRgEIAEoCRIeChF2YWx1ZV9kZXNjcmlwdGlvbhgFIAEoCUgAiAEBEhAKCHRvcGljX2lkGAogASgFQhQKEl92YWx1ZV9kZXNjcmlwdGlvbiKIAQoVQXR0ZW1wdEFuc3dlckNhdGVnb3J5EgoKAmlkGAEgASgFEgwKBG5hbWUYAiABKAkSDAoEdHlwZRgDIAEoCRINCgV2YWx1ZRgEIAEoCRITCgtjb3JyZWN0bmVzcxgFIAEoBRIQCgh0b3BpY19pZBgPIAEoBRIRCglhbnN3ZXJfaWQYECABKAUidwoJRGFpbHlHYW1lEgoKAmlkGAEgASgFEigKBGRhdGUYAyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEhEKCWFuc3dlcl9pZBgKIAEoBRIPCgdtb2RlX2lkGAsgASgFEhAKCHRvcGljX2lkGAwgASgFIr0BChpEZXRhaWxEYWlseUdhbWVBbnN3ZXJTdGF0cxIVCg10b3RhbF9ndWVzc2VzGAIgASgFEhcKD2NvcnJlY3RfZ3Vlc3NlcxgDIAEoBRIZChFpbmNvcnJlY3RfZ3Vlc3NlcxgEIAEoBRIVCg1kYWlseV9nYW1lX2lkGAogASgFEhEKCWFuc3dlcl9pZBgLIAEoBRIqCg1kZXRhaWxfYW5zd2VyGAwgASgLMhMucGxhdG8uRGV0YWlsQW5zd2VyIncKE0RhaWx5R2FtZUd1ZXNzU3RhdHMSFQoNdG90YWxfZ3Vlc3NlcxgCIAEoBRIXCg9jb3JyZWN0X2d1ZXNzZXMYAyABKAUSGQoRaW5jb3JyZWN0X2d1ZXNzZXMYBCABKAUSFQoNZGFpbHlfZ2FtZV9pZBgKIAEoBSKnAQoPRGV0YWlsRGFpbHlHYW1lEiQKCmRhaWx5X2dhbWUYASABKAsyEC5wbGF0by5EYWlseUdhbWUSMgoVY3VycmVudF9kZXRhaWxfYW5zd2VyGAIgASgLMhMucGxhdG8uRGV0YWlsQW5zd2VyEjoKFmRhaWx5X2dhbWVfZ3Vlc3Nfc3RhdHMYBSABKAsyGi5wbGF0by5EYWlseUdhbWVHdWVzc1N0YXRzIogBCg9QdWJsaWNEYWlseUdhbWUSFQoNZGFpbHlfZ2FtZV9pZBgBIAEoBRIoCgRkYXRlGAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIVCg10b3RhbF9ndWVzc2VzGAMgASgFEh0KFXRvdGFsX2NvcnJlY3RfZ3Vlc3NlcxgEIAEoBUIRWg9wbGF0by9hcGkvcHJvdG9iBnByb3RvMw",
     [file_google_protobuf_timestamp],
   );
 
@@ -106,13 +106,6 @@ export type Mode = Message<"plato.Mode"> & {
   backgroundUrl?: string;
 
   /**
-   * e.g., "Champion", "Hero", "Pokemon"
-   *
-   * @generated from field: string answer_type = 6;
-   */
-  answerType: string;
-
-  /**
    * e.g., "WORDLE", "SUDOKU"
    *
    * @generated from field: string Type = 7;
@@ -145,14 +138,50 @@ export type Mode = Message<"plato.Mode"> & {
   text5?: string;
 
   /**
-   * json string for additional mode data
+   * JSON string for additional data
    *
    * @generated from field: optional string additional_data = 14;
    */
   additionalData?: string;
 
   /**
-   * @generated from field: int32 topic_id = 20;
+   * e.g., ["Champion", "Hero", "Pokemon"]
+   *
+   * @generated from field: repeated string answer_types = 15;
+   */
+  answerTypes: string[];
+
+  /**
+   * e.g., ["Category1", "Category2"]
+   *
+   * @generated from field: repeated string category_names = 16;
+   */
+  categoryNames: string[];
+
+  /**
+   * e.g., ["ClueCategory1", "ClueCategory2"]
+   *
+   * @generated from field: repeated string clue_category_names = 17;
+   */
+  clueCategoryNames: string[];
+
+  /**
+   * @generated from field: int32 clue_count = 18;
+   */
+  clueCount: number;
+
+  /**
+   * @generated from field: int32 clue_interval = 19;
+   */
+  clueInterval: number;
+
+  /**
+   * @generated from field: int32 clue_start = 20;
+   */
+  clueStart: number;
+
+  /**
+   * @generated from field: int32 topic_id = 50;
    */
   topicId: number;
 };
@@ -241,6 +270,16 @@ export type AttemptDetailAnswer = Message<"plato.AttemptDetailAnswer"> & {
    * @generated from field: repeated plato.AttemptAnswerCategory answer_categories = 2;
    */
   answerCategories: AttemptAnswerCategory[];
+
+  /**
+   * @generated from field: bool is_correct = 3;
+   */
+  isCorrect: boolean;
+
+  /**
+   * @generated from field: int32 total_guesses = 4;
+   */
+  totalGuesses: number;
 };
 
 /**
@@ -276,12 +315,17 @@ export type AnswerCategory = Message<"plato.AnswerCategory"> & {
   value: string;
 
   /**
-   * @generated from field: int32 topic_id = 5;
+   * @generated from field: optional string value_description = 5;
+   */
+  valueDescription?: string;
+
+  /**
+   * @generated from field: int32 topic_id = 10;
    */
   topicId: number;
 
   /**
-   * @generated from field: int32 answer_id = 6;
+   * @generated from field: int32 answer_id = 11;
    */
   answerId: number;
 };
@@ -293,6 +337,44 @@ export type AnswerCategory = Message<"plato.AnswerCategory"> & {
 export const AnswerCategorySchema: GenMessage<AnswerCategory> =
   /*@__PURE__*/
   messageDesc(file_plato_object, 5);
+
+/**
+ * @generated from message plato.Clue
+ */
+export type Clue = Message<"plato.Clue"> & {
+  /**
+   * @generated from field: string name = 2;
+   */
+  name: string;
+
+  /**
+   * @generated from field: string type = 3;
+   */
+  type: string;
+
+  /**
+   * @generated from field: string value = 4;
+   */
+  value: string;
+
+  /**
+   * @generated from field: optional string value_description = 5;
+   */
+  valueDescription?: string;
+
+  /**
+   * @generated from field: int32 topic_id = 10;
+   */
+  topicId: number;
+};
+
+/**
+ * Describes the message plato.Clue.
+ * Use `create(ClueSchema)` to create a new message.
+ */
+export const ClueSchema: GenMessage<Clue> =
+  /*@__PURE__*/
+  messageDesc(file_plato_object, 6);
 
 /**
  * @generated from message plato.AttemptAnswerCategory
@@ -346,7 +428,7 @@ export type AttemptAnswerCategory = Message<"plato.AttemptAnswerCategory"> & {
  */
 export const AttemptAnswerCategorySchema: GenMessage<AttemptAnswerCategory> =
   /*@__PURE__*/
-  messageDesc(file_plato_object, 6);
+  messageDesc(file_plato_object, 7);
 
 /**
  * @generated from message plato.DailyGame
@@ -383,34 +465,6 @@ export type DailyGame = Message<"plato.DailyGame"> & {
  * Use `create(DailyGameSchema)` to create a new message.
  */
 export const DailyGameSchema: GenMessage<DailyGame> =
-  /*@__PURE__*/
-  messageDesc(file_plato_object, 7);
-
-/**
- * @generated from message plato.DailyGameAnswerStats
- */
-export type DailyGameAnswerStats = Message<"plato.DailyGameAnswerStats"> & {
-  /**
-   * @generated from field: int32 total_guesses = 2;
-   */
-  totalGuesses: number;
-
-  /**
-   * @generated from field: int32 daily_game_id = 10;
-   */
-  dailyGameId: number;
-
-  /**
-   * @generated from field: int32 answer_id = 11;
-   */
-  answerId: number;
-};
-
-/**
- * Describes the message plato.DailyGameAnswerStats.
- * Use `create(DailyGameAnswerStatsSchema)` to create a new message.
- */
-export const DailyGameAnswerStatsSchema: GenMessage<DailyGameAnswerStats> =
   /*@__PURE__*/
   messageDesc(file_plato_object, 8);
 
@@ -506,12 +560,7 @@ export type DetailDailyGame = Message<"plato.DetailDailyGame"> & {
   currentDetailAnswer?: DetailAnswer;
 
   /**
-   * @generated from field: repeated plato.DailyGameAnswerStats daily_game_answer_stats = 3;
-   */
-  dailyGameAnswerStats: DailyGameAnswerStats[];
-
-  /**
-   * @generated from field: plato.DailyGameGuessStats daily_game_guess_stats = 4;
+   * @generated from field: plato.DailyGameGuessStats daily_game_guess_stats = 5;
    */
   dailyGameGuessStats?: DailyGameGuessStats;
 };

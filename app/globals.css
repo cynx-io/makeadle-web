@@ -113,6 +113,27 @@
     }
   }
 
+  @keyframes infinite-scroll-horizontal {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes gradient-flow {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
   @keyframes bgGlow {
     0%,
     100% {
@@ -148,6 +169,15 @@
 
   .bg-animate-glow {
     animation: bgGlow 6s ease-in-out infinite;
+  }
+
+  .animate-infinite-scroll-horizontal {
+    animation: infinite-scroll-horizontal 60s linear infinite;
+  }
+
+  .animate-gradient-flow {
+    animation: gradient-flow 15s ease infinite;
+    background-size: 200% 200%;
   }
 
   .bg-white-gradient {

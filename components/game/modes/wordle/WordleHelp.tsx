@@ -12,7 +12,7 @@ export default function WordleHelp() {
           <p>Incorrect</p>
         </span>
         <span className="flex flex-col items-center">
-          <div className="bg-yellow-900 w-8 h-8"></div>{" "}
+          <div className="bg-yellow-700 w-8 h-8"></div>{" "}
           {/* Changed from orange-600 to match code */}
           <p>Partial</p>
         </span>
