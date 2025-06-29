@@ -6,7 +6,7 @@ import type {
   PublicDailyGame,
   Answer,
 } from "@/proto/janus/plato/object_pb";
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 
 type Props = {
   topic: Topic;
@@ -16,9 +16,14 @@ type Props = {
   answers: Answer[];
 };
 
-export const GameContext = createContext<Props | null>(null);
+type GameContextType = Props & {
+  gameOver: boolean;
+  setGameOver: (v: boolean) => void;
+};
 
-export const useGame = (): Props => {
+export const GameContext = createContext<GameContextType | null>(null);
+
+export const useGame = (): GameContextType => {
   const game = useContext(GameContext);
   if (!game) throw new Error("usegame must be used within gameProvider");
   return game;
@@ -31,5 +36,10 @@ export const GameProvider = ({
   children: React.ReactNode;
   value: Props;
 }) => {
-  return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
+  const [gameOver, setGameOver] = useState(false);
+  return (
+    <GameContext.Provider value={{ ...value, gameOver, setGameOver }}>
+      {children}
+    </GameContext.Provider>
+  );
 };

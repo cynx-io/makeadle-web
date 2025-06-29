@@ -11,6 +11,7 @@ import {
 } from "@/proto/janus/plato/object_pb";
 import React, { useEffect, useRef, useState } from "react";
 import AudioPlayer from "./AudioPlayer";
+import { AudiodleCell } from "@/components/game/modes/audiodle/AudiodleCell";
 
 export type AudiodleGameProps = {
   attempts: AttemptDetailAnswer[];
@@ -24,7 +25,7 @@ export function AudiodleGame({
   setAttempts,
   clues,
 }: Readonly<AudiodleGameProps>) {
-  const { currentMode, answers, dailyGame } = useGame();
+  const { currentMode, answers, dailyGame, gameOver, setGameOver } = useGame();
   const [availableAnswers, setAvailableAnswers] = useState<Answer[]>(
     answers.filter((ans) => {
       return currentMode.answerTypes.includes(ans.answerType ?? "");
@@ -79,6 +80,8 @@ export function AudiodleGame({
       return;
     }
 
+    if (attemptAnswerResp.attemptDetailAnswer?.isCorrect) setGameOver(true);
+
     // Add new attempt to the beginning of the array
     setAttempts((prevAttempts) => {
       if (!attemptAnswerResp.attemptDetailAnswer) {
@@ -93,8 +96,8 @@ export function AudiodleGame({
     <div className="flex flex-col mx-auto">
       <div className="w-[30vw] min-w-96 mx-auto"></div>
 
-      <div className={`max-w-[80vw] min-w-[20vw] mx-auto`}>
-        <div className="flex flex-col">
+      <div className={`w-[30vw] mx-auto flex flex-col gap-5`}>
+        <div className="flex flex-col w-2/3 mx-auto">
           {clues.map((clue, index) => {
             return (
               <div
@@ -112,13 +115,21 @@ export function AudiodleGame({
         </div>
 
         <AnswerSearchBar answers={availableAnswers} onSelect={onSelect} />
-        <div className="flex flex-row">
+        <div className="flex flex-row flex-wrap w-full items-start justify-start">
           {attempts.length > 0 &&
             attempts.map((attempt, index) => {
               const answer = attempt.answer;
               if (!answer) return null;
 
-              return <div key={answer.id}>{answer.name}</div>;
+              return (
+                <AudiodleCell
+                  tooltipValue={answer.name}
+                  cellSizeCss={"w-20 h-20"}
+                  iconUrl={answer.iconUrl ?? "img/invalid.png"}
+                  isCorrect={attempt.isCorrect}
+                  key={answer.id}
+                />
+              );
             })}
         </div>
       </div>

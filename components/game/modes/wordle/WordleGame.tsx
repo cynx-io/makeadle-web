@@ -23,7 +23,7 @@ export type WordleGameProps = {
 };
 
 export function WordleGame({ attempts, setAttempts }: WordleGameProps) {
-  const { currentMode, answers, dailyGame } = useGame();
+  const { currentMode, answers, dailyGame, gameOver, setGameOver } = useGame();
   const [availableAnswers, setAvailableAnswers] = useState<Answer[]>(
     answers.filter((ans) => {
       return currentMode.answerTypes.includes(ans?.answerType ?? "");
@@ -93,6 +93,8 @@ export function WordleGame({ attempts, setAttempts }: WordleGameProps) {
       isLoading.current = false;
       return;
     }
+
+    if (attemptAnswerResp.attemptDetailAnswer?.isCorrect) setGameOver(true);
 
     // Add new attempt to the beginning of the array
     setAttempts((prevAttempts) => {
