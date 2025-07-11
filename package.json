@@ -28,6 +28,8 @@
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-tooltip": "^1.2.7",
     "@tailwindcss/language-server": "^0.14.21",
+    "@tiptap/react": "^2.24.1",
+    "@tiptap/starter-kit": "^2.24.1",
     "@types/lodash": "^4.17.17",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

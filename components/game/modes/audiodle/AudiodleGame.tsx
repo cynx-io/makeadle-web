@@ -24,6 +24,7 @@ export function AudiodleGame({
   attempts,
   setAttempts,
   clues,
+  setClues,
 }: Readonly<AudiodleGameProps>) {
   const { currentMode, answers, dailyGame, gameOver, setGameOver } = useGame();
   const [availableAnswers, setAvailableAnswers] = useState<Answer[]>(
@@ -81,6 +82,8 @@ export function AudiodleGame({
     }
 
     if (attemptAnswerResp.attemptDetailAnswer?.isCorrect) setGameOver(true);
+
+    setClues(attemptAnswerResp.clues);
 
     // Add new attempt to the beginning of the array
     setAttempts((prevAttempts) => {

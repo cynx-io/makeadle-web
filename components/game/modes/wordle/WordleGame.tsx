@@ -34,7 +34,9 @@ export function WordleGame({ attempts, setAttempts }: WordleGameProps) {
     Answer | undefined
   >();
   const isLoading = useRef(false);
-  const categoryValueMap = new Map<string, Set<string>>();
+  const categoryValueMap = new Map<string, Set<string>>(
+    currentMode.categoryNames.map((name) => [name, new Set<string>()]),
+  );
 
   useEffect(() => {
     setAvailableAnswers(
