@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/tooltip";
 import { CorrectnessType } from "@/types/game/correctnessType";
 import { motion, Variants } from "motion/react";
+import { ArrowUp, ArrowDown } from "lucide-react";
 import React from "react";
 
 export type WordleCellProps = {
@@ -70,9 +71,57 @@ export const WordleCell = ({
       bgColor = "bg-yellow-700";
       break;
     case CorrectnessType.LOWER:
-      bgColor = "bg-blue-700";
+      bgColor = "bg-yellow-700";
       break;
   }
+
+  const renderCellContent = () => {
+    const valueParts = value.split(", ");
+
+    if (type === CorrectnessType.HIGHER) {
+      return (
+        <div className="w-full h-full flex flex-col justify-center items-center">
+          <ArrowUp className="w-4 h-4 mb-1 text-white" />
+          <div className="flex flex-wrap justify-center items-center text-center">
+            {valueParts.map((part, idx) => (
+              <React.Fragment key={idx}>
+                {part}
+                {idx < valueParts.length - 1 && <br />}
+              </React.Fragment>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    if (type === CorrectnessType.LOWER) {
+      return (
+        <div className="w-full h-full flex flex-col justify-center items-center">
+          <ArrowDown className="w-4 h-4 mb-1 text-white" />
+          <div className="flex flex-wrap justify-center items-center text-center">
+            {valueParts.map((part, idx) => (
+              <React.Fragment key={idx}>
+                {part}
+                {idx < valueParts.length - 1 && <br />}
+              </React.Fragment>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    // Default content for other types
+    return (
+      <div className="w-full h-full flex flex-wrap justify-center items-center">
+        {valueParts.map((part, idx) => (
+          <React.Fragment key={idx}>
+            {part}
+            {idx < valueParts.length - 1 && <br />}
+          </React.Fragment>
+        ))}
+      </div>
+    );
+  };
 
   return (
     // Pass the custom prop to motion.div
@@ -86,28 +135,14 @@ export const WordleCell = ({
       {tooltipValue.length > 0 ? (
         <Tooltip>
           <TooltipTrigger asChild>
-            <div className="w-full h-full flex flex-wrap justify-center items-center">
-              {value.split(", ").map((part, idx) => (
-                <React.Fragment key={idx}>
-                  {part}
-                  {idx < value.split(", ").length - 1 && <br />}
-                </React.Fragment>
-              ))}
-            </div>
+            <div className="w-full h-full">{renderCellContent()}</div>
           </TooltipTrigger>
           <TooltipContent className="bg-red-600 opacity-90 text-white">
             <p>{tooltipValue}</p>
           </TooltipContent>
         </Tooltip>
       ) : (
-        <div className="w-full h-full flex flex-wrap justify-center items-center">
-          {value.split(", ").map((part, idx) => (
-            <React.Fragment key={idx}>
-              {part}
-              {idx < value.split(", ").length - 1 && <br />}
-            </React.Fragment>
-          ))}
-        </div>
+        renderCellContent()
       )}
     </motion.div>
   );

@@ -78,7 +78,7 @@ const LandingHero = ({
           <img
             src={image.src}
             alt={image.alt}
-            className="max-h-96 w-full rounded-md object-cover"
+            className="max-h-[50vh] mx-auto rounded-md object-cover"
           />
         </div>
       </div>

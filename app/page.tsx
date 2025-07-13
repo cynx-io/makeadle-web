@@ -27,29 +27,33 @@ export default async function Home() {
         <MakeadleBar />
       </div>
 
-      <div className="w-full px-20">
-        <LandingHero
-          image={{ src: "icon.png", alt: "makeadle" }}
-          heading="Make your DLE"
-          badge="✨ Explore"
-          description="Make your own DLE at Makeadle or play other user created DLEs !"
-          buttons={{
-            primary: { text: "Create Yours", url: "/dashboard" },
-            secondary: { text: "Explore DLEs", url: "/g/mobiledle" },
-          }}
-        />
-        <LandingGallery
-          items={topics.map((topic: Topic) => ({
-            title: topic.title,
-            description: topic.description,
-            image: topic.bannerUrl ?? "/img/invalid.png",
-            link: `/g/${topic.slug}`,
-            id: topic.id.toString(),
-            summary: topic.description,
-            slug: topic.slug,
-            url: `/g/${topic.slug}`,
-          }))}
-        />
+      <div className="w-full">
+        <section className={"px-20"}>
+          <LandingHero
+            image={{ src: "icon.png", alt: "makeadle" }}
+            heading="Make your DLE"
+            badge="✨ Explore"
+            description="Make your own DLE at Makeadle or play other user created DLEs !"
+            buttons={{
+              primary: { text: "Create Yours", url: "/dashboard" },
+              secondary: { text: "Explore DLEs", url: "/g/mobiledle" },
+            }}
+          />
+        </section>
+        <section className="bg-muted/30 px-20">
+          <LandingGallery
+            items={topics.map((topic: Topic) => ({
+              title: topic.title,
+              description: topic.description,
+              image: topic.bannerUrl ?? "/img/invalid.png",
+              link: `/g/${topic.slug}`,
+              id: topic.id.toString(),
+              summary: topic.description,
+              slug: topic.slug,
+              url: `/g/${topic.slug}`,
+            }))}
+          />
+        </section>
       </div>
 
       <footer className="w-full py-8 text-center text-gray-500 text-sm bg-gray-900">

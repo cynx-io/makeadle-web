@@ -17,6 +17,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Script from "next/script";
+import ParticleScreen from "@/components/game/ParticleScreen";
+import TitleImage from "@/components/game/modes/TitleImage";
 
 type Props = {
   params: Promise<{ slug: string; mode: string }>;
@@ -105,9 +107,10 @@ export default async function TopicModesPage({ params }: Props) {
 
   return (
     <div
-      className="h-screen w-screen overflow-y-auto bg-cover bg-center bg-fixed text-white bg-animate-glow"
+      className="h-full w-screen overflow-y-auto bg-cover bg-center bg-fixed text-white bg-animate-glow overflow-x-hidden"
       style={{ backgroundImage: `url(${backgroundUrl || "/img/invalid.png"})` }}
     >
+      <ParticleScreen />
       <Script
         id={`jsonld-game-${topic.slug}`}
         type="application/ld+json"
@@ -116,13 +119,7 @@ export default async function TopicModesPage({ params }: Props) {
       <MakeadleBar />
 
       <div className="flex flex-col items-center px-4 py-10 mb-[30vh]">
-        <Image
-          src={topic.titleImageUrl || "/img/invalid.png"}
-          alt={topic.title}
-          width={600}
-          height={200}
-          className="mt-[5vh]"
-        />
+        <TitleImage src={topic.titleImageUrl} alt={topic.title}></TitleImage>
         <p className="text-xl font-bold shadow-2xl text-center max-w-2xl mb-5">
           {currentMode.description}
         </p>

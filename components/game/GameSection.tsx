@@ -10,6 +10,7 @@ import { AudiodleGame } from "./modes/audiodle/AudiodleGame";
 import { LoaderCircle } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
+import { BlurdleGame } from "@/components/game/modes/blurdle/BlurdleGame";
 
 export function GameSection() {
   const { currentMode, dailyGame, modes, gameOver, setGameOver, topic } =
@@ -90,33 +91,59 @@ export function GameSection() {
                 setClues={setClues}
               />
             );
+          case "BLURDLE":
+            return (
+              <BlurdleGame
+                attempts={attempts}
+                setAttempts={setAttempts}
+                clues={clues}
+                setClues={setClues}
+              />
+            );
 
           default:
             return <div>Unsupported game mode: {currentMode.Type}</div>;
         }
       })()}
 
-      {gameOver && nextMode && (
+      {gameOver && (
         <div
           ref={nextModeRef}
           className="flex justify-center mt-10 scroll-m-40"
         >
-          <Link href={`/g/${topic.slug}/${nextMode.title.toLowerCase()}`}>
-            <Card className="w-[300px] bg-slate-100/10 hover:brightness-125 text-white font-extrabold text-xl hover:scale-105 transition-transform shadow-xl border-2 cursor-pointer">
-              <CardHeader>
-                <CardTitle className="text-center">
-                  Next Mode: {nextMode.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="flex justify-center items-center">
-                <img
-                  src={nextMode.iconUrl || "/img/default-icon.png"}
-                  alt={nextMode.title}
-                  className="w-20 h-20 rounded-md object-cover"
-                />
-              </CardContent>
-            </Card>
-          </Link>
+          {nextMode ? (
+            <Link href={`/g/${topic.slug}/${nextMode.title.toLowerCase()}`}>
+              <Card className="w-[300px] bg-slate-100/10 hover:brightness-125 text-white font-extrabold text-xl hover:scale-105 transition-transform shadow-xl border-2 cursor-pointer relative z-20">
+                <CardHeader>
+                  <CardTitle className="text-center">
+                    Next Mode: {nextMode.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="flex justify-center items-center">
+                  <img
+                    src={nextMode.iconUrl || "/img/default-icon.png"}
+                    alt={nextMode.title}
+                    className="w-20 h-20 rounded-md object-cover"
+                  />
+                </CardContent>
+              </Card>
+            </Link>
+          ) : (
+            <Link href="/">
+              <Card className="w-[300px] bg-slate-100/10 hover:brightness-125 text-white font-extrabold text-xl hover:scale-105 transition-transform shadow-xl border-2 cursor-pointer relative z-20">
+                <CardHeader>
+                  <CardTitle className="text-center">Back to Home</CardTitle>
+                </CardHeader>
+                <CardContent className="flex justify-center items-center">
+                  <img
+                    src="/icon.png"
+                    alt="Home"
+                    className="w-20 h-20 rounded-md object-cover"
+                  />
+                </CardContent>
+              </Card>
+            </Link>
+          )}
         </div>
       )}
     </div>
