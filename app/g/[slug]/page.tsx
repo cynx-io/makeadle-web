@@ -32,5 +32,11 @@ export default async function TopicModesPage({ params }: Props) {
 
   // router.replace(`/g/${topic.slug}/${modes[0].title.toLowerCase()}`);
   redirect(`/g/${topic.slug}/${modes[0].title.toLowerCase()}`);
-  return <div className={"fixed inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 flex items-center justify-center z-50"}></div>;
+  return (
+    <div
+      className={
+        "fixed inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 flex items-center justify-center z-50"
+      }
+    ></div>
+  );
 }

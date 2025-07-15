@@ -46,6 +46,24 @@ export const WordleRow = ({
   cellSizeCss,
   getCorrectnessType,
 }: WordleRowProps) => {
+  // Check if we're switching modes within the same topic
+  const shouldAnimate = React.useMemo(() => {
+    if (typeof window === "undefined") return true;
+
+    const currentPath = window.location.pathname;
+    const lastPath = sessionStorage.getItem("lastGamePath");
+
+    // Extract topic slug from path (e.g., /g/pokemon/wordle -> pokemon)
+    const currentTopic = currentPath.split("/")[2];
+    const lastTopic = lastPath?.split("/")[2];
+
+    // If switching within same topic, don't animate
+    if (lastTopic && currentTopic === lastTopic) {
+      return false;
+    }
+
+    return true;
+  }, []);
   const detailAnswer = attemptAnswer;
   if (!detailAnswer) return <div>Error no Detail Answer</div>;
 
@@ -56,7 +74,7 @@ export const WordleRow = ({
     <motion.div
       className="contents" // Use "contents" to avoid creating an extra div that breaks grid layout
       variants={rowContainerVariants}
-      initial="hidden"
+      initial={shouldAnimate ? "hidden" : "visible"}
       animate="visible"
     >
       {/* Answer Icon Cell (first column) */}
@@ -104,7 +122,7 @@ export const WordleRow = ({
             type={cellType}
             value={cellValue}
             // The `custom` prop is passed down and used by cellVariants to determine individual delay
-            custom={index * 0.08} // This creates the stagger effect (index * stagger_amount)
+            custom={shouldAnimate ? index * 0.08 : 0} // Only stagger if animating
           />
         );
       })}

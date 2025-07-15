@@ -43,6 +43,26 @@ export const WordleCell = ({
   cellSizeCss,
   custom, // Destructure the custom prop here
 }: WordleCellProps) => {
+  // Check if we're switching modes within the same topic
+  const shouldAnimate = React.useMemo(() => {
+    if (typeof window === "undefined") return true;
+
+    const currentPath = window.location.pathname;
+    const lastPath = sessionStorage.getItem("lastGamePath");
+
+    // Extract topic slug from path (e.g., /g/pokemon/wordle -> pokemon)
+    const currentTopic = currentPath.split("/")[2];
+    const lastTopic = lastPath?.split("/")[2];
+
+    // If switching within same topic, don't animate
+    if (lastTopic && currentTopic === lastTopic) {
+      return false;
+    }
+
+    // Store current path for next navigation
+    sessionStorage.setItem("lastGamePath", currentPath);
+    return true;
+  }, []);
   let tooltipValue = "";
   let bgColor = "";
   let opacity = 1;
@@ -75,52 +95,81 @@ export const WordleCell = ({
       break;
   }
 
+  const isContentTooLong = (content: string) => {
+    // Consider content too long if it has more than 15 characters or multiple comma-separated values
+    return content.length > 15 || content.includes(", ");
+  };
+
   const renderCellContent = () => {
     const valueParts = value.split(", ");
+    const shouldShowTooltip = isContentTooLong(value);
 
-    if (type === CorrectnessType.HIGHER) {
+    const content = (() => {
+      if (type === CorrectnessType.HIGHER) {
+        return (
+          <div className="w-full h-full flex flex-col justify-center items-center p-1 overflow-hidden">
+            <ArrowUp className="w-3 h-3 sm:w-4 sm:h-4 mb-1 text-white flex-shrink-0" />
+            <div className="flex flex-wrap justify-center items-center text-center">
+              <span className="leading-tight break-words hyphens-auto">
+                {valueParts.map((part, idx) => (
+                  <React.Fragment key={`higher-${idx}`}>
+                    {part}
+                    {idx < valueParts.length - 1 && <br />}
+                  </React.Fragment>
+                ))}
+              </span>
+            </div>
+          </div>
+        );
+      }
+
+      if (type === CorrectnessType.LOWER) {
+        return (
+          <div className="w-full h-full flex flex-col justify-center items-center p-1 overflow-hidden">
+            <ArrowDown className="w-3 h-3 sm:w-4 sm:h-4 mb-1 text-white flex-shrink-0" />
+            <div className="flex flex-wrap justify-center items-center text-center">
+              <span className="leading-tight break-words hyphens-auto">
+                {valueParts.map((part, idx) => (
+                  <React.Fragment key={`lower-${idx}`}>
+                    {part}
+                    {idx < valueParts.length - 1 && <br />}
+                  </React.Fragment>
+                ))}
+              </span>
+            </div>
+          </div>
+        );
+      }
+
+      // Default content for other types
       return (
-        <div className="w-full h-full flex flex-col justify-center items-center">
-          <ArrowUp className="w-4 h-4 mb-1 text-white" />
-          <div className="flex flex-wrap justify-center items-center text-center">
+        <div className="w-full h-full flex flex-wrap justify-center items-center p-1 text-center overflow-hidden">
+          <span className="leading-tight break-words hyphens-auto">
             {valueParts.map((part, idx) => (
-              <React.Fragment key={idx}>
+              <React.Fragment key={`default-${idx}`}>
                 {part}
                 {idx < valueParts.length - 1 && <br />}
               </React.Fragment>
             ))}
-          </div>
+          </span>
         </div>
       );
-    }
+    })();
 
-    if (type === CorrectnessType.LOWER) {
+    if (shouldShowTooltip && tooltipValue.length === 0) {
       return (
-        <div className="w-full h-full flex flex-col justify-center items-center">
-          <ArrowDown className="w-4 h-4 mb-1 text-white" />
-          <div className="flex flex-wrap justify-center items-center text-center">
-            {valueParts.map((part, idx) => (
-              <React.Fragment key={idx}>
-                {part}
-                {idx < valueParts.length - 1 && <br />}
-              </React.Fragment>
-            ))}
-          </div>
-        </div>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div className="w-full h-full cursor-help">{content}</div>
+          </TooltipTrigger>
+          <TooltipContent className="max-w-xs">
+            <p>{value}</p>
+          </TooltipContent>
+        </Tooltip>
       );
     }
 
-    // Default content for other types
-    return (
-      <div className="w-full h-full flex flex-wrap justify-center items-center">
-        {valueParts.map((part, idx) => (
-          <React.Fragment key={idx}>
-            {part}
-            {idx < valueParts.length - 1 && <br />}
-          </React.Fragment>
-        ))}
-      </div>
-    );
+    return content;
   };
 
   return (
@@ -128,9 +177,9 @@ export const WordleCell = ({
     <motion.div
       variants={cellVariants}
       custom={custom} // Pass the custom prop received by WordleCell
-      initial="hidden" // Add initial and animate back here for individual cell animation
+      initial={shouldAnimate ? "hidden" : "visible"} // Only animate if switching topics
       animate={{ opacity: opacity, scale: 1 }} // This ensures each cell animates when it enters the DOM
-      className={`text-center text-lg font-bold rounded-xs justify-center items-center cursor-default border-2 text-shadow-2xs ${cellSizeCss} ${bgColor} flex mx-auto`}
+      className={`text-center text-xs sm:text-sm md:text-base font-bold rounded-xs justify-center items-center cursor-default border-2 text-shadow-2xs ${cellSizeCss} ${bgColor} flex mx-auto aspect-square max-w-24 max-h-24 min-w-12 min-h-12`}
     >
       {tooltipValue.length > 0 ? (
         <Tooltip>

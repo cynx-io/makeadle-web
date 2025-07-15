@@ -37,6 +37,7 @@ export function BlurdleGame({
     Answer | undefined
   >();
   const isLoading = useRef(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   // Calculate blur amount based on attempts
   const calculateBlur = (attemptCount: number): number => {
@@ -108,6 +109,11 @@ export function BlurdleGame({
     );
   }, [attempts]);
 
+  // Reset image loaded state when clues change (mode switch)
+  useEffect(() => {
+    setImageLoaded(false);
+  }, [clues]);
+
   async function onSelect(answerId: number) {
     console.log("Selected answer:", answerId);
     if (isLoading.current || lastSelectedAnswer?.id === answerId) return;
@@ -166,23 +172,42 @@ export function BlurdleGame({
               >
                 {clue.type === "image" ? (
                   <div className="relative min-w-[20vw] mx-auto">
+                    {!imageLoaded && (
+                      <div className="min-w-[20vw] h-[300px] mx-auto flex items-center justify-center bg-gray-800 rounded-lg">
+                        <div className="text-white">Loading...</div>
+                      </div>
+                    )}
                     <Image
                       width={300}
                       height={300}
                       src={clue.value}
-                      alt={clue.value}
-                      className="min-w-[20vw] mx-auto transition-all duration-500 ease-in-out hover:scale-110 rounded-lg"
+                      alt="Blurred game image"
+                      priority={true}
+                      className={`min-w-[20vw] mx-auto transition-all duration-500 ease-in-out hover:scale-110 rounded-lg ${
+                        imageLoaded ? "opacity-100" : "opacity-0"
+                      }`}
                       style={{
                         filter: `blur(${currentBlur}px) saturate(${currentSaturation}%) brightness(${currentBrightness}%)`,
                         WebkitFilter: `blur(${currentBlur}px) saturate(${currentSaturation}%) brightness(${currentBrightness}%)`, // Safari support
                       }}
+                      onLoad={() => {
+                        setImageLoaded(true);
+                      }}
+                      onError={() => {
+                        console.warn(
+                          "Failed to load blurdle image:",
+                          clue.value,
+                        );
+                        setImageLoaded(true); // Show error state
+                      }}
                     />
-                    {(currentBlur > 0 || currentSaturation < 100) && (
-                      <div className="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs">
-                        <div>Blur: {currentBlur.toFixed(1)}px</div>
-                        <div>Color: {currentSaturation.toFixed(0)}%</div>
-                      </div>
-                    )}
+                    {imageLoaded &&
+                      (currentBlur > 0 || currentSaturation < 100) && (
+                        <div className="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs">
+                          <div>Blur: {currentBlur.toFixed(1)}px</div>
+                          <div>Color: {currentSaturation.toFixed(0)}%</div>
+                        </div>
+                      )}
                   </div>
                 ) : (
                   <span className="text-lg font-semibold">{clue.value}</span>

@@ -3,7 +3,11 @@
 import { useGame } from "@/context/GameContext";
 import { WordleGame } from "./modes/wordle/WordleGame";
 import { useEffect, useRef, useState } from "react";
-import { AttemptDetailAnswer, Clue, Mode } from "@/proto/janus/plato/object_pb";
+import {
+  AttemptDetailAnswer,
+  Clue,
+  Mode,
+} from "@/proto/janus/plato/object_pb";
 import { dailyGameClient } from "@/lib/janus/client/plato";
 import { newJanusError } from "@/lib/janus/client/error";
 import { AudiodleGame } from "./modes/audiodle/AudiodleGame";
@@ -13,7 +17,7 @@ import Link from "next/link";
 import { BlurdleGame } from "@/components/game/modes/blurdle/BlurdleGame";
 
 export function GameSection() {
-  const { currentMode, dailyGame, modes, gameOver, setGameOver, topic } =
+  const { currentMode, dailyGame, modes, gameOver, setGameOver, topic, clearDataTrigger } =
     useGame();
 
   const [attempts, setAttempts] = useState<AttemptDetailAnswer[]>([]);
@@ -22,6 +26,15 @@ export function GameSection() {
   const [nextMode, setNextMode] = useState<Mode | null>(null);
 
   const nextModeRef = useRef<HTMLDivElement | null>(null);
+
+  // Clear attempts immediately when clearDataTrigger changes
+  useEffect(() => {
+    if (clearDataTrigger > 0) {
+      setAttempts([]);
+      setClues([]);
+      setHistoryInitialized(false);
+    }
+  }, [clearDataTrigger]);
 
   useEffect(() => {
     if (!gameOver) return;
@@ -46,6 +59,7 @@ export function GameSection() {
 
   useEffect(() => {
     setHistoryInitialized(false);
+
     dailyGameClient
       .attemptHistory({
         dailyGameId: dailyGame.dailyGameId,

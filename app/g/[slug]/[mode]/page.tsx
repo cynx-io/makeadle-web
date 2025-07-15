@@ -1,10 +1,5 @@
 import { GameSection } from "@/components/game/GameSection";
 import MakeadleBar from "@/components/game/MakeadleBar";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { GameProvider } from "@/context/GameContext";
 import { newJanusServerError } from "@/lib/janus/server-client/error";
 import {
@@ -13,12 +8,11 @@ import {
   modeServerClient,
   topicServerClient,
 } from "@/lib/janus/server-client/plato";
-import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import Script from "next/script";
 import ParticleScreen from "@/components/game/ParticleScreen";
 import TitleImage from "@/components/game/modes/TitleImage";
+import ModeSelector from "@/components/game/ModeSelector";
 
 type Props = {
   params: Promise<{ slug: string; mode: string }>;
@@ -124,34 +118,6 @@ export default async function TopicModesPage({ params }: Props) {
           {currentMode.description}
         </p>
 
-        <div className="flex space-x-6 overflow-x-auto px-4 py-6">
-          {modes.map((mode) => (
-            <Link
-              key={mode.id}
-              href={`/g/${slug}/${mode.title.toLowerCase()}`}
-              className=""
-            >
-              <div className="size-16 rounded-full overflow-hidden mb-3 border-2 border-white/50 hover:brightness-75">
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Image
-                      src={mode.iconUrl || "/img/default-icon.png"}
-                      alt={mode.title}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                      height={100}
-                      width={100}
-                    />
-                  </TooltipTrigger>
-
-                  <TooltipContent>
-                    <p>{mode.title}</p>
-                  </TooltipContent>
-                </Tooltip>
-              </div>
-            </Link>
-          ))}
-        </div>
         <GameProvider
           value={{
             topic,
@@ -161,6 +127,9 @@ export default async function TopicModesPage({ params }: Props) {
             answers: answers,
           }}
         >
+          <div className="flex space-x-6 overflow-x-auto px-4 py-6">
+            <ModeSelector modes={modes} />
+          </div>
           <div className="w-full h-full">
             <GameSection />
           </div>
