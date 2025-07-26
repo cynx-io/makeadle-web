@@ -26,7 +26,13 @@ export function BlurdleGame({
   clues,
   setClues,
 }: Readonly<BlurdleGameProps>) {
-  const { currentMode, answers, dailyGame, gameOver, setGameOver } = useGame();
+  const {
+    currentMode,
+    answers,
+    dailyGame,
+    gameOver: _gameOver,
+    setGameOver,
+  } = useGame();
   const [availableAnswers, setAvailableAnswers] = useState<Answer[]>(
     answers.filter((ans) => {
       return currentMode.answerTypes.includes(ans.answerType ?? "");
@@ -40,7 +46,7 @@ export function BlurdleGame({
   const [imageLoaded, setImageLoaded] = useState(false);
 
   // Calculate blur amount based on attempts
-  const calculateBlur = (attemptCount: number): number => {
+  const _calculateBlur = (attemptCount: number): number => {
     // Start with maximum blur and decrease as attempts increase
     const maxBlur = 20; // Maximum blur in pixels
     const minBlur = 0; // Minimum blur (fully clear)
@@ -61,7 +67,7 @@ export function BlurdleGame({
   };
 
   // Calculate saturation (color) based on attempts
-  const calculateSaturation = (attemptCount: number): number => {
+  const _calculateSaturation = (attemptCount: number): number => {
     // Start with no color (0%) and increase to full color (100%)
     const maxAttempts = 10; // Should match your blur steps
     const saturation = Math.min(100, (attemptCount / maxAttempts) * 100);
@@ -107,7 +113,7 @@ export function BlurdleGame({
         return isValid;
       }),
     );
-  }, [attempts]);
+  }, [attempts, answers, currentMode.answerTypes]);
 
   // Reset image loaded state when clues change (mode switch)
   useEffect(() => {
@@ -244,7 +250,7 @@ export function BlurdleGame({
 
         <div className="flex flex-row flex-wrap w-full items-start justify-start">
           {attempts.length > 0 &&
-            attempts.map((attempt, index) => {
+            attempts.map((attempt, _index) => {
               const answer = attempt.answer;
               if (!answer) return null;
 

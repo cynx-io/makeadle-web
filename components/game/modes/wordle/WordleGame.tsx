@@ -23,7 +23,13 @@ export type WordleGameProps = {
 };
 
 export function WordleGame({ attempts, setAttempts }: WordleGameProps) {
-  const { currentMode, answers, dailyGame, gameOver, setGameOver } = useGame();
+  const {
+    currentMode,
+    answers,
+    dailyGame,
+    gameOver: _gameOver,
+    setGameOver,
+  } = useGame();
   const [availableAnswers, setAvailableAnswers] = useState<Answer[]>(
     answers.filter((ans) => {
       return currentMode.answerTypes.includes(ans?.answerType ?? "");
@@ -54,7 +60,7 @@ export function WordleGame({ attempts, setAttempts }: WordleGameProps) {
         return isValid;
       }),
     );
-  }, [attempts]);
+  }, [attempts, answers, currentMode.answerTypes]);
 
   attempts.forEach((answer) => {
     answer.answerCategories.forEach((cat) => {

@@ -53,30 +53,30 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 interface Topic {
-  id: string;
+  id: number;
   title: string;
   slug: string;
 }
 
 interface Mode {
-  id: string;
+  id: number;
   title: string;
   type: string;
-  topicId: string;
+  topicId: number;
 }
 
 interface Answer {
-  id: string;
+  id: number;
   name: string;
-  topicId: string;
+  topicId: number;
 }
 
 interface DailyGameWithDetails {
-  id: string;
+  id: number;
   date: string;
-  answerId: string;
-  modeId: string;
-  topicId: string;
+  answerId: number;
+  modeId: number;
+  topicId: number;
   answerName: string;
   modeName: string;
   modeType: string;
@@ -86,9 +86,9 @@ interface DailyGameWithDetails {
 
 interface DailyGameFormData {
   date: Date | undefined;
-  topicId: string;
-  modeId: string;
-  answerId: string;
+  topicId: number;
+  modeId: number;
+  answerId: number;
 }
 
 export function DailyGameManagement() {
@@ -103,9 +103,9 @@ export function DailyGameManagement() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [formData, setFormData] = useState<DailyGameFormData>({
     date: undefined,
-    topicId: "",
-    modeId: "",
-    answerId: "",
+    topicId: 0,
+    modeId: 0,
+    answerId: 0,
   });
 
   useEffect(() => {
@@ -131,7 +131,11 @@ export function DailyGameManagement() {
         });
         const topicModes = modesResp?.modes || [];
         allModes.push(
-          ...topicModes.map((mode) => ({ ...mode, topicId: topic.id })),
+          ...topicModes.map((mode) => ({
+            ...mode,
+            topicId: topic.id,
+            type: mode.Type || "UNKNOWN",
+          })),
         );
 
         const answersResp = await answerClient.listAnswersByTopicId({
@@ -158,15 +162,20 @@ export function DailyGameManagement() {
   };
 
   const handleTopicChange = (topicId: string) => {
-    setFormData({ ...formData, topicId, modeId: "", answerId: "" });
+    setFormData({
+      ...formData,
+      topicId: parseInt(topicId),
+      modeId: 0,
+      answerId: 0,
+    });
   };
 
   const getModesForTopic = (topicId: string) => {
-    return modes.filter((mode) => mode.topicId === topicId);
+    return modes.filter((mode) => mode.topicId === parseInt(topicId));
   };
 
   const getAnswersForTopic = (topicId: string) => {
-    return answers.filter((answer) => answer.topicId === topicId);
+    return answers.filter((answer) => answer.topicId === parseInt(topicId));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -205,7 +214,7 @@ export function DailyGameManagement() {
     setIsDialogOpen(true);
   };
 
-  const handleDelete = async (gameId: string) => {
+  const handleDelete = async (gameId: number) => {
     if (!confirm("Are you sure you want to delete this daily game?")) {
       return;
     }
@@ -224,9 +233,9 @@ export function DailyGameManagement() {
     setEditingGame(null);
     setFormData({
       date: undefined,
-      topicId: "",
-      modeId: "",
-      answerId: "",
+      topicId: 0,
+      modeId: 0,
+      answerId: 0,
     });
   };
 
@@ -299,7 +308,7 @@ export function DailyGameManagement() {
                     Topic
                   </Label>
                   <Select
-                    value={formData.topicId}
+                    value={formData.topicId.toString()}
                     onValueChange={handleTopicChange}
                   >
                     <SelectTrigger className="col-span-3">
@@ -307,7 +316,7 @@ export function DailyGameManagement() {
                     </SelectTrigger>
                     <SelectContent>
                       {topics.map((topic) => (
-                        <SelectItem key={topic.id} value={topic.id}>
+                        <SelectItem key={topic.id} value={topic.id.toString()}>
                           {topic.title}
                         </SelectItem>
                       ))}
@@ -319,21 +328,23 @@ export function DailyGameManagement() {
                     Mode
                   </Label>
                   <Select
-                    value={formData.modeId}
+                    value={formData.modeId.toString()}
                     onValueChange={(value) =>
-                      setFormData({ ...formData, modeId: value })
+                      setFormData({ ...formData, modeId: parseInt(value) })
                     }
-                    disabled={!formData.topicId}
+                    disabled={formData.topicId === 0}
                   >
                     <SelectTrigger className="col-span-3">
                       <SelectValue placeholder="Select a mode" />
                     </SelectTrigger>
                     <SelectContent>
-                      {getModesForTopic(formData.topicId).map((mode) => (
-                        <SelectItem key={mode.id} value={mode.id}>
-                          {mode.title} ({mode.type})
-                        </SelectItem>
-                      ))}
+                      {getModesForTopic(formData.topicId.toString()).map(
+                        (mode) => (
+                          <SelectItem key={mode.id} value={mode.id.toString()}>
+                            {mode.title} ({mode.type})
+                          </SelectItem>
+                        ),
+                      )}
                     </SelectContent>
                   </Select>
                 </div>
@@ -342,21 +353,26 @@ export function DailyGameManagement() {
                     Answer
                   </Label>
                   <Select
-                    value={formData.answerId}
+                    value={formData.answerId.toString()}
                     onValueChange={(value) =>
-                      setFormData({ ...formData, answerId: value })
+                      setFormData({ ...formData, answerId: parseInt(value) })
                     }
-                    disabled={!formData.topicId}
+                    disabled={formData.topicId === 0}
                   >
                     <SelectTrigger className="col-span-3">
                       <SelectValue placeholder="Select an answer" />
                     </SelectTrigger>
                     <SelectContent>
-                      {getAnswersForTopic(formData.topicId).map((answer) => (
-                        <SelectItem key={answer.id} value={answer.id}>
-                          {answer.name}
-                        </SelectItem>
-                      ))}
+                      {getAnswersForTopic(formData.topicId.toString()).map(
+                        (answer) => (
+                          <SelectItem
+                            key={answer.id}
+                            value={answer.id.toString()}
+                          >
+                            {answer.name}
+                          </SelectItem>
+                        ),
+                      )}
                     </SelectContent>
                   </Select>
                 </div>
@@ -381,7 +397,9 @@ export function DailyGameManagement() {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Today's Games</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Today&apos;s Games
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">0</div>

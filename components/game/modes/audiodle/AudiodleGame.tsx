@@ -26,7 +26,13 @@ export function AudiodleGame({
   clues,
   setClues,
 }: Readonly<AudiodleGameProps>) {
-  const { currentMode, answers, dailyGame, gameOver, setGameOver } = useGame();
+  const {
+    currentMode,
+    answers,
+    dailyGame,
+    gameOver: _gameOver,
+    setGameOver,
+  } = useGame();
   const [availableAnswers, setAvailableAnswers] = useState<Answer[]>(
     answers.filter((ans) => {
       return currentMode.answerTypes.includes(ans.answerType ?? "");
@@ -54,7 +60,7 @@ export function AudiodleGame({
         return isValid;
       }),
     );
-  }, [attempts]);
+  }, [attempts, answers, currentMode.answerTypes]);
 
   async function onSelect(answerId: number) {
     console.log("Selected answer:", answerId);
@@ -120,7 +126,7 @@ export function AudiodleGame({
         <AnswerSearchBar answers={availableAnswers} onSelect={onSelect} />
         <div className="flex flex-row flex-wrap w-full items-start justify-start">
           {attempts.length > 0 &&
-            attempts.map((attempt, index) => {
+            attempts.map((attempt, _index) => {
               const answer = attempt.answer;
               if (!answer) return null;
 

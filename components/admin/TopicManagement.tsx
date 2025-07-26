@@ -35,7 +35,7 @@ import { Plus, Edit, Trash2, ExternalLink } from "lucide-react";
 import Link from "next/link";
 
 interface TopicWithModes {
-  id: string;
+  id: number;
   title: string;
   description: string;
   slug: string;
@@ -106,7 +106,6 @@ export function TopicManagement() {
           id: editingTopic.id,
           title: formData.title,
           description: formData.description,
-          slug: formData.slug,
           iconUrl: formData.iconUrl || undefined,
           bannerUrl: formData.bannerUrl || undefined,
           titleImageUrl: formData.titleImageUrl || undefined,
@@ -143,7 +142,7 @@ export function TopicManagement() {
     setIsDialogOpen(true);
   };
 
-  const handleDelete = async (topicId: string) => {
+  const handleDelete = async (topicId: number) => {
     if (
       !confirm(
         "Are you sure you want to delete this topic? This will also delete all associated modes and answers.",
@@ -153,7 +152,7 @@ export function TopicManagement() {
     }
 
     try {
-      await topicClient.deleteTopic({ id: topicId });
+      await topicClient.deleteTopic({ topicId });
       loadTopics();
     } catch (err) {
       newJanusError(err).handle();

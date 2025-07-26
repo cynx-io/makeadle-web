@@ -42,19 +42,19 @@ import { Plus, Edit, Trash2, ExternalLink } from "lucide-react";
 import Link from "next/link";
 
 interface Topic {
-  id: string;
+  id: number;
   title: string;
   slug: string;
 }
 
 interface ModeWithTopic {
-  id: string;
+  id: number;
   title: string;
   description: string;
   type: string;
   iconUrl?: string;
   backgroundUrl?: string;
-  topicId: string;
+  topicId: number;
   topicTitle: string;
   topicSlug: string;
 }
@@ -65,7 +65,7 @@ interface ModeFormData {
   type: string;
   iconUrl: string;
   backgroundUrl: string;
-  topicId: string;
+  topicId: number;
 }
 
 const GAME_TYPES = [
@@ -86,7 +86,7 @@ export function ModeManagement() {
     type: "",
     iconUrl: "",
     backgroundUrl: "",
-    topicId: "",
+    topicId: 0,
   });
 
   useEffect(() => {
@@ -113,8 +113,10 @@ export function ModeManagement() {
         topicModes.forEach((mode) => {
           allModes.push({
             ...mode,
+            topicId: topic.id,
             topicTitle: topic.title,
             topicSlug: topic.slug,
+            type: mode.Type || "UNKNOWN",
           });
         });
       }
@@ -135,18 +137,15 @@ export function ModeManagement() {
           id: editingMode.id,
           title: formData.title,
           description: formData.description,
-          type: formData.type,
           iconUrl: formData.iconUrl || undefined,
-          backgroundUrl: formData.backgroundUrl || undefined,
-          topicId: formData.topicId,
         });
       } else {
         await modeClient.insertMode({
           title: formData.title,
           description: formData.description,
-          type: formData.type,
-          iconUrl: formData.iconUrl || undefined,
-          backgroundUrl: formData.backgroundUrl || undefined,
+          iconUrl: formData.iconUrl || "",
+          bannerUrl: formData.backgroundUrl || "",
+          slug: formData.title.toLowerCase().replace(/\s+/g, "-"),
           topicId: formData.topicId,
         });
       }
@@ -172,7 +171,7 @@ export function ModeManagement() {
     setIsDialogOpen(true);
   };
 
-  const handleDelete = async (modeId: string) => {
+  const handleDelete = async (modeId: number) => {
     if (
       !confirm(
         "Are you sure you want to delete this mode? This will also delete all associated daily games.",
@@ -182,7 +181,7 @@ export function ModeManagement() {
     }
 
     try {
-      await modeClient.deleteMode({ id: modeId });
+      await modeClient.deleteMode({ modeId });
       loadData();
     } catch (err) {
       newJanusError(err).handle();
@@ -197,7 +196,7 @@ export function ModeManagement() {
       type: "",
       iconUrl: "",
       backgroundUrl: "",
-      topicId: "",
+      topicId: 0,
     });
   };
 
@@ -239,9 +238,9 @@ export function ModeManagement() {
                     Topic
                   </Label>
                   <Select
-                    value={formData.topicId}
+                    value={formData.topicId.toString()}
                     onValueChange={(value) =>
-                      setFormData({ ...formData, topicId: value })
+                      setFormData({ ...formData, topicId: parseInt(value) })
                     }
                   >
                     <SelectTrigger className="col-span-3">
@@ -249,7 +248,7 @@ export function ModeManagement() {
                     </SelectTrigger>
                     <SelectContent>
                       {topics.map((topic) => (
-                        <SelectItem key={topic.id} value={topic.id}>
+                        <SelectItem key={topic.id} value={topic.id.toString()}>
                           {topic.title}
                         </SelectItem>
                       ))}

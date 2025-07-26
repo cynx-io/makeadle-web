@@ -37,7 +37,7 @@ const cellVariants: Variants = {
 };
 
 export const WordleCell = ({
-  category,
+  category: _category,
   value,
   type,
   cellSizeCss,

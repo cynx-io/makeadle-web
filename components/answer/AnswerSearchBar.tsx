@@ -36,7 +36,7 @@ export default function AnswerSearchBar({
     };
 
     handler(query);
-  }, [query]);
+  }, [query, answers]);
 
   const handleOnSelect = async (answerId: number) => {
     setQuery("");

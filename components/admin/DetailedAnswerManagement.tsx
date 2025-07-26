@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   Card,
   CardContent,
@@ -18,9 +18,10 @@ import {
 import { topicClient, answerClient } from "@/lib/janus/client/plato";
 import { newJanusError } from "@/lib/janus/client/error";
 import { DashboardAnswerTable } from "@/components/admin/answer/table/DashboardAnswerTable";
+import { DetailAnswer } from "@/proto/janus/plato/object_pb";
 
 interface Topic {
-  id: string;
+  id: number;
   title: string;
   slug: string;
 }
@@ -28,14 +29,10 @@ interface Topic {
 export function DetailedAnswerManagement() {
   const [topics, setTopics] = useState<Topic[]>([]);
   const [selectedTopic, setSelectedTopic] = useState<Topic | null>(null);
-  const [detailAnswers, setDetailAnswers] = useState<unknown[]>([]);
+  const [detailAnswers, setDetailAnswers] = useState<DetailAnswer[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    loadTopics();
-  }, []);
-
-  const loadTopics = async () => {
+  const loadTopics = useCallback(async () => {
     try {
       setLoading(true);
       const topicsResp = await topicClient.listTopicsByUserId({});
@@ -44,19 +41,25 @@ export function DetailedAnswerManagement() {
 
       if (topicList.length > 0) {
         setSelectedTopic(topicList[0]);
-        loadDetailAnswers(topicList[0].id);
+        loadDetailAnswers(topicList[0].id.toString());
       }
     } catch (err) {
       newJanusError(err).handle();
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    loadTopics();
+  }, [loadTopics]);
 
   const loadDetailAnswers = async (topicId: string) => {
     try {
       const detailAnswersResp =
-        await answerClient.listDetailAnswersByTopicModeId({ topicId });
+        await answerClient.listDetailAnswersByTopicModeId({
+          topicId: parseInt(topicId),
+        });
 
       if (detailAnswersResp) {
         setDetailAnswers(detailAnswersResp.detailAnswers || []);
@@ -67,10 +70,10 @@ export function DetailedAnswerManagement() {
   };
 
   const handleTopicChange = (topicId: string) => {
-    const topic = topics.find((t) => t.id === topicId);
+    const topic = topics.find((t) => t.id === parseInt(topicId));
     if (topic) {
       setSelectedTopic(topic);
-      loadDetailAnswers(topic.id);
+      loadDetailAnswers(topic.id.toString());
     }
   };
 
@@ -98,7 +101,7 @@ export function DetailedAnswerManagement() {
           </p>
         </div>
         <Select
-          value={selectedTopic?.id || ""}
+          value={selectedTopic?.id.toString() || ""}
           onValueChange={handleTopicChange}
         >
           <SelectTrigger className="w-[200px]">
@@ -106,7 +109,7 @@ export function DetailedAnswerManagement() {
           </SelectTrigger>
           <SelectContent>
             {topics.map((topic) => (
-              <SelectItem key={topic.id} value={topic.id}>
+              <SelectItem key={topic.id} value={topic.id.toString()}>
                 {topic.title}
               </SelectItem>
             ))}

@@ -45,17 +45,17 @@ import { newJanusError } from "@/lib/janus/client/error";
 import { Plus, Edit, Trash2, Search } from "lucide-react";
 
 interface Topic {
-  id: string;
+  id: number;
   title: string;
   slug: string;
 }
 
 interface AnswerWithTopic {
-  id: string;
+  id: number;
   name: string;
   iconUrl?: string;
   answerType: string;
-  topicId: string;
+  topicId: number;
   topicTitle: string;
   topicSlug: string;
   categoriesCount: number;
@@ -65,7 +65,7 @@ interface AnswerFormData {
   name: string;
   iconUrl: string;
   answerType: string;
-  topicId: string;
+  topicId: number;
 }
 
 const ANSWER_TYPES = [
@@ -90,7 +90,7 @@ export function AnswerManagement() {
     name: "",
     iconUrl: "",
     answerType: "",
-    topicId: "",
+    topicId: 0,
   });
 
   useEffect(() => {
@@ -124,6 +124,7 @@ export function AnswerManagement() {
 
           allAnswers.push({
             ...answer,
+            topicId: topic.id,
             topicTitle: topic.title,
             topicSlug: topic.slug,
             categoriesCount,
@@ -144,17 +145,16 @@ export function AnswerManagement() {
     try {
       if (editingAnswer) {
         await answerClient.updateAnswer({
-          id: editingAnswer.id,
+          answerId: editingAnswer.id,
           name: formData.name,
           iconUrl: formData.iconUrl || undefined,
-          answerType: formData.answerType,
-          topicId: formData.topicId,
+          AnswerType: formData.answerType,
         });
       } else {
         await answerClient.insertAnswer({
           name: formData.name,
           iconUrl: formData.iconUrl || undefined,
-          answerType: formData.answerType,
+          AnswerType: formData.answerType,
           topicId: formData.topicId,
         });
       }
@@ -178,7 +178,7 @@ export function AnswerManagement() {
     setIsDialogOpen(true);
   };
 
-  const handleDelete = async (answerId: string) => {
+  const handleDelete = async (answerId: number) => {
     if (
       !confirm(
         "Are you sure you want to delete this answer? This will also delete all associated categories.",
@@ -188,7 +188,7 @@ export function AnswerManagement() {
     }
 
     try {
-      await answerClient.deleteAnswer({ id: answerId });
+      await answerClient.deleteAnswer({ answerId });
       loadData();
     } catch (err) {
       newJanusError(err).handle();
@@ -201,7 +201,7 @@ export function AnswerManagement() {
       name: "",
       iconUrl: "",
       answerType: "",
-      topicId: "",
+      topicId: 0,
     });
   };
 
@@ -210,7 +210,7 @@ export function AnswerManagement() {
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
     const matchesTopic =
-      selectedTopic === "all" || answer.topicId === selectedTopic;
+      selectedTopic === "all" || answer.topicId.toString() === selectedTopic;
     return matchesSearch && matchesTopic;
   });
 
@@ -252,9 +252,9 @@ export function AnswerManagement() {
                     Topic
                   </Label>
                   <Select
-                    value={formData.topicId}
+                    value={formData.topicId.toString()}
                     onValueChange={(value) =>
-                      setFormData({ ...formData, topicId: value })
+                      setFormData({ ...formData, topicId: parseInt(value) })
                     }
                   >
                     <SelectTrigger className="col-span-3">
@@ -262,7 +262,7 @@ export function AnswerManagement() {
                     </SelectTrigger>
                     <SelectContent>
                       {topics.map((topic) => (
-                        <SelectItem key={topic.id} value={topic.id}>
+                        <SelectItem key={topic.id} value={topic.id.toString()}>
                           {topic.title}
                         </SelectItem>
                       ))}
@@ -354,7 +354,7 @@ export function AnswerManagement() {
           <SelectContent>
             <SelectItem value="all">All Topics</SelectItem>
             {topics.map((topic) => (
-              <SelectItem key={topic.id} value={topic.id}>
+              <SelectItem key={topic.id} value={topic.id.toString()}>
                 {topic.title}
               </SelectItem>
             ))}

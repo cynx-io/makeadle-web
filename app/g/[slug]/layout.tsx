@@ -103,6 +103,9 @@ export async function generateMetadata({
   };
 }
 
-export default async function TopicLayout({ children, params }: Props) {
+export default async function TopicLayout({
+  children,
+  params: _params,
+}: Props) {
   return <div className="h-full w-full">{children}</div>;
 }
