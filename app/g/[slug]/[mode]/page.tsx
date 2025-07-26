@@ -8,11 +8,13 @@ import {
   modeServerClient,
   topicServerClient,
 } from "@/lib/janus/server-client/plato";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Script from "next/script";
 import ParticleScreen from "@/components/game/ParticleScreen";
 import TitleImage from "@/components/game/modes/TitleImage";
 import ModeSelector from "@/components/game/ModeSelector";
+
+export const dynamic = 'force-dynamic';
 
 type Props = {
   params: Promise<{ slug: string; mode: string }>;
@@ -21,22 +23,45 @@ type Props = {
 export default async function TopicModesPage({ params }: Props) {
   const { slug, mode } = await params;
 
+  console.log(`[${slug}/${mode}] Starting API calls`);
+  
   const topicResp = await topicServerClient
     .getTopicBySlug({ slug: slug })
-    .catch((err) => newJanusServerError(err).handle());
+    .then((resp) => {
+      console.log(`[${slug}/${mode}] GetTopicBySlug success:`, resp?.topic ? 'found' : 'not found');
+      return resp;
+    })
+    .catch((err) => {
+      console.log(`[${slug}/${mode}] GetTopicBySlug error:`, err);
+      newJanusServerError(err).handle();
+      return null;
+    });
 
   const topic = topicResp?.topic;
-  if (!topic) return notFound();
+  if (!topic) {
+    console.log(`[${slug}/${mode}] Topic not found, returning 404`);
+    return notFound();
+  }
 
   const modesResp = await modeServerClient
     .listModesByTopicId({ topicId: topic.id })
+    .then((resp) => {
+      console.log(`[${slug}/${mode}] ListModesByTopicId success:`, resp?.modes?.length || 0, 'modes');
+      return resp;
+    })
     .catch((err) => {
+      console.log(`[${slug}/${mode}] ListModesByTopicId error:`, err);
       newJanusServerError(err).handle();
+      return null;
     });
 
   const modes = modesResp?.modes;
-  if (!modes) return notFound();
+  if (!modes) {
+    console.log(`[${slug}/${mode}] Modes API failed, redirecting to /g/${slug} to retry`);
+    redirect(`/g/${slug}`);
+  }
   if (modes.length === 0) {
+    console.log(`[${slug}/${mode}] No modes available for topic`);
     return (
       <div className="h-screen flex items-center justify-center">
         <p className="text-lg">No modes available for this topic.</p>
@@ -48,8 +73,12 @@ export default async function TopicModesPage({ params }: Props) {
     (m) => m.title.toLowerCase() === mode.toLowerCase(),
   );
   if (!currentMode) {
-    return notFound();
+    console.log(`[${slug}/${mode}] Mode '${mode}' not found in available modes:`, modes.map(m => m.title));
+    console.log(`[${slug}/${mode}] Redirecting to default mode via /g/${slug}`);
+    redirect(`/g/${slug}`);
   }
+  
+  console.log(`[${slug}/${mode}] Found current mode:`, currentMode.title);
 
   const answersRespPromise = answerServerClient
     .listAnswersByTopicId({
@@ -57,6 +86,7 @@ export default async function TopicModesPage({ params }: Props) {
     })
     .catch((err) => {
       newJanusServerError(err).handle();
+      return null;
     });
 
   const dailyGameResp = await dailyGameServerClient
@@ -65,6 +95,7 @@ export default async function TopicModesPage({ params }: Props) {
     })
     .catch((err) => {
       newJanusServerError(err).handle();
+      return null;
     });
   if (!dailyGameResp) {
     return notFound();
