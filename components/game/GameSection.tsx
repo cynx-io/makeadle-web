@@ -3,11 +3,7 @@
 import { useGame } from "@/context/GameContext";
 import { WordleGame } from "./modes/wordle/WordleGame";
 import { useEffect, useRef, useState } from "react";
-import {
-  AttemptDetailAnswer,
-  Clue,
-  Mode,
-} from "@/proto/janus/plato/object_pb";
+import { AttemptDetailAnswer, Clue, Mode } from "@/proto/janus/plato/object_pb";
 import { dailyGameClient } from "@/lib/janus/client/plato";
 import { newJanusError } from "@/lib/janus/client/error";
 import { AudiodleGame } from "./modes/audiodle/AudiodleGame";
@@ -17,8 +13,15 @@ import Link from "next/link";
 import { BlurdleGame } from "@/components/game/modes/blurdle/BlurdleGame";
 
 export function GameSection() {
-  const { currentMode, dailyGame, modes, gameOver, setGameOver, topic, clearDataTrigger } =
-    useGame();
+  const {
+    currentMode,
+    dailyGame,
+    modes,
+    gameOver,
+    setGameOver,
+    topic,
+    clearDataTrigger,
+  } = useGame();
 
   const [attempts, setAttempts] = useState<AttemptDetailAnswer[]>([]);
   const [clues, setClues] = useState<Clue[]>([]);

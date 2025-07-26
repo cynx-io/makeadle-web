@@ -1,0 +1,6 @@
+Contact: security@makeadle.com
+Expires: 2025-12-31T23:59:59.000Z
+Encryption: https://keys.openpgp.org/vks/v1/by-fingerprint/YOUR_PGP_FINGERPRINT
+Acknowledgments: https://www.makeadle.com/security/acknowledgments
+Policy: https://www.makeadle.com/security/policy
+Hiring: https://www.makeadle.com/careers

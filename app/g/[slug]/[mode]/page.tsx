@@ -101,7 +101,7 @@ export default async function TopicModesPage({ params }: Props) {
 
   return (
     <div
-      className="h-full w-screen overflow-y-auto bg-cover bg-center bg-fixed text-white bg-animate-glow overflow-x-hidden"
+      className="h-screen w-screen overflow-y-auto bg-cover bg-center bg-fixed text-white bg-animate-glow overflow-x-hidden"
       style={{ backgroundImage: `url(${backgroundUrl || "/img/invalid.png"})` }}
     >
       <ParticleScreen />
@@ -127,7 +127,7 @@ export default async function TopicModesPage({ params }: Props) {
             answers: answers,
           }}
         >
-          <div className="flex space-x-6 overflow-x-auto px-4 py-6">
+          <div className="flex space-x-6 overflow-x-auto px-4 py-6 h-full">
             <ModeSelector modes={modes} />
           </div>
           <div className="w-full h-full">

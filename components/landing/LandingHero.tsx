@@ -75,11 +75,14 @@ const LandingHero = ({
               )}
             </div>
           </div>
-          <img
-            src={image.src}
-            alt={image.alt}
-            className="max-h-[50vh] mx-auto rounded-md object-cover"
-          />
+          <div className="relative">
+            <div className="absolute -inset-4 bg-gradient-to-r rounded-2xl blur opacity-20"></div>
+            <img
+              src={image.src}
+              alt={image.alt}
+              className="relative max-h-[50vh] mx-auto rounded-2xl object-cover hover:scale-105 transition-transform duration-300"
+            />
+          </div>
         </div>
       </div>
     </section>
