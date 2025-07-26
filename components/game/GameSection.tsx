@@ -58,7 +58,7 @@ export function GameSection() {
         block: "center",
       });
     }, 300);
-  }, [gameOver, setGameOver]);
+  }, [gameOver, setGameOver, currentMode.id, modes]);
 
   useEffect(() => {
     setHistoryInitialized(false);
@@ -81,7 +81,7 @@ export function GameSection() {
       .finally(() => {
         setHistoryInitialized(true);
       });
-  }, [dailyGame, currentMode.id, modes]);
+  }, [dailyGame, currentMode.id, modes, setGameOver]);
 
   if (!historyInitialized)
     return (
