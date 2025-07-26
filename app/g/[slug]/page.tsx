@@ -5,7 +5,7 @@ import {
 } from "@/lib/janus/server-client/plato";
 import { newJanusServerError } from "@/lib/janus/server-client/error";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 type Props = {
   params: Promise<{ slug: string }>;
 };
@@ -18,7 +18,10 @@ export default async function TopicModesPage({ params }: Props) {
   const topicResp = await topicServerClient
     .getTopicBySlug({ slug: slug })
     .then((resp) => {
-      console.log(`[${slug}] GetTopicBySlug success:`, resp?.topic ? 'found' : 'not found');
+      console.log(
+        `[${slug}] GetTopicBySlug success:`,
+        resp?.topic ? "found" : "not found",
+      );
       return resp;
     })
     .catch((err) => {
@@ -37,7 +40,11 @@ export default async function TopicModesPage({ params }: Props) {
   const modesResp = await modeServerClient
     .listModesByTopicId({ topicId: topic.id })
     .then((resp) => {
-      console.log(`[${slug}] ListModesByTopicId success:`, resp?.modes?.length || 0, 'modes');
+      console.log(
+        `[${slug}] ListModesByTopicId success:`,
+        resp?.modes?.length || 0,
+        "modes",
+      );
       return resp;
     })
     .catch((err) => {

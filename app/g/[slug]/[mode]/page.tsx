@@ -14,7 +14,7 @@ import ParticleScreen from "@/components/game/ParticleScreen";
 import TitleImage from "@/components/game/modes/TitleImage";
 import ModeSelector from "@/components/game/ModeSelector";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 type Props = {
   params: Promise<{ slug: string; mode: string }>;
@@ -24,11 +24,14 @@ export default async function TopicModesPage({ params }: Props) {
   const { slug, mode } = await params;
 
   console.log(`[${slug}/${mode}] Starting API calls`);
-  
+
   const topicResp = await topicServerClient
     .getTopicBySlug({ slug: slug })
     .then((resp) => {
-      console.log(`[${slug}/${mode}] GetTopicBySlug success:`, resp?.topic ? 'found' : 'not found');
+      console.log(
+        `[${slug}/${mode}] GetTopicBySlug success:`,
+        resp?.topic ? "found" : "not found",
+      );
       return resp;
     })
     .catch((err) => {
@@ -46,7 +49,11 @@ export default async function TopicModesPage({ params }: Props) {
   const modesResp = await modeServerClient
     .listModesByTopicId({ topicId: topic.id })
     .then((resp) => {
-      console.log(`[${slug}/${mode}] ListModesByTopicId success:`, resp?.modes?.length || 0, 'modes');
+      console.log(
+        `[${slug}/${mode}] ListModesByTopicId success:`,
+        resp?.modes?.length || 0,
+        "modes",
+      );
       return resp;
     })
     .catch((err) => {
@@ -57,7 +64,9 @@ export default async function TopicModesPage({ params }: Props) {
 
   const modes = modesResp?.modes;
   if (!modes) {
-    console.log(`[${slug}/${mode}] Modes API failed, redirecting to /g/${slug} to retry`);
+    console.log(
+      `[${slug}/${mode}] Modes API failed, redirecting to /g/${slug} to retry`,
+    );
     redirect(`/g/${slug}`);
   }
   if (modes.length === 0) {
@@ -73,11 +82,14 @@ export default async function TopicModesPage({ params }: Props) {
     (m) => m.title.toLowerCase() === mode.toLowerCase(),
   );
   if (!currentMode) {
-    console.log(`[${slug}/${mode}] Mode '${mode}' not found in available modes:`, modes.map(m => m.title));
+    console.log(
+      `[${slug}/${mode}] Mode '${mode}' not found in available modes:`,
+      modes.map((m) => m.title),
+    );
     console.log(`[${slug}/${mode}] Redirecting to default mode via /g/${slug}`);
     redirect(`/g/${slug}`);
   }
-  
+
   console.log(`[${slug}/${mode}] Found current mode:`, currentMode.title);
 
   const answersRespPromise = answerServerClient

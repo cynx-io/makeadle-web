@@ -48,13 +48,13 @@ export const GameProvider = ({
   const [clearDataTrigger, setClearDataTrigger] = useState(0);
 
   const clearGameData = () => {
-    setClearDataTrigger(prev => prev + 1);
+    setClearDataTrigger((prev) => prev + 1);
   };
 
   const switchMode = (mode: Mode) => {
     // Clear game data immediately before switching
     clearGameData();
-    
+
     setCurrentMode(mode);
     setGameOver(false); // Reset game over state when switching modes
 
