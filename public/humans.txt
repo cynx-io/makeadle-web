@@ -1,0 +1,16 @@
+/* TEAM */
+Developer: Your Name
+Site: https://www.makeadle.com
+Twitter: @makeadle
+Location: Your Location
+
+/* THANKS */
+Contributors: Open Source Community
+Libraries: Next.js, React, Tailwind CSS
+
+/* SITE */
+Last update: 2024/12/15
+Language: English
+Doctype: HTML5
+IDE: Visual Studio Code
+Standards: HTML5, CSS3, ES6+

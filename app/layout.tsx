@@ -3,6 +3,7 @@ import "./globals.css";
 import RootClientLayout from "@/components/sections/RootClientLayout";
 import { Toaster } from "sonner";
 import Script from "next/script";
+import DynamicFavicon from "@/components/DynamicFavicon";
 
 export const metadata: Metadata = {
   title: {
@@ -87,8 +88,49 @@ export default async function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1374372173829138"
           crossOrigin="anonymous"
         ></script>
+
+        {/* Additional SEO Meta Tags */}
+        <meta
+          name="robots"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+        />
+        <meta name="googlebot" content="index, follow" />
+        <meta name="bingbot" content="index, follow" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
+        />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="theme-color" content="#2563eb" />
+        <meta name="color-scheme" content="light dark" />
+        <meta name="format-detection" content="telephone=no" />
+
+        {/* Preconnect to external domains */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
+
+        {/* Canonical URL */}
+        <link rel="canonical" href="https://www.makeadle.com" />
+
+        {/* Favicon - using your custom favicon.ico */}
+        <link
+          rel="icon"
+          href="/favicon.ico"
+          type="image/x-icon"
+          sizes="32x32"
+        />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="/icon.png" />
+
+        {/* Alternate languages if you plan to support them */}
+        <link rel="alternate" hrefLang="en" href="https://www.makeadle.com" />
+
+        {/* RSS Feed if you plan to add a blog */}
+        {/* <link rel="alternate" type="application/rss+xml" title="Makeadle Blog" href="/feed.xml" /> */}
       </head>
-      <body className="antialiased h-screen w-screen overflow-hidden scrollbar scrollbar-thumb-slate-700 scrollbar-track-slate-300">
+      <body className="antialiased scrollbar scrollbar-thumb-slate-700 scrollbar-track-slate-300">
+        <DynamicFavicon />
         <RootClientLayout />
         {children}
         <Toaster />

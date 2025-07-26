@@ -1,12 +1,35 @@
-# Block all crawlers from accessing the /admin directory
+# Makeadle Robots.txt
 User-agent: *
 Disallow: /dashboard/
-Disallow: /api/ # Generally good to disallow API routes if they return raw data not meant for direct indexing
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /login
+Disallow: /register
 
-# Specify the location of your sitemap(s)
+# Allow important pages
+Allow: /
+Allow: /g/
+Allow: /g/*/
+Allow: /g/*/wordle
+Allow: /g/*/audiodle
+Allow: /g/*/blurdle
+
+# Sitemaps
 Sitemap: https://www.makeadle.com/sitemap.xml
-# Add more sitemaps if you split them (e.g., for different content types)
 
-# Allow all crawlers for the rest of the site (default behavior if not disallowed)
-User-agent: *
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Special instructions for different bots
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
 Allow: /

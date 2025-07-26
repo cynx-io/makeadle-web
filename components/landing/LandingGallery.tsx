@@ -173,7 +173,9 @@ const LandingGallery = ({
                   <div className="text-muted-foreground mb-8 line-clamp-2 text-sm md:mb-12 md:text-base lg:mb-9">
                     {item.summary}
                   </div>
-                  <Button>Play </Button>
+                  <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+                    Play Now
+                  </Button>
                 </a>
               </CarouselItem>
             ))}
