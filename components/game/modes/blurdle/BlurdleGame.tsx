@@ -115,10 +115,10 @@ export function BlurdleGame({
     );
   }, [attempts, answers, currentMode.answerTypes]);
 
-  // Reset image loaded state when clues change (mode switch)
+  // Reset image loaded state when the actual image URL changes (mode switch)
   useEffect(() => {
     setImageLoaded(false);
-  }, [clues]);
+  }, [clues.find(clue => clue.type === "image")?.value]);
 
   async function onSelect(answerId: number) {
     console.log("Selected answer:", answerId);

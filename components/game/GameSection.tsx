@@ -61,6 +61,9 @@ export function GameSection() {
   }, [gameOver, setGameOver, currentMode.id, modes]);
 
   useEffect(() => {
+    // Clear attempts immediately when switching modes to prevent flash of old data
+    setAttempts([]);
+    setClues([]);
     setHistoryInitialized(false);
 
     dailyGameClient
